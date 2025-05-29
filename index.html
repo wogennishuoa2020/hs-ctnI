@@ -78,6 +78,9 @@
         @media (max-width: 767px) {
             .quick-analysis-module {
                 padding: 1.5rem; /* Reduced padding on mobile */
+                max-width: 400px; /* Limit max width on mobile for better readability */
+                margin-left: auto; /* Center the module */
+                margin-right: auto; /* Center the module */
             }
         }
 
@@ -102,6 +105,23 @@
             border-color: #ef4444; /* Red border for invalid input */
             box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
         }
+        /* Adjust unit text position for smaller screens */
+        .input-field-unit {
+            position: absolute;
+            right: 0.75rem; /* Adjusted from 3 */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem; /* Smaller font size */
+            color: #666;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+        @media (max-width: 767px) {
+            .input-field-unit {
+                right: 0.5rem; /* Even smaller right margin on very small screens */
+                font-size: 0.7rem; /* Even smaller font size */
+            }
+        }
+
 
         /* Action buttons */
         .action-button {
@@ -259,18 +279,20 @@
             border-radius: 0.5rem;
             border: 1px dashed #99ccff; /* Medium light blue dashed border */
         }
-        .quick-analysis-module .grid-cols-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
         /* Mobile optimization for quick analysis module */
         @media (max-width: 767px) { /* Changed from 768px to 767px for consistency with main-layout */
+            /* Force single column for the main input grid on small screens */
             .quick-analysis-module .grid-cols-2 {
-                grid-template-columns: 1fr; /* Stack columns on mobile */
+                grid-template-columns: 1fr !important; /* Use !important to override any conflicting Tailwind defaults */
+                gap: 1rem; /* Reduce gap on mobile */
             }
             .quick-analysis-module .input-group {
                 margin-bottom: 1rem; /* Reduce margin for tighter spacing */
+            }
+            /* Ensure radio/checkbox labels wrap correctly */
+            .quick-analysis-module .radio-group-item span,
+            .quick-analysis-module .checkbox-group span {
+                flex-grow: 1; /* Allow text to grow and wrap */
             }
         }
         .principle-toggle {
@@ -489,12 +511,11 @@
                 </div>
 
                 <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">快速判读与处理建议</h2>
-                <div class="grid-cols-2">
-                    <div class="input-group">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <div class="input-group">
                         <label for="initialTnI">首次 hs-cTnI (ng/mL) <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <input type="number" id="initialTnI" step="0.001" class="input-field w-full" placeholder="请输入数值">
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">×1000=ng/L</span>
+                            <span class="input-field-unit">×1000=ng/L</span>
                         </div>
                         <p class="text-sm text-gray-500 mt-1">（我司参考区间 ≤ 0.060 ng/mL）</p>
                     </div>
@@ -502,7 +523,7 @@
                         <label for="repeatTnI">复查 hs-cTnI (ng/mL)</label>
                         <div class="relative">
                             <input type="number" id="repeatTnI" step="0.001" class="input-field w-full" placeholder="例如: 0.090 (可选)">
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">×1000=ng/L</span>
+                            <span class="input-field-unit">×1000=ng/L</span>
                         </div>
                         <p class="text-sm text-gray-500 mt-1">（若无复查，可留空）</p>
                     </div>
@@ -562,10 +583,8 @@
                         </div>
                     </div>
 
-                    <div class="input-group col-span-2">
-                        <label class="mb-2">高危因素（可多选）:</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="checkbox-group flex items-center cursor-pointer">
+                    <div class="input-group col-span-1 md:col-span-2"> <label class="mb-2">高危因素（可多选，无则不选）:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2"> <label class="checkbox-group flex items-center cursor-pointer">
                                 <input type="checkbox" id="hasHighRiskFactorsAge" value="age" class="mr-3">
                                 <span class="text-sm">年龄>65岁</span>
                             </label>
@@ -625,36 +644,7 @@
                             </div>
                         </div>
 
-                        <div class="collapsible-container">
-                            <button class="collapsible-header" data-target="medicationContent">
-                                <span class="font-medium">药物治疗建议</span>
-                                <svg class="w-4 h-4 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </button>
-                            <div id="medicationContent" class="collapsible-content hidden">
-                                <div class="space-y-2">
-                                    <p><strong>抗血小板：</strong>阿司匹林300mg嚼服，氯吡格雷300-600mg负荷量</p>
-                                    <p><strong>抗凝：</strong>根据情况给予肝素类药物</p>
-                                    <p><strong>其他：</strong>硝酸酯类缓解症状，β受体阻滞剂（无禁忌时）</p>
-                                    <p class="text-xs text-gray-500 mt-2">*具体用药请根据患者具体情况和禁忌症调整</p>
-                                </div>
-                            </div>
                         </div>
-
-                        <div class="collapsible-container">
-                            <button class="collapsible-header" data-target="communicationContent">
-                                <span class="font-medium">患者沟通要点</span>
-                                <svg class="w-4 h-4 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </button>
-                            <div id="communicationContent" class="collapsible-content hidden">
-                                <ul class="space-y-1 list-disc list-inside">
-                                    <li>解释检查结果意义，肌钙蛋白升高不一定就是心脏病</li>
-                                    <li>说明下一步诊疗计划，让患者明确需要配合的事项</li>
-                                    <li>告知病情可能变化，强调及时复诊的重要性</li>
-                                    <li>提供必要的心理支持，消除患者恐惧</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="note">
@@ -676,9 +666,7 @@
                             <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="dynamic-monitoring-details-section">4. 动态监测与AMI评估</button></li>
                             <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="other-tests-details-section">5. 其他检查建议</button></li>
                             <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="treatment-decisions-details-section">6. 处理决策</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="drug-therapy-details-section-detailed">7. 药物治疗参考</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="patient-communication-details-section">8. 患者沟通技巧</button></li>
-                        </ul>
+                            </ul>
                     </nav>
                 </aside>
 
@@ -725,6 +713,7 @@
                             <div>
                                 <h4 class="font-medium text-gray-700">12 导联心电图:</h4>
                                 <p class="ml-4 text-gray-600">10 分钟内完成，重点观察：ST段抬高或压低，T波改变，Q波，新的左束支传导阻滞。</p>
+                                <p class="text-xs text-gray-500 mt-1">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
                             </div>
                             <div>
                                 <h4 class="font-medium text-gray-700">初步体格检查:</h4>
@@ -744,6 +733,7 @@
                             </div>
                         </div>
                         <p class="text-sm text-gray-600 mt-4">**指南依据:** “所有急诊接诊的急性非创伤性胸痛患者，均应进行病史采集、体格检查及心电图（electrocardiogram, ECG）检查（首次医疗接触10 min内，18导联）。综合临床信息后，高效且有针对性地使用生物标志物检测，有助于及时作出正确的诊断和治疗决策。” — 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》</p>
+                        <p class="text-xs text-gray-500 mt-1">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
                     </section>
 
                     <section id="hscTnI-interpretation-details-section" class="content-section hidden">
@@ -871,80 +861,7 @@
                         <p class="text-sm text-gray-600 mt-2">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注治疗外，其他急性胸痛患者均需依靠cTn检测结果诊断或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                     </section>
 
-                    <section id="drug-therapy-details-section-detailed" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">7. 药物治疗参考</h3>
-                        <p class="mb-4 text-gray-600">药物治疗是ACS管理的重要组成部分。以下为常用药物及参考剂量，具体用药需结合患者情况和禁忌证。<strong>请注意：基层医院应根据自身药物储备和医生资质，在确保安全的前提下进行用药。</strong></p>
-                        <div class="space-y-3">
-                            <div>
-                                <h4 class="font-medium text-gray-700">抗血小板：</h4>
-                                <ul class="list-disc list-inside ml-4 text-gray-600">
-                                    <li>阿司匹林：300 mg 嚼服（负荷剂量）</li>
-                                    <li>氯吡格雷：300-600 mg 负荷剂量，75 mg 维持剂量</li>
-                                    <li>替格瑞洛：180 mg 负荷剂量，90 mg 维持剂量</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">抗凝：</h4>
-                                <p class="ml-4 text-gray-600">普通肝素或低分子肝素</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">硝酸酯类：</h4>
-                                <p class="ml-4 text-gray-600">缓解心绞痛</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">β受体阻滞剂:</h4>
-                                <p class="ml-4 text-gray-600">控制心率，缓解心绞痛 (无禁忌证时)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">其他：</h4>
-                                <p class="ml-4 text-gray-600">镇痛、镇静、吸氧等对症治疗</p>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** “对于高度怀疑 STEMI，立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；给予抗血小板、抗凝等治疗；尽快转诊上级医院行急诊 PCI。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                        <p class="text-sm text-gray-600 mt-2">（此处可根据指南进一步补充具体药物的推荐等级和注意事项）</p>
-                    </section>
-
-                    <section id="patient-communication-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">8. 患者沟通技巧</h3>
-                        <p class="mb-4 text-gray-600">良好的医患沟通有助于建立信任，提高患者依从性。以下为沟通的基本原则、要点及模板。</p>
-                        <div>
-                            <h4 class="font-medium text-gray-700">基本原则：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li>耐心倾听，积极解释，消除患者的疑虑和恐惧。</li>
-                                <li>使用通俗易懂的语言，避免使用过于专业的术语。</li>
-                                <li>尊重患者的知情权和选择权。</li>
-                            </ul>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">沟通要点：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li>解释检查结果意义，肌钙蛋白升高不一定就是心脏病。</li>
-                                <li>说明下一步诊疗计划，让患者明确需要配合的事项。</li>
-                                <li>告知病情可能变化，强调及时复诊的重要性。</li>
-                                <li>提供必要的心理支持，消除患者恐惧。</li>
-                            </ul>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">模板：</h4>
-                            <div class="space-y-2">
-                                <div class="p-3 bg-gray-100 rounded-md">
-                                    <p class="text-gray-700">“您的检查结果提示心肌可能受到了损伤，但具体原因还需要进一步检查才能确定。”</p>
-                                    <button class="copy-template-button mt-1 text-sm text-blue-600 hover:text-blue-800">复制</button>
-                                </div>
-                                <div class="p-3 bg-gray-100 rounded-md">
-                                    <p class="text-gray-700">“我们会密切观察您的病情变化，并根据情况决定是否需要转诊到上级医院。”</p>
-                                    <button class="copy-template-button mt-1 text-sm text-blue-600 hover:text-blue-800">复制</button>
-                                </div>
-                                <div class="p-3 bg-gray-100 rounded-md">
-                                    <p class="text-gray-700">“请您放心，我们会尽力为您提供最好的诊疗服务。”</p>
-                                    <button class="copy-template-button mt-1 text-sm text-blue-600 hover:text-blue-800">复制</button>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** 本手册旨在提供实用指南，其中强调了良好的医患沟通有助于建立信任，提高患者依从性。</p>
-                        <p class="text-sm text-gray-600 mt-2">（此处可根据指南进一步补充沟通原则和要点）</p>
-                    </section>
-                </div>
+                    </div>
             </main>
 
             <footer class="mt-12 pt-8 border-t border-gray-300 text-center">
@@ -1164,7 +1081,7 @@
                 urgency = '立即处理';
                 color = 'red';
                 actions = [
-                    '立即启动紧急救治流程：吸氧、建立静脉通路、持续心电监护、监测生命体征。',
+                    '立即启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。',
                     '紧急联系上级医院或胸痛中心，准备转运。',
                     '转运过程中给予初步对症治疗。'
                 ];
