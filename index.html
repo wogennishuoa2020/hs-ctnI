@@ -463,7 +463,7 @@
             <h3>4. 数据隐私：</h3>
             <p>本工具可能存储用户输入的数据（存储于本地设备）。请勿输入患者真实姓名、身份证号等敏感信息。本工具开发者不对数据泄露或不当使用承担责任。建议定期清除浏览器缓存以保护隐私。</p>
 
-            <h3>5. 知识产权声明：</h3>
+            <h3>5. 知识产权声明：：</h3>
             <p>本工具引用了国内相关指南内容，仅用于学术参考，未经商业用途。如有版权争议，请联系我们处理。</p>
 
             <h3>6. 适用法律：</h3>
@@ -511,13 +511,23 @@
                 </div>
 
                 <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">快速判读与处理建议</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <div class="input-group">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="input-group col-span-1 md:col-span-2">
+                        <label for="customReferenceInterval">自定义参考区间 (99th URL, ng/mL)</label>
+                        <div class="relative">
+                            <input type="number" id="customReferenceInterval" step="0.001" class="input-field w-full" placeholder="例如: 0.060 (默认)">
+                            <span class="input-field-unit">ng/mL</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">（请根据您所在医院的实际参考区间填写，留空则使用默认值 0.060 ng/mL）</p>
+                    </div>
+
+                    <div class="input-group">
                         <label for="initialTnI">首次 hs-cTnI (ng/mL) <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <input type="number" id="initialTnI" step="0.001" class="input-field w-full" placeholder="请输入数值">
                             <span class="input-field-unit">×1000=ng/L</span>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">（我司参考区间 ≤ 0.060 ng/mL）</p>
+                        <p id="initialTnIRefNote" class="text-sm text-gray-500 mt-1">（当前参考区间 ≤ <span id="currentRefIntervalDisplay">0.060</span> ng/mL）</p>
                     </div>
                     <div class="input-group">
                         <label for="repeatTnI">复查 hs-cTnI (ng/mL)</label>
@@ -583,8 +593,10 @@
                         </div>
                     </div>
 
-                    <div class="input-group col-span-1 md:col-span-2"> <label class="mb-2">高危因素（可多选，无则不选）:</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2"> <label class="checkbox-group flex items-center cursor-pointer">
+                    <div class="input-group col-span-1 md:col-span-2">
+                        <label class="mb-2">高危因素（可多选，无则不选）:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="checkbox-group flex items-center cursor-pointer">
                                 <input type="checkbox" id="hasHighRiskFactorsAge" value="age" class="mr-3">
                                 <span class="text-sm">年龄>65岁</span>
                             </label>
@@ -651,7 +663,7 @@
                     <p><strong>重要提示：</strong></p>
                     <p>1. 本工具是基于国内最新指南共识（如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等）开发的辅助决策工具，**不能替代专业医生的临床判断**。</p>
                     <p>2. 实际诊疗需结合患者完整病史、体格检查、其他实验室检查及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
-                    <p>3. hs-cTnI 的 99th URL 应以医院自身建立的为准，此处使用我司试剂盒参考值 **0.060 ng/mL** 作为判断依据。</p>
+                    <p>3. hs-cTnI 的 99th URL 应以医院自身建立的为准，本工具默认使用 **0.060 ng/mL** 作为判断依据，您可以在上方**自定义参考区间**。</p>
                 </div>
             </div>
 
@@ -743,7 +755,7 @@
                             <h4 class="font-medium text-gray-700">参考范围：</h4>
                             <p class="ml-4 text-gray-600">以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。<br>
                             <span class="text-sm"><strong>注解：</strong> `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</span><br>
-                            例如：我司试剂盒正常参考区间为 ≤ 0.060 ng/mL</p>
+                            例如：本工具默认参考区间为 ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL</p>
                         </div>
                         <div class="mt-3">
                             <h4 class="font-medium text-gray-700">结果分级：</h4>
@@ -778,7 +790,7 @@
                             <p class="ml-4 text-gray-600">至少复查 1-2 次，必要时可多次复查。</p>
                         </div>
                         <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">结果解读：</h4>
+                            <h4 class="font-medium text-gray-700">结果解读：：</h4>
                             <ul class="list-disc list-inside ml-4 text-gray-600">
                                 <li><strong>绝对变化 (Δ值):</strong> 复查值 - 首次值</li>
                                 <li><strong>相对变化 (%):</strong> ((复查值 - 首次值) / 首次值) × 100%</li>
@@ -907,6 +919,9 @@
         const symptomsRadios = document.querySelectorAll('input[name="symptoms"]');
         const ecgRadios = document.querySelectorAll('input[name="ecg"]');
         const riskFactorCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="hasHighRiskFactors"], input[type="checkbox"][id="hasMultipleRiskFactors"]');
+        const customReferenceIntervalInput = document.getElementById('customReferenceInterval');
+        const currentRefIntervalDisplay = document.getElementById('currentRefIntervalDisplay');
+        const detailedRefIntervalDisplay = document.getElementById('detailedRefIntervalDisplay');
 
 
         // Result display elements in the quick analysis module
@@ -923,11 +938,35 @@
         const contentSections = document.querySelectorAll('.content-section');
 
         // Define constants
-        const URL_99_PERCENTILE_NG_ML = 0.060; // Our company's assay reference interval upper limit
+        const DEFAULT_URL_99_PERCENTILE_NG_ML = 0.060; // Default reference interval
+
+        // Function to get the current 99th percentile URL, either custom or default
+        function get99thPercentileURL() {
+            const customValue = parseFloat(customReferenceIntervalInput.value);
+            if (!isNaN(customValue) && customValue > 0) {
+                return customValue;
+            }
+            return DEFAULT_URL_99_PERCENTILE_NG_ML;
+        }
+
+        // Update the displayed reference interval when the custom input changes
+        customReferenceIntervalInput.addEventListener('input', () => {
+            const currentURL = get99thPercentileURL();
+            currentRefIntervalDisplay.textContent = currentURL.toFixed(3);
+            detailedRefIntervalDisplay.textContent = currentURL.toFixed(3);
+        });
+
+        // Initialize displayed reference interval on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialURL = get99thPercentileURL();
+            currentRefIntervalDisplay.textContent = initialURL.toFixed(3);
+            detailedRefIntervalDisplay.textContent = initialURL.toFixed(3);
+        });
+
 
         // Function to calculate elevation level (from Claude's code)
         function calculateElevationLevel(value) {
-            const threshold = URL_99_PERCENTILE_NG_ML;
+            const threshold = get99thPercentileURL();
             if (value <= threshold) return 'normal';
             if (value <= threshold * 3) return 'mild';
             if (value <= threshold * 10) return 'moderate';
@@ -935,11 +974,12 @@
         }
 
         function getElevationText(level, value) {
+            const currentURL = get99thPercentileURL();
             switch(level) {
                 case 'normal': return `${value.toFixed(3)} ng/mL (正常范围)`;
-                case 'mild': return `${value.toFixed(3)} ng/mL (轻度升高，约2-3倍99th URL)`;
-                case 'moderate': return `${value.toFixed(3)} ng/mL (中度升高，约3-10倍99th URL)`;
-                case 'significant': return `${value.toFixed(3)} ng/mL (显著升高，>10倍99th URL)`;
+                case 'mild': return `${value.toFixed(3)} ng/mL (轻度升高，约2-3倍${currentURL.toFixed(3)} ng/mL)`;
+                case 'moderate': return `${value.toFixed(3)} ng/mL (中度升高，约3-10倍${currentURL.toFixed(3)} ng/mL)`;
+                case 'significant': return `${value.toFixed(3)} ng/mL (显著升高，>10倍${currentURL.toFixed(3)} ng/mL)`;
                 default: return '';
             }
         }
@@ -1011,12 +1051,16 @@
             // Reset invalid state
             initialTnIInput.classList.remove('invalid');
             chestPainDurationInput.classList.remove('invalid');
+            customReferenceIntervalInput.classList.remove('invalid'); // New: Reset validation for custom reference input
+
 
             // Get input values
             const initialTnI = parseFloat(initialTnIInput.value);
             const repeatTnI = parseFloat(repeatTnIInput.value); // May be NaN if empty
             const repeatTime = parseInt(repeatTimeSelect.value);
             const chestPainDuration = parseFloat(chestPainDurationInput.value);
+            const URL_99_PERCENTILE_NG_ML = get99thPercentileURL(); // Get the current (custom or default) URL
+
 
             let selectedSymptoms = '';
             for (const radio of symptomsRadios) {
@@ -1056,10 +1100,16 @@
                 isValid = false;
                 // Visually indicate required radio group if possible, or use a general alert
             }
+            // New: Validate custom reference interval
+            const customRefValue = customReferenceIntervalInput.value.trim();
+            if (customRefValue !== '' && (isNaN(parseFloat(customRefValue)) || parseFloat(customRefValue) <= 0)) {
+                customReferenceIntervalInput.classList.add('invalid');
+                isValid = false;
+            }
 
 
             if (!isValid) {
-                alert("请填写所有必填项（* 标注），并确保数值有效！");
+                alert("请填写所有必填项（* 标注），并确保数值有效！自定义参考区间若填写，也请确保为有效正数。");
                 return;
             }
 
