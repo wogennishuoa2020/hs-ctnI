@@ -5,326 +5,515 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高敏肌钙蛋白I判读辅助手册</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* New Palette: Blue/White System with Medical Touch */
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color: #e6f7ff; /* Very light sky blue */
-            line-height: 1.6; /* Improve readability */
+        /********************************************
+         * 修复代码问题的关键CSS修改
+         *******************************************/
+        
+        /* 1. 全局容器 - 限制最大宽度并添加两侧留白 */
+        .global-container {
+            max-width: 1200px; /* Increased max-width for more space */
+            margin: 0 auto;
+            padding: 0 50px; /* Increased side padding for more breathing room on large screens */
         }
-        /* Main layout for desktop */
-        .main-layout {
-            display: flex;
-            gap: 1.5rem; /* md:space-x-6 */
+        
+        /* 2. 修复标题大小问题 */
+        /* Targets the h1 directly inside the header-content */
+        .header-content h1 {
+            font-size: 32.4px; /* Adjusted: 36px * 0.9 = 32.4px */
+            margin-bottom: 10px;
+            font-weight: 700; /* Ensure main title is bold */
+            line-height: 1.2; /* Added for readability */
         }
-        /* Mobile layout: stack navigation and content */
-        @media (max-width: 767px) {
-            .main-layout {
-                flex-direction: column; /* Stack vertically on mobile */
-            }
-            .aside-nav {
-                width: 100%; /* Full width on mobile */
-                margin-bottom: 1.5rem; /* Space below nav */
-            }
-            .content-area {
-                width: 100%; /* Full width on mobile */
-            }
+        /* Targets the subtitle class directly */
+        .subtitle {
+            font-size: 19.44px; /* Adjusted: 21.6px * 0.9 = 19.44px */
+            font-weight: 500; /* Keep subtitle slightly lighter than main title */
+            opacity: 0.9;
+            margin-bottom: 0.8rem; /* Adjusted margin */
+            letter-spacing: 0.5px; /* Retain letter spacing */
         }
-
-        /* Navigation buttons */
-        .sub-tab-button {
-            transition: all 0.2s ease;
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 0.75rem 1rem; /* More padding for tap targets */
-            border-radius: 0.375rem; /* rounded-md */
-            color: #333333; /* Darker text */
-            font-size: 0.95rem; /* Slightly larger for readability */
+        /* Targets the header-description class */
+        .header-description {
+            font-size: 12.96px; /* Adjusted: 14.4px * 0.9 = 12.96px */
+            opacity: 0.8;
+            max-width: 800px; /* Limit width for better readability */
         }
-        .sub-tab-button.active {
-            background-color: #cceeff; /* Lighter blue for active sub-tab */
-            color: #1a73e8; /* Primary blue for active text */
-            font-weight: 600;
+        
+        /* 3. 内容容器添加呼吸感 */
+        .app-container {
+            display: grid; /* Ensure grid display for the main content area */
+            grid-template-columns: 4fr 3fr; /* Default two columns for larger screens */
+            gap: 30px; /* 增加块间距 */
+            margin-top: 40px; /* 增加上边距 */
+            margin-bottom: 40px; /* 增加下边距 */
         }
-        .sub-tab-button:hover {
-            background-color: #f0f8ff; /* Very light blue on hover */
+        
+        /* 4. 卡片增加内边距和圆角提供空间感 */
+        .analysis-section,
+        .result-section,
+        .guide-section {
+            background: white; /* Retain white background for these sections */
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px;
         }
-
-        /* Content sections */
-        .content-section {
-            background-color: #ffffff; /* Pure white */
-            border: 1px solid #cceeff; /* Light blue border */
-            padding: 1.5rem; /* Consistent padding */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Softer shadow */
+        
+        /* 5. 输入/输出元素增加呼吸空间 */
+        .form-group {
+            margin-bottom: 28px;
         }
-        @media (max-width: 767px) {
-            .content-section {
-                padding: 1rem; /* Reduced padding on mobile */
-            }
+        .radio-group {
+            gap: 16px;
+            margin-top: 15px;
         }
-
-        /* Calculator/Input cards (quick-analysis-module) */
-        .quick-analysis-module {
-            background-color: #ffffff; /* Pure white */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem;
+        
+        /********************************************
+         * 原始关键样式（保留好的部分）
+         *******************************************/
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            margin-bottom: 2rem; /* Space below the quick analysis module */
+            font-family: 'Noto Sans SC', 'Inter', sans-serif; /* Prioritize Noto Sans SC for Chinese, fallback to Inter */
         }
-        @media (max-width: 767px) {
-            .quick-analysis-module {
-                padding: 1.5rem; /* Reduced padding on mobile */
-                max-width: 400px; /* Limit max width on mobile for better readability */
-                margin-left: auto; /* Center the module */
-                margin-right: auto; /* Center the module */
-            }
+        
+        :root {
+            /* 颜色变量 */
+            --primary-blue: #1a73e8;
+            --light-blue: #e6f7ff;
+            --dark-blue: #0056b3;
+            --red: #e53935;
+            --orange: #ff9800;
+            --yellow: #fdd835;
+            --green: #43a047;
+            --gray: #f5f5f5;
+            --dark-gray: #333;
+            --border: #ddd;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
-
-        /* Typography */
-        h1, h2, h3, h4 { color: #1a73e8; } /* Primary blue for headings */
-        p, li, label, span { color: #333333; } /* Dark gray for text */
-
-        /* Input fields */
-        .input-field {
-            border-color: #99ccff; /* Medium light blue for input borders */
-            padding: 0.5rem 0.75rem; /* Consistent padding */
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06); /* Inner shadow for depth */
-            width: 100%; /* Ensure full width for inputs */
+        
+        body {
+            background-color: var(--light-blue);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding: 25px 0; /* Adjusted padding for body */
         }
-        .input-field:focus {
-            border-color: #007bff; /* Accent Blue on focus */
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-            outline: none; /* Remove default focus outline */
-        }
-        .input-field.invalid {
-            border-color: #ef4444; /* Red border for invalid input */
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
-        }
-        /* Adjust unit text position for smaller screens */
-        .input-field-unit {
-            position: absolute;
-            right: 0.75rem; /* Adjusted from 3 */
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.75rem; /* Smaller font size */
-            color: #666;
-            white-space: nowrap; /* Prevent wrapping */
-        }
-        @media (max-width: 767px) {
-            .input-field-unit {
-                right: 0.5rem; /* Even smaller right margin on very small screens */
-                font-size: 0.7rem; /* Even smaller font size */
-            }
-        }
-
-
-        /* Action buttons */
-        .action-button {
-            background-color: #1a73e8; /* Primary blue */
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             color: white;
-            padding: 0.625rem 1.25rem; /* More padding for tap targets */
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
-            transition: background-color 0.2s ease;
-            font-size: 1rem; /* Ensure good button size */
-        }
-        .action-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-
-        /* Chart container */
-        .chart-container {
+            padding: 35px 0; /* Adjusted padding for header */
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
             position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 600px; /* Max width for charts on larger screens */
-            margin-left: auto;
-            margin-right: auto;
-            height: 200px; /* Base height for chart */
-            max-height: 250px; /* Max height for chart */
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
         }
-        /* Responsive adjustments for chart container */
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 250px; /* Slightly taller on desktop */
-                max-height: 300px;
-            }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 25px;
+            justify-content: flex-start; /* Ensure default left alignment for desktop */
+            padding-left: 30px; /* Added padding to create distance from left edge for logo */
+        }
+        
+        .header-text {
+            flex: 1; /* Allow header-text to take available space, pushing content left */
         }
 
-        /* View Details button - keep it consistent with action button */
-        .view-details-button {
-            background-color: #1a73e8;
+        .logo {
+            width: 90px;
+            height: 90px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0; /* Ensure no auto-margins for desktop left alignment */
+        }
+        
+        .logo i {
+            font-size: 42px;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem; /* rounded-md */
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            transition: background-color 0.2s ease;
-            margin-top: 1rem;
-            display: inline-block;
         }
-        .view-details-button:hover {
-            background-color: #0056b3;
-        }
-        .details-content {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #cceeff; /* Light blue dashed border */
-        }
-
-        /* Urgent alert styles - maintain contrast but fit theme */
-        .urgent-alert {
-            background-color: #ffebeb; /* Very light red */
-            border-color: #ff9999; /* Medium red */
-            color: #cc0000; /* Dark red */
-            padding: 1rem; /* Consistent padding */
-            border-radius: 0.5rem; /* rounded-md */
-        }
-        .urgent-action-button {
-            background-color: #cc0000; /* Dark red for urgency */
-            color: white;
-            padding: 0.625rem 1.25rem; /* More padding for tap targets */
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
-            transition: background-color 0.2s ease;
-        }
-        .urgent-action-button:hover {
-            background-color: #990000; /* Darker red on hover */
-        }
-
-        /* Quick analysis module specific styles */
-        .quick-analysis-module .input-group {
-            margin-bottom: 1.5rem;
-        }
-        .quick-analysis-module .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-        }
-        .quick-analysis-module .checkbox-group,
-        .quick-analysis-module .radio-group-item {
+        
+        /* Analysis section title */
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 24px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            margin-bottom: 0.75rem;
-            border: 1px solid #e0f2fe; /* Light blue border */
-            border-radius: 0.5rem; /* Slightly more rounded */
-            padding: 0.75rem; /* More padding */
-            transition: background-color 0.2s;
-            cursor: pointer; /* Indicate clickable area */
+            gap: 12px;
         }
-        .quick-analysis-module .checkbox-group:hover,
-        .quick-analysis-module .radio-group-item:hover {
-            background-color: #f0f8ff; /* Very light blue on hover */
+        
+        .section-title i {
+            background: var(--light-blue);
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
-        .quick-analysis-module .checkbox-group input[type="checkbox"],
-        .quick-analysis-module .radio-group-item input[type="radio"] {
-            margin-right: 0.75rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: #1a73e8; /* Primary blue for checkboxes/radios */
-            border-radius: 0.25rem;
-            flex-shrink: 0; /* Prevent input from shrinking */
-        }
-        .quick-analysis-module .btn {
-            background-color: #1a73e8; /* Primary blue */
-            color: #ffffff;
-            padding: 0.85rem 1.75rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            border: none;
-            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3); /* Blue shadow */
-        }
-        .quick-analysis-module .btn:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            transform: translateY(-1px);
-        }
-        .quick-analysis-module .btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(26, 115, 232, 0.4);
-        }
-        .quick-analysis-module .result-area {
-            background-color: #ffffff; /* Pure white */
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border: 1px solid #cceeff; /* Light blue border */
-            color: #333333; /* Dark gray text */
-        }
-        .quick-analysis-module .result-area h3 {
+
+        .section-title h2 {
             font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: #1a73e8; /* Primary blue heading */
         }
-        .quick-analysis-module .result-area p {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
+
+        /* Form elements */
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 16px;
         }
-        .quick-analysis-module .result-area p strong {
-            color: #1a73e8; /* Primary blue for strong text */
+        
+        .unit-wrapper {
+            position: relative;
+            display: flex;
         }
-        .quick-analysis-module .note {
-            font-size: 0.875rem;
-            color: #666666; /* Medium gray */
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: #f0f8ff; /* Very light blue */
-            border-radius: 0.5rem;
-            border: 1px dashed #99ccff; /* Medium light blue dashed border */
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
-        /* Mobile optimization for quick analysis module */
-        @media (max-width: 767px) { /* Changed from 768px to 767px for consistency with main-layout */
-            /* Force single column for the main input grid on small screens */
-            .quick-analysis-module .grid-cols-2 {
-                grid-template-columns: 1fr !important; /* Use !important to override any conflicting Tailwind defaults */
-                gap: 1rem; /* Reduce gap on mobile */
-            }
-            .quick-analysis-module .input-group {
-                margin-bottom: 1rem; /* Reduce margin for tighter spacing */
-            }
-            /* Ensure radio/checkbox labels wrap correctly */
-            .quick-analysis-module .radio-group-item span,
-            .quick-analysis-module .checkbox-group span {
-                flex-grow: 1; /* Allow text to grow and wrap */
-            }
+        
+        input:focus, select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
         }
-        .principle-toggle {
-            background-color: #cceeff; /* Light blue */
-            color: #1a73e8; /* Primary blue */
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
+
+        input.invalid, select.invalid {
+            border-color: var(--red);
+            box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2);
+        }
+        
+        .unit {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .small-text {
+            font-size: 13px;
+            color: #777;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+        
+        .radio-item {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .radio-label {
+            display: block;
+            padding: 14px;
+            background: var(--gray);
+            border-radius: 12px;
+            border: 2px solid var(--border);
             cursor: pointer;
-            margin-top: 1rem;
+            transition: var(--transition);
+            font-size: 15px;
+        }
+        
+        .radio-label:hover {
+            border-color: var(--primary-blue);
+            background: rgba(26, 115, 232, 0.05);
+        }
+        
+        input[type="radio"]:checked + .radio-label {
+            border-color: var(--primary-blue);
+            background-color: rgba(26, 115, 232, 0.1);
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+        
+        input[type="radio"] {
+            display: none;
+        }
+        
+        .checkbox-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .checkbox-item {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--gray);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--dark-blue);
+        }
+        
+        .result-card {
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            position: relative;
+        }
+        
+        .result-card.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .red-bg { background-color: var(--red); }
+        .orange-bg { background-color: var(--orange); }
+        .yellow-bg { background-color: var(--yellow); }
+        .green-bg { background-color: var(--green); }
+        
+        .result-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .risk-level {
             display: inline-block;
-            transition: background-color 0.2s;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 25px;
         }
-        .principle-toggle:hover {
-            background-color: #99ccff; /* Medium light blue on hover */
+        
+        .value-highlight {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.04);
         }
-        .principle-content {
-            background-color: #f0f8ff; /* Very light blue */
-            border-left: 4px solid #1a73e8; /* Primary blue border */
-            padding: 1rem 1.5rem;
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.9rem;
-            color: #333333; /* Dark gray text */
+        
+        .rec-title {
+            font-size: 18px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            margin-top: 25px;
+            text-align: left;
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
-        .principle-content ul {
-            list-style-type: disc;
-            margin-left: 1.25rem;
-            margin-top: 0.5rem;
+        
+        .rec-box {
+            background: var(--light-blue);
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 0 8px 8px 0;
+            padding: 18px;
+            margin-bottom: 15px;
+            text-align: left;
         }
-        .principle-content li {
-            margin-bottom: 0.25rem;
+        
+        .rec-list {
+            margin-left: 25px;
+        }
+        
+    .rec-list li {
+        margin-bottom: 8px;
+        padding-left: 5px;
+    }
+        
+        .reference-box {
+            background: #f9f9f9;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .ref-list li {
+            margin-bottom: 10px;
+        }
+        
+        .graph-container {
+            height: 250px;
+            position: relative;
+            margin: 20px 0;
+            background: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .chart-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 5px;
+        }
+        
+        .chart-line {
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .guide-section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-top: 25px;
+        }
+        
+        .guide-title {
+            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .guide-content {
+            margin-bottom: 25px;
+        }
+        
+        .guide-box {
+            background: #f0f8ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .guide-steps {
+            margin: 15px 0 15px 25px;
+        }
+        
+        .guide-steps li {
+            margin-bottom: 15px;
+        }
+        
+        .guide-key {
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 14px;
+            margin-top: 25px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 14px 24px;
+            background: var(--gray);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
 
         /* Disclaimer Modal Styles */
@@ -360,14 +549,14 @@
         .modal-content h2 {
             font-size: 1.75rem;
             font-weight: bold;
-            color: #1a73e8; /* Primary blue */
+            color: var(--primary-blue);
             margin-bottom: 1.5rem;
             text-align: center;
         }
         .modal-content h3 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #333333; /* Dark gray */
+            color: var(--dark-gray);
             margin-top: 1rem;
             margin-bottom: 0.5rem;
         }
@@ -387,7 +576,7 @@
             margin-top: 2rem;
         }
         .modal-buttons button {
-            background-color: #1a73e8; /* Primary blue */
+            background-color: var(--primary-blue);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -397,51 +586,80 @@
             border: none;
         }
         .modal-buttons button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: var(--dark-blue);
         }
         .hidden {
             display: none;
         }
 
-        /* Result card colors - adjusted to fit the new theme but maintain clear distinction */
-        .result-card-red { border-color: #ff6666; background-color: #ffebeb; color: #cc0000; }
-        .result-card-orange { border-color: #ffcc66; background-color: #fff7ed; color: #e69100; }
-        .result-card-yellow { border-color: #ffee66; background-color: #fefce8; color: #ccaa00; }
-        .result-card-green { border-color: #66cc66; background-color: #f0fdf4; color: #009900; }
-
-        .result-card-red .result-urgency-badge { background-color: #cc0000; color: white; }
-        .result-card-orange .result-urgency-badge { background-color: #e69100; color: white; }
-        .result-card-yellow .result-urgency-badge { background-color: #ccaa00; color: white; }
-        .result-card-green .result-urgency-badge { background-color: #009900; color: white; }
-
-        .collapsible-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            background-color: #f0f8ff; /* Very light blue */
-            border-bottom: 1px solid #cceeff; /* Light blue border */
-            cursor: pointer;
-            font-weight: 600;
-            color: #1a73e8; /* Primary blue */
-            border-radius: 0.5rem;
-            transition: background-color 0.2s;
+        /* Responsive adjustments */
+        @media (min-width: 992px) {
+            .header-content {
+                text-align: left; /* Ensure text aligns left within its container */
+                padding: 0 30px; /* Added padding to create distance from left edge for logo */
+            }
+            .header-content h1 {
+                flex: 1; /* Allows h1 to take available space */
+                text-align: left; /* Ensure h1 text is left-aligned */
+            }
+            .logo {
+                margin: 0; /* Remove auto margins for larger screens */
+                width: 80px; /* Adjusted logo size for larger screens */
+                height: 80px;
+            }
+            .app-container {
+                grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+            }
         }
-        .collapsible-header:hover {
-            background-color: #cceeff; /* Lighter blue on hover */
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 0; /* Reduced body padding for mobile */
+            }
+            .header-content {
+                justify-content: center; /* Center items when they wrap on small screens */
+                text-align: center; /* Center text within the header-text div on small screens */
+                padding: 0 15px; /* Added padding for mobile header content */
+            }
+            .logo {
+                margin-bottom: 15px; /* Add bottom margin when stacked */
+                margin-left: auto; /* Center horizontally when stacked */
+                margin-right: auto; /* Center horizontally when stacked */
+            }
+            .header-content h1 {
+                font-size: 25.92px; /* Adjusted: 28.8px * 0.9 = 25.92px */
+            }
+            .subtitle {
+                font-size: 16.2px; /* Adjusted: 18px * 0.9 = 16.2px */
+            }
+            .global-container {
+                padding: 0 15px; /* Reduced side padding for mobile */
+            }
+            .header-description { /* Mobile header description size */
+                font-size: 11.34px; /* Adjusted: 12.6px * 0.9 = 11.34px */
+            }
+            .logo { /* Mobile logo size */
+                width: 70px;
+                height: 70px;
+            }
+            .logo i { /* Mobile logo icon size */
+                font-size: 35px;
+            }
+            header { /* Mobile header padding */
+                padding: 25px 0;
+            }
+            .section-title { /* Mobile section title size */
+                font-size: 22px;
+            }
+            .app-container { /* Ensure single column on mobile */
+                grid-template-columns: 1fr;
+            }
         }
-        .collapsible-content {
-            padding: 1rem;
-            border-top: 1px solid #e5e7eb; /* Keep a subtle border */
-            background-color: #ffffff; /* Pure white */
-            border-radius: 0.5rem;
-        }
-        .collapsible-container {
-            border: 1px solid #cceeff; /* Light blue border */
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+        /* Further adjustments for very small screens as per DeepSeek's suggestion */
+        @media (max-width: 480px) {
+            .radio-item {
+                min-width: 100%; /* Ensure radio items stack on very small screens */
+            }
         }
     </style>
 </head>
@@ -463,7 +681,7 @@
             <h3>4. 数据隐私：</h3>
             <p>本工具可能存储用户输入的数据（存储于本地设备）。请勿输入患者真实姓名、身份证号等敏感信息。本工具开发者不对数据泄露或不当使用承担责任。建议定期清除浏览器缓存以保护隐私。</p>
 
-            <h3>5. 知识产权声明：：</h3>
+            <h3>5. 知识产权声明：</h3>
             <p>本工具引用了国内相关指南内容，仅用于学术参考，未经商业用途。如有版权争议，请联系我们处理。</p>
 
             <h3>6. 适用法律：</h3>
@@ -478,408 +696,316 @@
         </div>
     </div>
 
-    <div id="mainContent" class="hidden">
-        <div class="container mx-auto p-4 md:p-8">
-            <header class="mb-8 text-center">
-                <div class="flex items-center justify-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 mr-3">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800">高敏肌钙蛋白I判读辅助手册</h1>
+    <div class="global-container" id="mainContent">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
                 </div>
-                <p class="text-gray-600 mt-2">基层医院hs-cTnI阳性结果快速决策工具</p>
-                <p class="text-sm text-gray-500 mt-1">本手册内容整合自国内最新相关指南共识，仅供临床参考</p>
-            </header>
-
-            <div class="quick-analysis-module">
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                    <div class="flex items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 mr-2 mt-0.5 flex-shrink-0">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        <div class="text-sm text-blue-800">
-                            <p class="font-medium mb-1">使用说明：</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li>请输入患者的基本信息和检测结果</li>
-                                <li>系统将根据最新指南共识提供处理建议</li>
-                                <li>本工具仅供参考，最终诊疗决策请结合临床实际</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="header-text">
+                    <h1>高敏肌钙蛋白I判读辅助手册</h1>
+                    <div class="subtitle">基层医院快速判读与决策工具</div>
+                    <p class="header-description">本工具基于中国最新指南共识，为检测阳性结果提供标准化处理路径</p>
                 </div>
+            </div>
+        </header>
 
-                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">快速判读与处理建议</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="input-group col-span-1 md:col-span-2">
+        <div class="app-container">
+            <div class="analysis-section">
+                <div class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    <h2>快速判读分析</h2>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="step1">步骤1：输入数据</div>
+                    <div class="tab" data-tab="step2">步骤2：结果解读</div>
+                    <div class="tab" data-tab="step3">步骤3：处理建议</div>
+                </div>
+                
+                <div id="step1" class="tab-content active">
+                    <div class="form-group">
                         <label for="customReferenceInterval">自定义参考区间 (99th URL, ng/mL)</label>
-                        <div class="relative">
-                            <input type="number" id="customReferenceInterval" step="0.001" class="input-field w-full" placeholder="例如: 0.060 (默认)">
-                            <span class="input-field-unit">ng/mL</span>
+                        <div class="unit-wrapper">
+                            <input type="number" id="customReferenceInterval" step="0.001" placeholder="例如: 0.060 (默认)">
+                            <div class="unit">ng/mL</div>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">（请根据您所在医院的实际参考区间填写，留空则使用默认值 0.060 ng/mL）</p>
+                        <div class="small-text">请根据您所在医院的实际参考区间填写，留空则使用默认值 0.060 ng/mL</div>
                     </div>
 
-                    <div class="input-group">
-                        <label for="initialTnI">首次 hs-cTnI (ng/mL) <span class="text-red-500">*</span></label>
-                        <div class="relative">
-                            <input type="number" id="initialTnI" step="0.001" class="input-field w-full" placeholder="请输入数值">
-                            <span class="input-field-unit">×1000=ng/L</span>
+                    <div class="form-group">
+                        <label for="initialTnI">首次肌钙蛋白检测值 (hs-cTnI, ng/mL) <span class="text-red-500">*</span></label>
+                        <div class="unit-wrapper">
+                            <input type="number" id="initialTnI" step="0.001" placeholder="输入首次hs-cTnI检测结果">
+                            <div class="unit">ng/mL</div>
                         </div>
-                        <p id="initialTnIRefNote" class="text-sm text-gray-500 mt-1">（当前参考区间 ≤ <span id="currentRefIntervalDisplay">0.060</span> ng/mL）</p>
-                    </div>
-                    <div class="input-group">
-                        <label for="repeatTnI">复查 hs-cTnI (ng/mL)</label>
-                        <div class="relative">
-                            <input type="number" id="repeatTnI" step="0.001" class="input-field w-full" placeholder="例如: 0.090 (可选)">
-                            <span class="input-field-unit">×1000=ng/L</span>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">（若无复查，可留空）</p>
+                        <div class="small-text">当前参考区间上限: ≤<span id="currentRefIntervalDisplay">0.060</span> ng/mL</div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="form-group">
+                        <label for="repeatTnI">复查肌钙蛋白检测值 (hs-cTnI, ng/mL)</label>
+                        <div class="unit-wrapper">
+                            <input type="number" id="repeatTnI" step="0.001" placeholder="例如: 0.090 (可选)">
+                            <div class="unit">ng/mL</div>
+                        </div>
+                        <div class="small-text">若无复查，可留空</div>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="repeatTime">复查时间间隔</label>
-                        <select id="repeatTime" class="input-field">
+                        <select id="repeatTime">
                             <option value="1">1 小时</option>
                             <option value="2">2 小时</option>
                             <option value="3">3 小时</option>
                         </select>
+                        <div class="small-text">从首次检测到复查的时间间隔</div>
                     </div>
-
-                    <div class="input-group">
+                    
+                    <div class="form-group">
                         <label for="chestPainDuration">胸痛持续时间 (小时) <span class="text-red-500">*</span></label>
-                        <input type="number" id="chestPainDuration" step="0.1" class="input-field" placeholder="例如: 4">
-                        <p class="text-sm text-gray-500 mt-1">（从胸痛发作到首次就诊的时间）</p>
-                    </div>
-
-                    <div class="input-group">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">胸痛症状特点 <span class="text-red-500">*</span></label>
-                        <div class="space-y-2">
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="symptoms" value="typical" class="mr-3">
-                                <span class="text-sm">典型胸痛（胸骨后压榨性，持续>20分钟）</span>
-                            </label>
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="symptoms" value="atypical" class="mr-3">
-                                <span class="text-sm">不典型胸痛</span>
-                            </label>
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="symptoms" value="other" class="mr-3">
-                                <span class="text-sm">其他症状（呼吸困难、晕厥、大汗、恶心呕吐）</span>
-                            </label>
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="symptoms" value="none" class="mr-3">
-                                <span class="text-sm">无明显症状</span>
-                            </label>
+                        <div class="unit-wrapper">
+                            <input type="number" id="chestPainDuration" step="0.1" placeholder="例如: 4">
+                            <div class="unit">小时</div>
                         </div>
+                        <div class="small-text">从胸痛发作到首次就诊的时间长度</div>
                     </div>
-
-                    <div class="input-group">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">心电图结果 <span class="text-red-500">*</span></label>
-                        <div class="space-y-2">
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="ecg" value="st_elevation" class="mr-3">
-                                <span class="text-sm">ST段抬高（或新发左/右束支传导阻滞）</span>
-                            </label>
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="ecg" value="ischemic_changes" class="mr-3">
-                                <span class="text-sm">缺血性改变（ST段压低、T波倒置等）</span>
-                            </label>
-                            <label class="radio-group-item flex items-center cursor-pointer">
-                                <input type="radio" name="ecg" value="normal" class="mr-3">
-                                <span class="text-sm">正常或非特异性改变</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="input-group col-span-1 md:col-span-2">
-                        <label class="mb-2">高危因素（可多选，无则不选）:</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="checkbox-group flex items-center cursor-pointer">
-                                <input type="checkbox" id="hasHighRiskFactorsAge" value="age" class="mr-3">
-                                <span class="text-sm">年龄>65岁</span>
-                            </label>
-                            <label class="checkbox-group flex items-center cursor-pointer">
-                                <input type="checkbox" id="hasHighRiskFactorsCAD" value="cad_history" class="mr-3">
-                                <span class="text-sm">既往冠心病史</span>
-                            </label>
-                            <label class="checkbox-group flex items-center cursor-pointer">
-                                <input type="checkbox" id="hasHighRiskFactorsDiabetes" value="diabetes" class="mr-3">
-                                <span class="text-sm">糖尿病/肾病</span>
-                            </label>
-                            <label class="checkbox-group flex items-center cursor-pointer">
-                                <input type="checkbox" id="hasMultipleRiskFactors" value="multiple_risk" class="mr-3">
-                                <span class="text-sm">多个心血管危险因素</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-center mt-6">
-                    <button class="btn action-button" onclick="analyzeTnI()">分析结果</button>
-                </div>
-
-                <div id="resultArea" class="result-area hidden">
-                    <div id="resultCard" class="border-2 rounded-lg p-6 mb-6">
-                        <div class="text-center mb-4">
-                            <h3 id="resultDiagnosis" class="text-2xl font-bold mb-2"></h3>
-                            <div class="inline-flex items-center px-4 py-2 rounded-full result-urgency-badge">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                                    <line x1="12" y1="9" x2="12" y2="13"></line>
-                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                                </svg>
-                                <span id="resultUrgency" class="font-medium"></span>
+                    
+                    <div class="form-group">
+                        <label>患者症状特点 <span class="text-red-500">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="symptoms" id="symp-typical" value="typical">
+                                <label class="radio-label" for="symp-typical">典型心绞痛<br><small>（压迫感，持续>20min）</small></label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="symptoms" id="symp-atypical" value="atypical">
+                                <label class="radio-label" for="symp-atypical">不典型胸痛</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="symptoms" id="symp-other" value="other">
+                                <label class="radio-label" for="symp-other">其他伴随症状<br><small>（呼吸困难、晕厥、大汗、恶心呕吐）</small></label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="symptoms" id="symp-none" value="none">
+                                <label class="radio-label" for="symp-none">无明显症状</label>
                             </div>
                         </div>
-
-                        <div class="bg-white rounded-lg p-4 mb-4">
-                            <p class="text-sm text-gray-600 mb-2">肌钙蛋白水平：</p>
-                            <p id="tniElevationLevel" class="font-medium"></p>
-                        </div>
-
-                        <div class="bg-white rounded-lg p-4">
-                            <h3 class="font-medium text-gray-800 mb-3">建议处理措施：</h3>
-                            <ul id="resultActions" class="space-y-2"></ul>
-                        </div>
+                        <div class="small-text">"不典型"可能指刺痛、短暂、非心前区等特点</div>
                     </div>
-
-                    <div class="space-y-4">
-                        <div class="collapsible-container">
-                            <button class="collapsible-header" data-target="reasoningContent">
-                                <span class="font-medium">诊断依据</span>
-                                <svg class="w-4 h-4 transform transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </button>
-                            <div id="reasoningContent" class="collapsible-content hidden">
-                                <div id="resultReasoning"></div>
+                    
+                    <div class="form-group">
+                        <label>心电图结果 <span class="text-red-500">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="ecg" id="ecg-st" value="st_elevation">
+                                <label class="radio-label" for="ecg-st">ST段抬高（或新发左/右束支传导阻滞）</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="ecg" id="ecg-ischemic" value="ischemic_changes">
+                                <label class="radio-label" for="ecg-ischemic">缺血性改变（ST段压低、T波倒置等）</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="ecg" id="ecg-normal" value="normal">
+                                <label class="radio-label" for="ecg-normal">正常或非特异性改变</label>
                             </div>
                         </div>
-
+                        <div class="small-text">LBBB = 左束支传导阻滞</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>患者高危因素（可多选，无则不选）</label>
+                        <div class="checkbox-row">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="risk-diabetes" value="diabetes">
+                                <label class="checkbox-label" for="risk-diabetes">糖尿病/肾病</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="risk-cad" value="cad_history">
+                                <label class="checkbox-label" for="risk-cad">既往冠心病史</label>
+                            </div>
+                             <div class="checkbox-item">
+                                <input type="checkbox" id="risk-age" value="age">
+                                <label class="checkbox-label" for="risk-age">年龄>65岁</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="risk-multiple" value="multiple_risk">
+                                <label class="checkbox-label" for="risk-multiple">多个心血管危险因素</label>
+                            </div>
                         </div>
+                        <div class="small-text">危险因素越多，心肌损伤可能性越大</div>
+                    </div>
+                    
+                    <button id="analyze-btn" class="btn"><i class="fas fa-play-circle"></i> 开始分析</button>
                 </div>
-
-                <div class="note">
-                    <p><strong>重要提示：</strong></p>
-                    <p>1. 本工具是基于国内最新指南共识（如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等）开发的辅助决策工具，**不能替代专业医生的临床判断**。</p>
-                    <p>2. 实际诊疗需结合患者完整病史、体格检查、其他实验室检查及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
-                    <p>3. hs-cTnI 的 99th URL 应以医院自身建立的为准，本工具默认使用 **0.060 ng/mL** 作为判断依据，您可以在上方**自定义参考区间**。</p>
+                
+                <div id="step2" class="tab-content">
+                    <div class="result-card" id="result-card">
+                        <div class="card-icon" id="result-icon-bg">
+                            <i id="result-icon" class="fas fa-check"></i>
+                        </div>
+                        <h3 class="result-title" id="result-title">等待分析结果</h3>
+                        <div class="risk-level" id="risk-level">风险等级：-</div>
+                        
+                        <div class="value-highlight" id="tni-value">
+                            肌钙蛋白值：
+                        </div>
+                        
+                        <div class="graph-container">
+                            <div class="chart-lines">
+                                <div class="chart-line">
+                                    <span>高值</span><span>>10倍ULN</span>
+                                </div>
+                                <div class="chart-line">
+                                    <span>中值</span><span>3-10倍ULN</span>
+                                </div>
+                                <div class="chart-line">
+                                    <span>低值</span><span>1-3倍ULN</span>
+                                </div>
+                                <div class="chart-line" style="border-color: var(--green);">
+                                    <span>正常</span><span>≤ULN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="step3" class="tab-content">
+                    <div class="rec-title">
+                        <i class="fas fa-stethoscope"></i> 处理措施
+                    </div>
+                    <div class="rec-box">
+                        <div id="rec-recommendations">
+                            <p>请输入患者信息后获取针对性建议</p>
+                        </div>
+                    </div>
+                    
+                    <div class="rec-title">
+                        <i class="fas fa-book"></i> 诊断依据
+                    </div>
+                    <div class="reference-box">
+                        <ul id="diagnosis-reasoning">
+                            <li>等待结果分析...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-            <main class="main-layout mt-8">
-                <aside class="aside-nav md:w-1/4">
-                    <nav class="bg-white p-4 rounded-lg shadow-md space-y-2">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-2">详细流程</h3>
-                        <ul>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="urgent-screening-details">1. 危急重症快速筛查 (即刻判断)</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="initial-assessment-details-section">2. 初始评估要点 (5-10 分钟内)</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="hscTnI-interpretation-details-section">3. hs-cTnI 结果解读</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="dynamic-monitoring-details-section">4. 动态监测与AMI评估</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="other-tests-details-section">5. 其他检查建议</button></li>
-                            <li><button class="sub-tab-button hover:bg-gray-100 focus:outline-none" data-subtab="treatment-decisions-details-section">6. 处理决策</button></li>
-                            </ul>
-                    </nav>
-                </aside>
-
-                <div class="content-area md:w-3/4 space-y-6">
-                    <section id="urgent-screening-details" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">1. 危急重症快速筛查 (即刻判断)</h3>
-                        <p class="mb-4 text-gray-600">本部分详细阐述了危急重症的识别要点和紧急处理原则，旨在帮助医护人员快速判断并采取行动。</p>
-                        <div class="space-y-3">
-                            <div>
-                                <h4 class="font-medium text-gray-700">识别要点：</h4>
-                                <ul class="list-disc list-inside ml-4 text-gray-600">
-                                    <li><strong>持续性剧烈胸痛:</strong> 伴大汗、恶心、呕吐等自主神经兴奋症状，提示可能为急性心肌梗死或主动脉夹层。</li>
-                                    <li><strong>严重呼吸困难、晕厥或休克:</strong> 提示可能存在心源性休克、肺栓塞、严重心律失常等。</li>
-                                    <li><strong>心电图提示急性ST段抬高（STEMI）或新发左/右束支传导阻滞:</strong> 明确诊断为STEMI，需立即启动再灌注治疗。</li>
-                                    <li><strong>典型撕裂样胸背痛，高度怀疑主动脉夹层（AAS）:</strong> 疼痛剧烈，向背部或腹部放射，常伴血压不对称。</li>
-                                    <li><strong>突发呼吸困难伴胸痛，高度怀疑肺栓塞（PE）伴血流动力学不稳定:</strong> 常见于大面积肺栓塞，可伴发绀、休克。</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">紧急处理要点：</h4>
-                                <ul class="list-disc list-inside ml-4 text-gray-600">
-                                    <li>立即吸氧，建立静脉通路，持续心电监护，监测生命体征。</li>
-                                    <li>根据具体危急情况，启动相应急救流程（如STEMI绿色通道，通知导管室）。</li>
-                                    <li>稳定生命体征后，尽快转诊至有抢救能力的上级医院或胸痛中心。</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》强调了对危急重症的快速识别和紧急处理的重要性，以挽救患者生命。</p>
-                    </section>
-
-                    <section id="initial-assessment-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">2. 初始评估要点 (5-10 分钟内)</h3>
-                        <p class="mb-3 text-gray-600">快速、准确的初始评估是后续诊疗的关键。此阶段应在5-10分钟内完成，重点在于识别危急重症并获取关键病史和检查信息。</p>
-                        <div class="space-y-3">
-                            <div>
-                                <h4 class="font-medium text-gray-700">详细病史:</h4>
-                                <ul class="list-disc list-inside ml-4 text-gray-600">
-                                    <li>胸痛特点：部位、性质、放射部位，发作时间、持续时间，诱发因素、缓解因素。</li>
-                                    <li>危险因素：年龄、性别、高血压、糖尿病、吸烟、高血脂、冠心病史等。</li>
-                                    <li>伴随症状：呼吸困难、心悸、恶心、呕吐、出汗、晕厥等。</li>
-                                    <li>既往史：有无其他心血管疾病、肾脏疾病等。</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">12 导联心电图:</h4>
-                                <p class="ml-4 text-gray-600">10 分钟内完成，重点观察：ST段抬高或压低，T波改变，Q波，新的左束支传导阻滞。</p>
-                                <p class="text-xs text-gray-500 mt-1">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">初步体格检查:</h4>
-                                <ul class="list-disc list-inside ml-4 text-gray-600">
-                                    <li>生命体征：血压、心率、呼吸、体温、氧饱和度。</li>
-                                    <li>心脏听诊：有无杂音、奔马律等。</li>
-                                    <li>肺部听诊：有无啰音等。</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">hs-cTnI 检测:</h4>
-                                <p class="ml-4 text-gray-600">立即检测，并记录检测时间。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">初步风险评估:</h4>
-                                <p class="ml-4 text-gray-600">根据病史、心电图、体格检查结果，初步判断患者发生 ACS 和其他严重疾病的可能性。</p>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** “所有急诊接诊的急性非创伤性胸痛患者，均应进行病史采集、体格检查及心电图（electrocardiogram, ECG）检查（首次医疗接触10 min内，18导联）。综合临床信息后，高效且有针对性地使用生物标志物检测，有助于及时作出正确的诊断和治疗决策。” — 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》</p>
-                        <p class="text-xs text-gray-500 mt-1">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
-                    </section>
-
-                    <section id="hscTnI-interpretation-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">3. hs-cTnI 结果解读</h3>
-                        <p class="mb-4 text-gray-600">正确解读hs-cTnI结果对于诊断至关重要。请结合患者临床情况和动态变化进行综合判断。</p>
-                        <div>
-                            <h4 class="font-medium text-gray-700">参考范围：</h4>
-                            <p class="ml-4 text-gray-600">以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。<br>
-                            <span class="text-sm"><strong>注解：</strong> `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</span><br>
-                            例如：本工具默认参考区间为 ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL</p>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">结果分级：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li><strong>正常:</strong> ≤ 99th URL</li>
-                                <li><strong>升高:</strong> > 99th URL
-                                    <ul class="list-circle list-inside ml-6">
-                                        <li><strong>轻度升高:</strong> > 99th URL，但 < 2-3 倍 99th URL</li>
-                                        <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
-                                        <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV≤10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
-                        <p class="text-sm text-gray-600 mt-2">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（≥20%）为急性心肌损伤；如持续升高，且幅度变化<20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                    </section>
-
-                    <section id="dynamic-monitoring-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">4. 动态监测与AMI评估</h3>
-                        <p class="mb-4 text-gray-600">动态监测hs-cTnI的变化趋势对于鉴别诊断AMI具有重要价值。建议遵循推荐的复查时间和次数，并结合变化值进行判断。</p>
-                        <div>
-                            <h4 class="font-medium text-gray-700">复查时间：</h4>
-                            <p class="ml-4 text-gray-600">建议在以下时间点进行动态监测：</p>
-                            <ul class="list-disc list-inside ml-8 text-gray-600">
-                                <li><strong>首选方案:</strong> 0 小时（首次检测）、1 小时、2 小时</li>
-                                <li><strong>备选方案:</strong> 0 小时（首次检测）、2 小时、3 小时 (尤其适用于基层医院)</li>
-                            </ul>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">复查次数：</h4>
-                            <p class="ml-4 text-gray-600">至少复查 1-2 次，必要时可多次复查。</p>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">结果解读：：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li><strong>绝对变化 (Δ值):</strong> 复查值 - 首次值</li>
-                                <li><strong>相对变化 (%):</strong> ((复查值 - 首次值) / 首次值) × 100%</li>
-                            </ul>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">判断标准：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li><strong>AMI 高可能性:</strong>
-                                    <ul class="list-circle list-inside ml-6">
-                                        <li>任何一次 hs-cTnI ≥ 10 倍 99th URL</li>
-                                        <li>或 1 小时 Δ值 ≥ 0.050 ng/mL，或相对变化 ≥ 20%</li>
-                                        <li>或 2 小时 Δ值 ≥ 0.010 ng/mL，或相对变化 ≥ 30%</li>
-                                        <li>或 3 小时 Δ值 ≥ 0.015 ng/mL，或相对变化 ≥ 50%</li>
-                                    </ul>
-                                </li>
-                                <li><strong>AMI 可能性小:</strong>
-                                    <ul class="list-circle list-inside ml-6">
-                                        <li>所有 hs-cTnI ≤ 2-3 倍 99th URL，且动态变化不明显</li>
-                                    </ul>
-                                </li>
-                                <li><strong>需要进一步观察:</strong>
-                                    <ul class="list-circle list-inside ml-6">
-                                        <li>介于上述两者之间的情况</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** “hs-cTn的最大应用价值一是通过极低值（通常采用LoD或LoQ）安全排除NSTEMI，二是通过高的基线值或单位时间变化值快速诊断NSTEMI。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                        <p class="text-sm text-gray-600 mt-2">“0~1h快速CDP主要有两个理论基础：第一，hs-cTn的测定值是一个连续变量，hs-cTn值的升高直接反映了心肌梗死概率的增大；第二，hs-cTn早期的改变量可以作为3h至6h改变量的替代，并额外提供独立于0h测定值的诊断和预后价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                    </section>
-
-                    <section id="other-tests-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">5. 其他检查建议</h3>
-                        <p class="mb-4 text-gray-600">除了hs-cTnI和心电图，其他辅助检查对于全面评估病情、排除其他疾病也十分重要。在基层医院，请根据医保限制和患者意愿，优先考虑必要的检查。</p>
-                        <div>
-                            <h4 class="font-medium text-gray-700">必备检查：</h4>
-                            <p class="ml-4 text-gray-600">12 导联心电图（用于初步评估和排除STEMI）</p>
-                        </div>
-                        <div class="mt-3">
-                            <h4 class="font-medium text-gray-700">选择性检查（根据临床指征和基层条件选择）：</h4>
-                            <ul class="list-disc list-inside ml-4 text-gray-600">
-                                <li><strong>胸片:</strong> 排除气胸、肺部感染等非心源性胸痛原因，费用较低，易于基层开展。</li>
-                                <li><strong>D-二聚体:</strong> 怀疑肺栓塞（PE）时，D-二聚体阴性可有效排除PE，避免不必要的CT检查。</li>
-                                <li><strong>心脏超声:</strong> 评估心功能、室壁运动等，对鉴别心源性疾病有帮助，但费用较高，可根据患者具体情况和转诊需求决定。</li>
-                                <li><strong>肾功能:</strong> 排除肾功能不全，因为肾功能不全可能导致hs-cTnI慢性升高。</li>
-                                <li><strong>血常规、电解质、血糖等:</strong> 根据具体情况选择，用于排除其他系统性疾病或评估并发症。</li>
-                            </ul>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** “PE的明确诊断依赖于增强CT检查，而D-二聚体对疑似PE的急性胸痛患者，尤其是临床可能性低到中的患者具有较高的诊断和排除诊断的价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                        <p class="text-sm text-gray-600 mt-2">“AAS的确诊及后续治疗方案的选择依赖于以增强CT为代表的影像学检查结果，但增强CT的应用受到临床可行性、造影剂使用和电离辐射等因素的制约。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                    </section>
-
-                    <section id="treatment-decisions-details-section" class="content-section hidden">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700">6. 处理决策</h3>
-                        <p class="mb-4 text-gray-600">根据综合评估结果，采取相应的处理决策。早期识别高危患者并及时转诊是改善预后的关键。</p>
-                        <div class="space-y-3">
-                            <div>
-                                <h4 class="font-medium text-gray-700">危急重症（已在“快速筛查”中处理）:</h4>
-                                <p class="ml-4 text-gray-600">立即抢救，并联系上级医院转诊。例如：急性主动脉夹层、张力性气胸、急性肺栓塞伴休克。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">高度怀疑 STEMI:</h4>
-                                <p class="ml-4 text-gray-600">立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；给予抗血小板、抗凝等治疗；尽快转诊上级医院行急诊 PCI。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</h4>
-                                <p class="ml-4 text-gray-600">密切监测患者病情变化。给予抗血小板、抗凝等治疗。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">AMI 可能性小（高敏肌钙蛋白低可能性）:</h4>
-                                <p class="ml-4 text-gray-600">寻找其他可能的原因，并进行相应处理。例如：心绞痛 (给予硝酸酯类药物)，心肌炎 (给予对症治疗)，肺栓塞 (给予抗凝治疗)。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-700">诊断不明确（高敏肌钙蛋白需进一步观察）:</h4>
-                                <p class="ml-4 text-gray-600">密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</p>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-4">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和治疗建议。</p>
-                        <p class="text-sm text-gray-600 mt-2">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注治疗外，其他急性胸痛患者均需依靠cTn检测结果诊断或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                    </section>
-
+            
+            <div class="result-section">
+                <div class="section-title">
+                    <i class="fas fa-book-medical"></i>
+                    <h2>解读手册</h2>
+                </div>
+                
+                <div class="guide-section">
+                    <div class="guide-title">
+                        <i class="fas fa-info-circle"></i> 核心解读原则
                     </div>
-            </main>
+                    
+                    <div class="guide-content">
+                        <h3>1. 参考值理解</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
+                            <p><span class="guide-key">99th URL：</span>诊断心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
+                            <p><span class="guide-key">不同升高分级：</span>
+                                <ul class="guide-steps">
+                                    <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL</li>
+                                    <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL</li>
+                                    <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
+                                    <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
+                                </ul>
+                            </p>
+                        </div>
+                        
+                        <h3>2. 检测结果意义</h3>
+                        <div class="guide-box">
+                            <p>hs-cTnI阳性不能简单等同于急性心肌梗死（AMI）：</p>
+                            <ul class="guide-steps">
+                                <li>可能是急性心肌梗死（AMI）</li>
+                                <li>也可能是慢性心肌损伤（肾功能不全、心衰等）</li>
+                                <li>关键区分点为"急性变化"</li>
+                            </ul>
+                            <p><span class="guide-key">动态监测原则：</span>建议0h、1h、2h/3h检测，观察变化趋势。</p>
+                        </div>
+                        
+                        <h3>3. 基层医院处理要点</h3>
+                        <div class="guide-box">
+                            <ul class="guide-steps">
+                                <li><strong>关键检查：</strong>心电图 + hs-cTnI是最低要求。</li>
+                                <li><strong>典型胸痛+ST抬高：</strong>立即启动STEMI流程。</li>
+                                <li><strong>hs-cTnI显著升高+典型症状：</strong>按AMI处理，联系转诊。</li>
+                                <li><strong>hs-cTnI轻度升高+心电图正常：</strong>寻找其他原因。</li>
+                                <li><strong>不确定情况：</strong>动态监测或转诊。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-section">
+                    <div class="guide-title">
+                        <i class="fas fa-book"></i> 详细流程
+                    </div>
+                    <div class="guide-content">
+                        <h3>1. 初始评估 (5-10 分钟内)</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
+                            <p><span class="guide-key">详细病史：</span>胸痛特点、危险因素、伴随症状、既往史。</p>
+                            <p><span class="guide-key">12 导联心电图：</span>10 分钟内完成，重点观察ST段、T波、Q波、新发左束支传导阻滞。</p>
+                            <p class="small-text">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
+                            <p><span class="guide-key">初步体格检查：</span>生命体征、心脏听诊、肺部听诊。</p>
+                            <p><span class="guide-key">hs-cTnI 检测：</span>立即检测，并记录检测时间。</p>
+                            <p><span class="guide-key">初步风险评估：</span>根据病史、心电图、体格检查结果，初步判断患者发生ACS和其他严重疾病的可能性。</p>
+                            <p class="small-text">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
+                        </div>
 
-            <footer class="mt-12 pt-8 border-t border-gray-300 text-center">
-                <p class="text-sm text-gray-500">&copy; <span id="currentYear"></span> 高敏肌钙蛋白I基层应用辅助决策手册。内容仅供参考，具体诊疗请遵医嘱。</p>
-            </footer>
+                        <h3>2. hs-cTnI 结果解读</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">参考范围：</span>以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。</p>
+                            <p class="small-text">**注解：** `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</p>
+                            <p><span class="guide-key">结果分级：</span>正常、轻度升高、中度升高、显著升高。</p>
+                        </div>
+
+                        <h3>3. 动态监测</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">复查时间：</span>首选方案（0h, 1h, 2h）、备选方案（0h, 2h, 3h）。</p>
+                            <p><span class="guide-key">复查次数：</span>至少复查 1-2 次，必要时可多次复查。</p>
+                            <p><span class="guide-key">结果解读：</span>绝对变化 (Δ值)、相对变化 (%)。</p>
+                            <p><span class="guide-key">判断标准：</span>AMI高可能性、AMI可能性小、需要进一步观察。</p>
+                        </div>
+
+                        <h3>4. 其他检查建议</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">必备：</span>12 导联心电图。</p>
+                            <p><span class="guide-key">选择性：</span>胸片、D-二聚体、心脏超声、肾功能、血常规、电解质、血糖等。</p>
+                        </div>
+
+                        <h3>5. 处理决策</h3>
+                        <div class="guide-box">
+                            <p><span class="guide-key">危急重症：</span>立即抢救，并联系上级医院转诊（如急性主动脉夹层、张力性气胸、急性肺栓塞伴休克）。</p>
+                            <p><span class="guide-key">高度怀疑 STEMI：</span>立即启动STEMI处理流程，尽快转诊上级医院行急诊PCI。</p>
+                            <p><span class="guide-key">高度怀疑 NSTEMI：</span>密切监测，给予抗血小板、抗凝，评估风险决定是否转诊行冠脉造影。</p>
+                            <p><span class="guide-key">AMI 可能性小：</span>寻找其他原因并处理（如心绞痛、心肌炎、肺栓塞）。</p>
+                            <p><span class="guide-key">诊断不明确：</span>密切观察，复查hs-cTnI和心电图，必要时会诊。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <div class="guide-section">
+            <div class="guide-title" style="background: #666;">
+                <i class="fas fa-exclamation-triangle"></i> 重要提示
+            </div>
+            <div class="reference-box">
+                <p><strong>1. 工具定位：</strong>本工具是基于国内最新指南共识(如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等)开发的辅助决策工具，<strong>不能替代专业医生的临床判断</strong>。</p>
+                <p><strong>2. 实际诊疗：</strong>实际诊疗需结合患者完整病史、体格检査、其他实验室检査及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
+                <p><strong>3. 参考值：</strong>hs-cTn 的 99th URL 应以医院自身建立的为准，本工具默认使用<strong>0.060 ng/mL</strong>作为判断依据，您可以在上方*自定义参考区间*。</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>高敏肌钙蛋白I判读辅助手册 v1.3 &copy; <span id="currentYear"></span> | 基于中国最新临床指南共识</p>
+            <p>本工具仅供医务人员参考，实际诊疗需结合患者具体情况</p>
+        </footer>
     </div>
 
     <script>
@@ -911,34 +1037,49 @@
         });
 
 
-        // Main inputs from the quick analysis module
+        // Tab切换功能
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 移除所有active状态
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // 添加当前active状态
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Result display elements
+        const resultCard = document.getElementById('result-card');
+        const resultTitle = document.getElementById('result-title');
+        const riskLevel = document.getElementById('risk-level');
+        const resultIcon = document.getElementById('result-icon');
+        const resultIconBg = document.getElementById('result-icon-bg'); // For background color
+        const tniValueDisplay = document.getElementById('tni-value');
+        const recRecommendations = document.getElementById('rec-recommendations');
+        const diagnosisReasoning = document.getElementById('diagnosis-reasoning'); 
+
+        // Input elements
+        const customReferenceIntervalInput = document.getElementById('customReferenceInterval');
         const initialTnIInput = document.getElementById('initialTnI');
         const repeatTnIInput = document.getElementById('repeatTnI');
         const repeatTimeSelect = document.getElementById('repeatTime');
         const chestPainDurationInput = document.getElementById('chestPainDuration');
         const symptomsRadios = document.querySelectorAll('input[name="symptoms"]');
         const ecgRadios = document.querySelectorAll('input[name="ecg"]');
-        const riskFactorCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="hasHighRiskFactors"], input[type="checkbox"][id="hasMultipleRiskFactors"]');
-        const customReferenceIntervalInput = document.getElementById('customReferenceInterval');
+        const riskFactorCheckboxes = document.querySelectorAll('.checkbox-row input[type="checkbox"]');
+
         const currentRefIntervalDisplay = document.getElementById('currentRefIntervalDisplay');
         const detailedRefIntervalDisplay = document.getElementById('detailedRefIntervalDisplay');
+        const detailedRefIntervalDisplay2 = document.getElementById('detailedRefIntervalDisplay2'); // For "轻度升高" in guide
 
-
-        // Result display elements in the quick analysis module
-        const resultArea = document.getElementById('resultArea');
-        const resultCard = document.getElementById('resultCard');
-        const resultDiagnosis = document.getElementById('resultDiagnosis');
-        const resultUrgency = document.getElementById('resultUrgency');
-        const tniElevationLevel = document.getElementById('tniElevationLevel');
-        const resultActions = document.getElementById('resultActions');
-        const resultReasoning = document.getElementById('resultReasoning');
-
-        // Elements for the detailed flow sections
-        const subTabs = document.querySelectorAll('.sub-tab-button');
-        const contentSections = document.querySelectorAll('.content-section');
-
-        // Define constants
-        const DEFAULT_URL_99_PERCENTILE_NG_ML = 0.060; // Default reference interval
+        // Default reference interval
+        const DEFAULT_URL_99_PERCENTILE_NG_ML = 0.060; 
 
         // Function to get the current 99th percentile URL, either custom or default
         function get99thPercentileURL() {
@@ -954,6 +1095,7 @@
             const currentURL = get99thPercentileURL();
             currentRefIntervalDisplay.textContent = currentURL.toFixed(3);
             detailedRefIntervalDisplay.textContent = currentURL.toFixed(3);
+            detailedRefIntervalDisplay2.textContent = currentURL.toFixed(3);
         });
 
         // Initialize displayed reference interval on load
@@ -961,97 +1103,40 @@
             const initialURL = get99thPercentileURL();
             currentRefIntervalDisplay.textContent = initialURL.toFixed(3);
             detailedRefIntervalDisplay.textContent = initialURL.toFixed(3);
+            detailedRefIntervalDisplay2.textContent = initialURL.toFixed(3);
         });
 
 
-        // Function to calculate elevation level (from Claude's code)
-        function calculateElevationLevel(value) {
-            const threshold = get99thPercentileURL();
-            if (value <= threshold) return 'normal';
-            if (value <= threshold * 3) return 'mild';
-            if (value <= threshold * 10) return 'moderate';
-            return 'significant';
+        // Function to calculate elevation level based on 99th URL (ULN)
+        function calculateElevationLevel(value, ULN) {
+            if (value <= ULN) return 'normal';
+            if (value <= ULN * 3) return 'mild'; // 1-3 times ULN
+            if (value <= ULN * 10) return 'moderate'; // 3-10 times ULN
+            return 'significant'; // >10 times ULN
         }
 
-        function getElevationText(level, value) {
-            const currentURL = get99thPercentileURL();
+        // Function to get descriptive text for elevation level
+        function getElevationText(level, value, ULN) {
             switch(level) {
-                case 'normal': return `${value.toFixed(3)} ng/mL (正常范围)`;
-                case 'mild': return `${value.toFixed(3)} ng/mL (轻度升高，约2-3倍${currentURL.toFixed(3)} ng/mL)`;
-                case 'moderate': return `${value.toFixed(3)} ng/mL (中度升高，约3-10倍${currentURL.toFixed(3)} ng/mL)`;
-                case 'significant': return `${value.toFixed(3)} ng/mL (显著升高，>10倍${currentURL.toFixed(3)} ng/mL)`;
+                case 'normal': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (正常范围)`;
+                case 'mild': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (轻度升高，约1-3倍ULN)`;
+                case 'moderate': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (中度升高，约3-10倍ULN)`;
+                case 'significant': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (显著升高，>10倍ULN)`;
                 default: return '';
             }
         }
 
-        // Function to get color class based on urgency level (matching Claude's mapping)
-        function getColorClass(color) {
-            switch(color) {
-                case 'red': return 'result-card-red';
-                case 'orange': return 'result-card-orange';
-                case 'yellow': return 'result-card-yellow';
-                case 'green': return 'result-card-green';
-                default: return 'border-gray-300 bg-gray-50';
-            }
-        }
-
-        // Function to switch and display detailed content sections
-        function switchDetailedContent(activeSectionId) {
-            subTabs.forEach(button => {
-                button.classList.remove('active');
-            });
-            contentSections.forEach(section => {
-                section.classList.add('hidden');
-            });
-
-            const activeButton = document.querySelector(`[data-subtab="${activeSectionId}"]`);
-            if (activeButton) {
-                activeButton.classList.add('active');
-            }
-            const activeSection = document.getElementById(activeSectionId);
-            if (activeSection) {
-                activeSection.classList.remove('hidden');
-                // Scroll to the active section for better UX, especially on mobile
-                activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Event listeners for detailed flow navigation
-        subTabs.forEach(button => {
-            button.addEventListener('click', () => {
-                switchDetailedContent(button.dataset.subtab);
-            });
-        });
-
-        // Default to the first detailed section on initial load (only if main content is visible)
-        if (hasAcceptedDisclaimer === 'true') {
-            switchDetailedContent('urgent-screening-details');
-        }
-
-        // Collapsible sections logic (from Claude's UI idea)
-        document.querySelectorAll('.collapsible-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const targetId = header.dataset.target;
-                const content = document.getElementById(targetId);
-                const icon = header.querySelector('svg');
-
-                if (content.classList.contains('hidden')) {
-                    content.classList.remove('hidden');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    content.classList.add('hidden');
-                    icon.style.transform = 'rotate(0deg)';
-                }
-            });
-        });
-
-
         // Main analysis function
-        function analyzeTnI() {
-            // Reset invalid state
+        document.getElementById('analyze-btn').addEventListener('click', analyzeResults);
+
+        function analyzeResults() {
+            // Reset invalid state for all inputs
             initialTnIInput.classList.remove('invalid');
+            repeatTnIInput.classList.remove('invalid');
             chestPainDurationInput.classList.remove('invalid');
-            customReferenceIntervalInput.classList.remove('invalid'); // New: Reset validation for custom reference input
+            customReferenceIntervalInput.classList.remove('invalid');
+            symptomsRadios.forEach(radio => radio.nextElementSibling.classList.remove('invalid')); // Remove invalid class from labels
+            ecgRadios.forEach(radio => radio.nextElementSibling.classList.remove('invalid'));
 
 
             // Get input values
@@ -1059,7 +1144,7 @@
             const repeatTnI = parseFloat(repeatTnIInput.value); // May be NaN if empty
             const repeatTime = parseInt(repeatTimeSelect.value);
             const chestPainDuration = parseFloat(chestPainDurationInput.value);
-            const URL_99_PERCENTILE_NG_ML = get99thPercentileURL(); // Get the current (custom or default) URL
+            const ULN = get99thPercentileURL(); // Get the current (custom or default) ULN
 
 
             let selectedSymptoms = '';
@@ -1084,213 +1169,197 @@
 
             // Input validation
             let isValid = true;
-            if (initialTnIInput.value.trim() === '' || isNaN(initialTnI) || initialTnI < 0) {
+            const errors = [];
+
+            if (isNaN(initialTnI) || initialTnI < 0) {
                 initialTnIInput.classList.add('invalid');
+                errors.push("请填写有效的首次 hs-cTnI 数值。");
                 isValid = false;
             }
-            if (chestPainDurationInput.value.trim() === '' || isNaN(chestPainDuration) || chestPainDuration < 0) {
+            if (!isNaN(repeatTnI) && repeatTnI < 0) { // Only validate if a value is entered
+                repeatTnIInput.classList.add('invalid');
+                errors.push("复查 hs-cTnI 数值不能为负。");
+                isValid = false;
+            }
+            if (isNaN(chestPainDuration) || chestPainDuration < 0) {
                 chestPainDurationInput.classList.add('invalid');
+                errors.push("请填写有效的胸痛持续时间。");
                 isValid = false;
             }
             if (!selectedSymptoms) {
+                symptomsRadios.forEach(radio => radio.nextElementSibling.classList.add('invalid'));
+                errors.push("请选择胸痛症状特点。");
                 isValid = false;
-                // Visually indicate required radio group if possible, or use a general alert
             }
             if (!selectedEcg) {
+                ecgRadios.forEach(radio => radio.nextElementSibling.classList.add('invalid'));
+                errors.push("请选择心电图结果。");
                 isValid = false;
-                // Visually indicate required radio group if possible, or use a general alert
             }
-            // New: Validate custom reference interval
             const customRefValue = customReferenceIntervalInput.value.trim();
             if (customRefValue !== '' && (isNaN(parseFloat(customRefValue)) || parseFloat(customRefValue) <= 0)) {
                 customReferenceIntervalInput.classList.add('invalid');
+                errors.push("自定义参考区间若填写，请确保为有效正数。");
                 isValid = false;
             }
 
 
             if (!isValid) {
-                alert("请填写所有必填项（* 标注），并确保数值有效！自定义参考区间若填写，也请确保为有效正数。");
+                alert("请检查以下问题：\n" + errors.join("\n"));
                 return;
             }
 
             let diagnosis = "";
             let urgency = "";
-            let color = ""; // This will be the string like 'red', 'orange', 'yellow', 'green'
-            let actions = [];
-            let reasoning = "";
-            let targetSectionId = ''; // To activate the relevant detailed section
+            let colorClass = ""; // This will be the string like 'red-bg', 'orange-bg', etc.
+            let actions = []; // Corresponds to "处理措施"
+            let reasons = []; // Corresponds to "诊断依据"
+            
+            const elevationLevel = calculateElevationLevel(initialTnI, ULN);
 
-            const initialTnIL = initialTnI * 1000;
-            const repeatTnIL = isNaN(repeatTnI) ? null : repeatTnI * 1000;
-            const elevationLevel = calculateElevationLevel(initialTnI);
-
-            // Decision Logic (Combined and refined)
-            // Prioritize immediate life-threatening conditions
-            if (selectedEcg === 'st_elevation' || selectedSymptoms === 'other') { // 'other' symptoms implies severe associated symptoms like dyspnea, syncope, diaphoresis, nausea/vomiting
+            // Decision Logic
+            // Priority 1: Immediate life-threatening conditions (STEMI or severe symptoms)
+            if (selectedEcg === 'st_elevation' || selectedSymptoms === 'other') {
                 diagnosis = '高度怀疑危急重症';
                 urgency = '立即处理';
-                color = 'red';
+                colorClass = 'red-bg';
                 actions = [
                     '立即启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。',
                     '紧急联系上级医院或胸痛中心，准备转运。',
-                    '转运过程中给予初步对症治疗。'
+                    '转运过程中给予初步对症治疗。',
+                    '对于STEMI，需在60分钟内启动再灌注治疗（PCI或溶栓）。'
                 ];
-                reasoning = `心电图提示ST段抬高，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状，高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》，需快速鉴别并及时转诊。`;
-                targetSectionId = 'urgent-screening-details';
-            } else if (initialTnI <= URL_99_PERCENTILE_NG_ML) {
-                // Initial TnI Normal
-                // If chest pain duration > 3 hours AND no high risk factors AND normal ECG AND no typical chest pain, then low AMI possibility
+                reasons = [
+                    `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
+                    `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
+                    `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》，需快速鉴别并及时转诊。`
+                ];
+            } 
+            // Priority 2: Initial TnI normal or very low, and low clinical suspicion
+            else if (initialTnI <= ULN) { // Initial TnI normal
                 if (chestPainDuration > 3 && selectedRiskFactors.length === 0 && selectedEcg === 'normal' && selectedSymptoms === 'none') {
                     diagnosis = '急性心肌梗死可能性很小';
                     urgency = '观察随访';
-                    color = 'green';
+                    colorClass = 'green-bg';
                     actions = [
                         '建议观察患者，寻找其他可能原因（如肌肉骨骼痛、消化道疾病等）。',
                         '若症状持续或加重，可考虑复查 hs-cTnI。',
                         '无需立即进行高费用检查。'
                     ];
-                    reasoning = `首次 hs-cTnI 正常，且胸痛持续时间较长（>3小时）、无高危因素、心电图正常、胸痛不典型。依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，可安全排除AMI。`;
-                    targetSectionId = 'initial-assessment-details-section';
+                    reasons = [
+                        `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 小于99th URL阈值)。`,
+                        `且胸痛持续时间较长（>3小时）、无高危因素、心电图正常、胸痛不典型。`,
+                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，在无心脏症状患者中，此值可安全排除急性心肌梗死。`
+                    ];
                 } else {
                     diagnosis = '肌钙蛋白正常，需结合临床';
                     urgency = '观察随访';
-                    color = 'green'; // Still green for normal TnI, but might need observation
+                    colorClass = 'green-bg';
                     actions = [
                         '建议观察患者，若症状持续或加重，或临床高度怀疑 ACS，可考虑复查 hs-cTnI。',
                         '结合病史、心电图等综合判断。'
                     ];
-                    reasoning = `首次 hs-cTnI 正常，但仍需结合临床情况。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，肌钙蛋白正常不完全排除ACS，尤其在症状发作早期，可能尚未达到升高水平，需结合临床综合判断。`;
-                    targetSectionId = 'initial-assessment-details-section';
+                    reasons = [
+                        `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 正常范围)。`,
+                        `但仍需结合临床情况。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，肌钙蛋白正常不完全排除ACS，尤其在症状发作早期，可能尚未达到升高水平，需结合临床综合判断。`
+                    ];
                 }
-            } else {
-                // Initial TnI Elevated (> 99th URL)
+            } 
+            // Priority 3: Initial TnI elevated, dynamic changes are key
+            else { // Initial TnI Elevated (> ULN)
                 let isAMIHighPossibility = false;
-                let isNonAcuteInjury = false;
+                let isNonAcuteInjury = false; // For chronic elevation or non-acute causes
 
-                if (repeatTnIL !== null) { // Dynamic evaluation available
+                if (repeatTnI !== null && !isNaN(repeatTnI)) { // Dynamic evaluation available
                     const deltaValue = repeatTnI - initialTnI;
                     const relativeChange = initialTnI !== 0 ? (deltaValue / initialTnI) * 100 : 0;
 
+                    // Apply dynamic change criteria from your provided logic
                     if (repeatTime === 1) {
                         if (relativeChange >= 20 || deltaValue >= 0.050) isAMIHighPossibility = true;
-                        else if (relativeChange < 20 && deltaValue < 0.050 && initialTnI <= (3 * URL_99_PERCENTILE_NG_ML) && repeatTnI <= (3 * URL_99_PERCENTILE_NG_ML)) isNonAcuteInjury = true;
+                        else if (relativeChange < 20 && deltaValue < 0.050 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
                     } else if (repeatTime === 2) {
                         if (relativeChange >= 30 || deltaValue >= 0.010) isAMIHighPossibility = true;
-                        else if (relativeChange < 30 && deltaValue < 0.010 && initialTnI <= (3 * URL_99_PERCENTILE_NG_ML) && repeatTnI <= (3 * URL_99_PERCENTILE_NG_ML)) isNonAcuteInjury = true;
+                        else if (relativeChange < 30 && deltaValue < 0.010 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
                     } else if (repeatTime === 3) {
                         if (relativeChange >= 50 || deltaValue >= 0.015) isAMIHighPossibility = true;
-                        else if (relativeChange < 50 && deltaValue < 0.015 && initialTnI <= (3 * URL_99_PERCENTILE_NG_ML) && repeatTnI <= (3 * URL_99_PERCENTILE_NG_ML)) isNonAcuteInjury = true;
+                        else if (relativeChange < 50 && deltaValue < 0.015 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
                     }
                 }
 
                 // Also check for absolute high values as a primary high possibility
-                if (initialTnI >= (10 * URL_99_PERCENTILE_NG_ML) || (repeatTnIL !== null && repeatTnI >= (10 * URL_99_PERCENTILE_NG_ML))) {
+                if (initialTnI >= (10 * ULN) || (repeatTnI !== null && !isNaN(repeatTnI) && repeatTnI >= (10 * ULN))) {
                      isAMIHighPossibility = true; // Overrides dynamic changes if absolute value is very high
                 }
 
                 // Combine with symptoms and ECG for NSTEMI suspicion
                 if (isAMIHighPossibility || (selectedSymptoms === 'typical' && selectedEcg === 'ischemic_changes')) {
                     diagnosis = '高度怀疑急性心肌梗死（AMI）';
-                    urgency = '立即处理'; // High suspicion, so immediate action
-                    color = 'red';
+                    urgency = '立即处理';
+                    colorClass = 'red-bg';
                     actions = [
-                        '立即给予抗血小板、抗凝等治疗。',
+                        '立即给予抗血小板（如阿司匹林300mg + 替格瑞洛180mg负荷剂量）、抗凝（如普通肝素或低分子肝素）等治疗。',
                         '密切监测患者生命体征和心电图。',
                         '评估患者风险，紧急联系上级医院心内科，准备转诊行冠脉造影。'
                     ];
-                    reasoning = `hs-cTnI 动态变化显著或绝对值显著升高，或伴有典型胸痛和心电图缺血性改变，高度怀疑急性心肌梗死（AMI）或其他急性心肌损伤。依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》和《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白的动态变化是诊断急性心肌损伤的关键指标。`;
-                    targetSectionId = 'treatment-decisions-details-section';
+                    reasons = [
+                        `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
+                        `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
+                        `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》，需快速鉴别并及时转诊。`
+                    ];
                 } else if (isNonAcuteInjury) {
                     diagnosis = '肌钙蛋白升高，非急性心肌损伤';
                     urgency = '观察随访';
-                    color = 'green'; // Non-acute injury can also be observed/followed up
+                    colorClass = 'green-bg';
                     actions = [
                         '寻找其他可能原因（如肾功能不全、心肌炎、心力衰竭、肺栓塞等），并针对病因进行相应处理。',
                         '若临床高度怀疑 ACS，仍需密切观察或请上级医院会诊。'
                     ];
-                    reasoning = `hs-cTnI 升高但动态变化不显著。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白升高可能由非ACS原因引起，如慢性肾病、心力衰竭、心肌炎等。此时肌钙蛋白水平通常稳定或动态变化不明显。`;
-                    targetSectionId = 'other-tests-details-section';
+                    reasons = [
+                        `hs-cTnI 升高但动态变化不显著。`,
+                        `依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白升高可能由非ACS原因引起，如慢性肾病、心力衰竭、心肌炎等。此时肌钙蛋白水平通常稳定或动态变化不明显。`
+                    ];
                 } else {
                     diagnosis = '肌钙蛋白升高，诊断不明确';
                     urgency = '进一步检查';
-                    color = 'orange'; // This is the 'yellow' equivalent in Claude's design for "待查"
+                    colorClass = 'orange-bg';
                     actions = [
                         '建议密切观察患者病情变化，必要时再次复查 hs-cTnI。',
                         '结合其他检查（如心脏超声、肾功能、D-二聚体等）综合判断。',
                         '若症状加重，立即转诊。'
                     ];
-                    reasoning = `hs-cTnI 升高，但动态变化处于观察区间，或临床表现不典型，诊断仍不明确。依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，对于肌钙蛋白动态变化不明确的患者，需要结合更长时间的观察、重复检测以及其他临床证据进行综合判断。`;
-                    targetSectionId = 'dynamic-monitoring-details-section';
+                    reasons = [
+                        `hs-cTnI 升高，但动态变化处于观察区间，或临床表现不典型，诊断仍不明确。`,
+                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，对于肌钙蛋白动态变化不明确的患者，需要结合更长时间的观察、重复检测以及其他临床证据进行综合判断。`
+                    ];
                 }
             }
 
             // Update Result Display
-            resultCard.className = `border-2 rounded-lg p-6 mb-6 ${getColorClass(color)}`;
-            resultDiagnosis.textContent = diagnosis;
-            resultUrgency.textContent = urgency;
-            tniElevationLevel.textContent = getElevationText(elevationLevel, initialTnI);
+            resultCard.className = `result-card show ${colorClass}`;
+            resultTitle.textContent = diagnosis;
+            riskLevel.textContent = `风险等级: ${urgency}`;
+            resultIconBg.className = `card-icon ${colorClass}`; // Update icon background color
+            resultIcon.className = `fas ${
+                colorClass === 'red-bg' ? 'fa-bolt' :
+                colorClass === 'orange-bg' ? 'fa-exclamation-circle' :
+                colorClass === 'yellow-bg' ? 'fa-exclamation-triangle' :
+                'fa-check'
+            }`; // Update icon based on color
 
-            resultActions.innerHTML = ''; // Clear previous actions
-            actions.forEach((action, index) => {
-                const li = document.createElement('li');
-                li.className = 'flex items-start';
-                li.innerHTML = `
-                    <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
-                        ${index + 1}
-                    </span>
-                    <span class="text-sm">${action}</span>
-                `;
-                resultActions.appendChild(li);
-            });
-
-            resultReasoning.innerHTML = reasoning; // Update reasoning content
-
-            resultArea.classList.remove('hidden');
-
-            // Reset collapsible sections to hidden
-            document.querySelectorAll('.collapsible-content').forEach(content => content.classList.add('hidden'));
-            document.querySelectorAll('.collapsible-header svg').forEach(icon => icon.style.transform = 'rotate(0deg)');
-
-            // Activate and scroll to the relevant detailed section
-            if (targetSectionId) {
-                switchDetailedContent(targetSectionId);
-            }
+            tniValueDisplay.innerHTML = getElevationText(elevationLevel, initialTnI, ULN);
+            
+            recRecommendations.innerHTML = actions.map(rec => `<p>${rec}</p>`).join('');
+            diagnosisReasoning.innerHTML = reasons.map(reason => `<li>${reason}</li>`).join('');
+            
+            // Auto switch to result tab
+            document.querySelector('[data-tab="step2"]').click();
+            
+            // Auto switch to treatment advice tab after 10 seconds
+            setTimeout(() => {
+                document.querySelector('[data-tab="step3"]').click();
+            }, 10000);
         }
-
-        // Copy template logic (remains the same)
-        const copyButtons = document.querySelectorAll('.copy-template-button');
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const templateText = button.previousElementSibling.textContent;
-                navigator.clipboard.writeText(templateText).then(() => {
-                    const originalText = button.textContent;
-                    button.textContent = '已复制!';
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                    }, 2000);
-                }).catch(err => {
-                    console.error('无法复制文本: ', err);
-                    const textArea = document.createElement("textarea");
-                    textArea.value = templateText;
-                    document.body.appendChild(textArea);
-                    textArea.focus();
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        const originalText = button.textContent;
-                        button.textContent = '已复制!';
-                        setTimeout(() => {
-                            button.textContent = originalText;
-                        }, 2000);
-                    } catch (err) {
-                         button.textContent = '复制失败';
-                         setTimeout(() => { button.textContent = '复制'; }, 2000);
-                    }
-                    document.body.removeChild(textArea);
-                });
-            });
-        });
-
     </script>
 </body>
 </html>
