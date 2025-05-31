@@ -63,11 +63,12 @@
         }
 
         /* Adjust guide-section to remove its own background/shadow/padding */
+        /* This rule is now for the "重要提示" section, so it needs to be styled */
         .guide-section {
-            background: none; /* No background */
-            border-radius: 0; /* No border-radius */
-            box-shadow: none; /* No shadow */
-            padding: 0; /* No padding */
+            /* background: none; /* No background */
+            /* border-radius: 0; /* No border-radius */
+            /* box-shadow: none; /* No shadow */
+            /* padding: 0; /* No padding */
             margin-top: 25px; /* Keep margin-top for spacing from previous section */
         }
         
@@ -408,7 +409,7 @@
             border: 1px dashed var(--border);
             border-radius: 12px;
             padding: 20px;
-            margin-top: 30px;
+            /* Removed margin-top from here, it will be handled by the new wrapper */
         }
         
         .ref-list li {
@@ -446,26 +447,15 @@
         }
         
         /* The main guide-section should not have its own background/shadow/padding */
-        .guide-section {
-            background: none;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 0;
+        /* This rule is now for the "重要提示" section, so it needs to be styled */
+        .guide-section.important-notice-section { /* Added a specific class for this section */
+            background-color: var(--white); /* White background */
+            border-radius: 16px; /* Rounded corners */
+            box-shadow: var(--shadow); /* Shadow */
+            padding: 20px; /* Padding inside the white box */
             margin-top: 25px; /* Keep margin-top for spacing from previous section */
         }
-        
-        .guide-title {
-            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
-            color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            font-size: 20px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
+
         .guide-content {
             margin-bottom: 25px;
         }
@@ -634,7 +624,7 @@
             background-color: inherit; /* Inherit AliceBlue from details[open] */
         }
 
-        /* Removed .inner-content-box entirely */
+        /* Removed .important-notice-content-wrapper entirely */
         
         /* Disclaimer Modal Styles */
         .modal-overlay {
@@ -1261,8 +1251,7 @@
             </div>
         </div>
         
-        <div class="guide-section">
-            <div class="guide-title" style="background: #666;">
+        <div class="guide-section important-notice-section"> <div class="guide-title" style="background: #666;">
                 <i class="fas fa-exclamation-triangle"></i> 重要提示
             </div>
             <div class="reference-box">
