@@ -306,9 +306,10 @@
             background: var(--dark-blue);
         }
         
+        /* 步骤2：结果解读区域优化 */
         .result-card {
             border-radius: 16px;
-            padding: 30px;
+            padding: 20px; /* Reduced padding */
             text-align: center;
             transition: var(--transition);
             transform: translateY(10px);
@@ -324,14 +325,14 @@
         }
         
         .card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 60px; /* Reduced icon size */
+            height: 60px; /* Reduced icon size */
+            margin: 0 auto 15px; /* Reduced margin */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            font-size: 36px;
+            font-size: 30px; /* Reduced icon font size */
             color: white;
         }
         
@@ -341,25 +342,26 @@
         .green-bg { background-color: var(--green); }
         
         .result-title {
-            font-size: 26px;
+            font-size: 22px; /* Reduced font size */
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced margin */
         }
         
         .risk-level {
             display: inline-block;
             font-weight: 700;
-            padding: 6px 18px;
-            border-radius: 20px;
-            margin-bottom: 25px;
+            padding: 4px 12px; /* Reduced padding */
+            border-radius: 16px; /* Adjusted border radius */
+            margin-bottom: 15px; /* Reduced margin */
+            font-size: 14px; /* Reduced font size */
         }
         
         .value-highlight {
-            font-size: 24px;
+            font-size: 18px; /* Reduced font size */
             font-weight: 700;
-            margin: 15px 0;
-            padding: 12px;
-            border-radius: 12px;
+            margin: 10px 0; /* Reduced margin */
+            padding: 8px; /* Reduced padding */
+            border-radius: 10px; /* Adjusted border radius */
             background: rgba(0,0,0,0.04);
         }
         
@@ -387,10 +389,10 @@
             margin-left: 25px;
         }
         
-    .rec-list li {
-        margin-bottom: 8px;
-        padding-left: 5px;
-    }
+        .rec-list li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
         
         .reference-box {
             background: #f9f9f9;
@@ -405,9 +407,9 @@
         }
         
         .graph-container {
-            height: 250px;
+            height: 180px; /* Reduced graph height */
             position: relative;
-            margin: 20px 0;
+            margin: 15px 0; /* Reduced margin */
             background: #f9f9f9;
             border-radius: 12px;
             overflow: hidden;
@@ -422,15 +424,15 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 10px 5px;
+            padding: 8px 5px; /* Reduced padding */
         }
         
         .chart-line {
             border-top: 1px dashed rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
-            padding: 0 10px;
-            font-size: 12px;
+            padding: 0 8px; /* Reduced padding */
+            font-size: 11px; /* Reduced font size */
             color: #777;
         }
         
@@ -516,6 +518,59 @@
             display: block;
         }
 
+        /* Collapsible (Details/Summary) styles */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        details[open] {
+            background-color: #e6f7ff; /* Light blue when open */
+            border-color: var(--primary-blue);
+        }
+        
+        summary {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--dark-gray);
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            list-style: none; /* Hide default marker */
+        }
+
+        summary::-webkit-details-marker {
+            display: none; /* Hide default marker for webkit browsers */
+        }
+        summary::marker {
+            display: none; /* Hide default marker for other browsers */
+        }
+
+        summary::after {
+            content: "\f078"; /* Unicode for chevron-down icon from FontAwesome */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s ease;
+            color: var(--primary-blue);
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .details-content {
+            padding: 10px 20px 20px;
+            border-top: 1px solid var(--border);
+        }
+        
         /* Disclaimer Modal Styles */
         .modal-overlay {
             position: fixed;
@@ -653,6 +708,41 @@
             }
             .app-container { /* Ensure single column on mobile */
                 grid-template-columns: 1fr;
+            }
+            /* Adjustments for result card on mobile */
+            .result-card {
+                padding: 15px;
+            }
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                margin-bottom: 10px;
+            }
+            .result-title {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            .risk-level {
+                font-size: 12px;
+                padding: 3px 10px;
+                margin-bottom: 10px;
+            }
+            .value-highlight {
+                font-size: 16px;
+                margin: 8px 0;
+                padding: 6px;
+            }
+            .graph-container {
+                height: 150px;
+                margin: 10px 0;
+            }
+            .chart-lines {
+                padding: 5px;
+            }
+            .chart-line {
+                font-size: 10px;
+                padding: 0 5px;
             }
         }
         /* Further adjustments for very small screens as per DeepSeek's suggestion */
@@ -902,41 +992,53 @@
                     </div>
                     
                     <div class="guide-content">
-                        <h3>1. 参考值理解</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
-                            <p><span class="guide-key">99th URL：</span>诊断心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
-                            <p><span class="guide-key">不同升高分级：</span>
-                                <ul class="guide-steps">
-                                    <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL</li>
-                                    <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL</li>
-                                    <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
-                                    <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
-                                </ul>
-                            </p>
-                        </div>
+                        <details>
+                            <summary><h3>1. 参考值理解</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
+                                    <p><span class="guide-key">99th URL：</span>诊断心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
+                                    <p><span class="guide-key">不同升高分级：</span>
+                                        <ul class="guide-steps">
+                                            <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL</li>
+                                            <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL</li>
+                                            <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
+                                            <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </details>
                         
-                        <h3>2. 检测结果意义</h3>
-                        <div class="guide-box">
-                            <p>hs-cTnI阳性不能简单等同于急性心肌梗死（AMI）：</p>
-                            <ul class="guide-steps">
-                                <li>可能是急性心肌梗死（AMI）</li>
-                                <li>也可能是慢性心肌损伤（肾功能不全、心衰等）</li>
-                                <li>关键区分点为"急性变化"</li>
-                            </ul>
-                            <p><span class="guide-key">动态监测原则：</span>建议0h、1h、2h/3h检测，观察变化趋势。</p>
-                        </div>
+                        <details>
+                            <summary><h3>2. 检测结果意义</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>hs-cTnI阳性不能简单等同于急性心肌梗死（AMI）：</p>
+                                    <ul class="guide-steps">
+                                        <li>可能是急性心肌梗死（AMI）</li>
+                                        <li>也可能是慢性心肌损伤（肾功能不全、心衰等）</li>
+                                        <li>关键区分点为"急性变化"</li>
+                                    </ul>
+                                    <p><span class="guide-key">动态监测原则：</span>建议0h、1h、2h/3h检测，观察变化趋势。</p>
+                                </div>
+                            </div>
+                        </details>
                         
-                        <h3>3. 基层医院处理要点</h3>
-                        <div class="guide-box">
-                            <ul class="guide-steps">
-                                <li><strong>关键检查：</strong>心电图 + hs-cTnI是最低要求。</li>
-                                <li><strong>典型胸痛+ST抬高：</strong>立即启动STEMI流程。</li>
-                                <li><strong>hs-cTnI显著升高+典型症状：</strong>按AMI处理，联系转诊。</li>
-                                <li><strong>hs-cTnI轻度升高+心电图正常：</strong>寻找其他原因。</li>
-                                <li><strong>不确定情况：</strong>动态监测或转诊。</li>
-                            </ul>
-                        </div>
+                        <details>
+                            <summary><h3>3. 基层医院处理要点</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <ul class="guide-steps">
+                                        <li><strong>关键检查：</strong>心电图 + hs-cTnI是最低要求。</li>
+                                        <li><strong>典型胸痛+ST抬高：</strong>立即启动STEMI流程。</li>
+                                        <li><strong>hs-cTnI显著升高+典型症状：</strong>按AMI处理，联系转诊。</li>
+                                        <li><strong>hs-cTnI轻度升高+心电图正常：</strong>寻找其他原因。</li>
+                                        <li><strong>不确定情况：</strong>动态监测或转诊。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 </div>
                 
@@ -945,47 +1047,170 @@
                         <i class="fas fa-book"></i> 详细流程
                     </div>
                     <div class="guide-content">
-                        <h3>1. 初始评估 (5-10 分钟内)</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
-                            <p><span class="guide-key">详细病史：</span>胸痛特点、危险因素、伴随症状、既往史。</p>
-                            <p><span class="guide-key">12 导联心电图：</span>10 分钟内完成，重点观察ST段、T波、Q波、新发左束支传导阻滞。</p>
-                            <p class="small-text">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
-                            <p><span class="guide-key">初步体格检查：</span>生命体征、心脏听诊、肺部听诊。</p>
-                            <p><span class="guide-key">hs-cTnI 检测：</span>立即检测，并记录检测时间。</p>
-                            <p><span class="guide-key">初步风险评估：</span>根据病史、心电图、体格检查结果，初步判断患者发生ACS和其他严重疾病的可能性。</p>
-                            <p class="small-text">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
-                        </div>
+                        <details>
+                            <summary><h3>1. 初始评估 (5-10 分钟内)</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>快速、准确的初始评估是后续诊疗的关键。此阶段应在5-10分钟内完成，重点在于识别危急重症并获取关键病史和检查信息。</p>
+                                    <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
+                                    <ul class="guide-steps">
+                                        <li><strong>重点关注：</strong></li>
+                                        <li>持续性剧烈胸痛，伴大汗、恶心、呕吐等</li>
+                                        <li>呼吸困难、晕厥、休克</li>
+                                        <li>心电图 ST 段抬高</li>
+                                    </ul>
+                                    <p><span class="guide-key">详细病史：</span></p>
+                                    <ul class="guide-steps">
+                                        <li><strong>胸痛特点：</strong></li>
+                                        <li>部位、性质、放射部位</li>
+                                        <li>发作时间、持续时间</li>
+                                        <li>诱发因素、缓解因素</li>
+                                        <li><strong>危险因素：</strong></li>
+                                        <li>年龄、性别、高血压、糖尿病、吸烟、高血脂、冠心病史等</li>
+                                        <li><strong>伴随症状：</strong></li>
+                                        <li>呼吸困难、心悸、恶心、呕吐、出汗、晕厥等</li>
+                                        <li><strong>既往史：</strong></li>
+                                        <li>有无其他心血管疾病、肾脏疾病等</li>
+                                    </ul>
+                                    <p><span class="guide-key">12 导联心电图：</span>10 分钟内完成，重点观察：</p>
+                                    <ul class="guide-steps">
+                                        <li>ST 段抬高或压低</li>
+                                        <li>T 波改变</li>
+                                        <li>Q 波</li>
+                                        <li>新的左束支传导阻滞</li>
+                                    </ul>
+                                    <p class="small-text">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
+                                    <p><span class="guide-key">初步体格检查：</span></p>
+                                    <ul class="guide-steps">
+                                        <li>生命体征：血压、心率、呼吸、体温、氧饱和度</li>
+                                        <li>心脏听诊：有无杂音、奔马律等</li>
+                                        <li>肺部听诊：有无啰音等</li>
+                                    </ul>
+                                    <p><span class="guide-key">hs-cTnI 检测：</span>立即检测，并记录检测时间。</p>
+                                    <p><span class="guide-key">初步风险评估：</span>根据病史、心电图、体格检查结果，初步判断患者发生ACS和其他严重疾病的可能性。</p>
+                                    <p class="small-text">**指南依据:** “所有急诊接诊的急性非创伤性胸痛患者，均应进行病史采集、体格检查及心电图（electrocardiogram, ECG）检查（首次医疗接触10 min内，18导联）。综合临床信息后，高效且有针对性地使用生物标志物检测，有助于及时作出正确的诊断和治疗决策。” — 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》</p>
+                                    <p class="small-text">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
+                                </div>
+                            </div>
+                        </details>
 
-                        <h3>2. hs-cTnI 结果解读</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">参考范围：</span>以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。</p>
-                            <p class="small-text">**注解：** `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</p>
-                            <p><span class="guide-key">结果分级：</span>正常、轻度升高、中度升高、显著升高。</p>
-                        </div>
+                        <details>
+                            <summary><h3>2. hs-cTnI 结果解读</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>正确解读hs-cTnI结果对于诊断至关重要。请结合患者临床情况和动态变化进行综合判断。</p>
+                                    <p><span class="guide-key">参考范围：</span></p>
+                                    <ul class="guide-steps">
+                                        <li>以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。</li>
+                                        <li><span class="small-text">**注解：** `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</span></li>
+                                        <li><span class="small-text">例如：本工具默认参考区间为 ≤ 0.060 ng/mL</span></li>
+                                    </ul>
+                                    <p><span class="guide-key">结果分级：</span></p>
+                                    <ul class="guide-steps">
+                                        <li><strong>正常:</strong> ≤ 99th URL</li>
+                                        <li><strong>升高:</strong> > 99th URL
+                                            <ul class="guide-steps">
+                                                <li><strong>轻度升高:</strong> > 99th URL，但 < 2-3 倍 99th URL</li>
+                                                <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
+                                                <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <p class="small-text">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV≤10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
+                                    <p class="small-text">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（≥20%）为急性心肌损伤；如持续升高，且幅度变化<20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                </div>
+                            </div>
+                        </details>
 
-                        <h3>3. 动态监测</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">复查时间：</span>首选方案（0h, 1h, 2h）、备选方案（0h, 2h, 3h）。</p>
-                            <p><span class="guide-key">复查次数：</span>至少复查 1-2 次，必要时可多次复查。</p>
-                            <p><span class="guide-key">结果解读：</span>绝对变化 (Δ值)、相对变化 (%)。</p>
-                            <p><span class="guide-key">判断标准：</span>AMI高可能性、AMI可能性小、需要进一步观察。</p>
-                        </div>
+                        <details>
+                            <summary><h3>3. 动态监测</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>动态监测hs-cTnI的变化趋势对于鉴别诊断AMI具有重要价值。建议遵循推荐的复查时间和次数，并结合变化值进行判断。</p>
+                                    <p><span class="guide-key">复查时间：</span>建议在以下时间点进行动态监测：</p>
+                                    <ul class="guide-steps">
+                                        <li><strong>首选方案:</strong> 0 小时（首次检测）、1 小时、2 小时</li>
+                                        <li><strong>备选方案:</strong> 0 小时（首次检测）、2 小时、3 小时 (尤其适用于基层医院)</li>
+                                    </ul>
+                                    <p><span class="guide-key">复查次数：</span>至少复查 1-2 次，必要时可多次复查。</p>
+                                    <p><span class="guide-key">结果解读：</span></p>
+                                    <ul class="guide-steps">
+                                        <li><strong>绝对变化 (Δ值):</strong> 复查值 - 首次值</li>
+                                        <li><strong>相对变化 (%):</strong> ((复查值 - 首次值) / 首次值) × 100%</li>
+                                    </ul>
+                                    <p><span class="guide-key">判断标准：</span></p>
+                                    <ul class="guide-steps">
+                                        <li><strong>AMI 高可能性:</strong>
+                                            <ul class="guide-steps">
+                                                <li>任何一次 hs-cTnI ≥ 10 倍 99th URL</li>
+                                                <li>或 1 小时 Δ值 ≥ 0.050 ng/mL，或相对变化 ≥ 20%</li>
+                                                <li>或 2 小时 Δ值 ≥ 0.010 ng/mL，或相对变化 ≥ 30%</li>
+                                                <li>或 3 小时 Δ值 ≥ 0.015 ng/mL，或相对变化 ≥ 50%</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>AMI 可能性小:</strong> 所有 hs-cTnI ≤ 2-3 倍 99th URL，且动态变化不明显</li>
+                                        <li><strong>需要进一步观察:</strong> 介于上述两者之间的情况</li>
+                                    </ul>
+                                    <p class="small-text">**指南依据:** “hs-cTn的最大应用价值一是通过极低值（通常采用LoD或LoQ）安全排除NSTEMI，二是通过高的基线值或单位时间变化值快速诊断NSTEMI。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                    <p class="small-text">“0~1h快速CDP主要有两个理论基础：第一，hs-cTn的测定值是一个连续变量，hs-cTn值的升高直接反映了心肌梗死概率的增大；第二，hs-cTn早期的改变量可以作为3h至6h改变量的替代，并额外提供独立于0h测定值的诊断和预后价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                </div>
+                            </div>
+                        </details>
 
-                        <h3>4. 其他检查建议</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">必备：</span>12 导联心电图。</p>
-                            <p><span class="guide-key">选择性：</span>胸片、D-二聚体、心脏超声、肾功能、血常规、电解质、血糖等。</p>
-                        </div>
+                        <details>
+                            <summary><h3>4. 其他检查建议</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>除了hs-cTnI和心电图，其他辅助检查对于全面评估病情、排除其他疾病也十分重要。在基层医院，请根据医保限制和患者意愿，优先考虑必要的检查。</p>
+                                    <p><span class="guide-key">必备检查：</span></p>
+                                    <ul class="guide-steps">
+                                        <li>12 导联心电图（用于初步评估和排除STEMI）</li>
+                                    </ul>
+                                    <p><span class="guide-key">选择性检查（根据临床指征和基层条件选择）：</span></p>
+                                    <ul class="guide-steps">
+                                        <li><strong>胸片:</strong> 排除气胸、肺部感染等非心源性胸痛原因，费用较低，易于基层开展。</li>
+                                        <li><strong>D-二聚体:</strong> 怀疑肺栓塞（PE）时，D-二聚体阴性可有效排除PE，避免不必要的CT检查。</li>
+                                        <li><strong>心脏超声:</strong> 评估心功能、室壁运动等，对鉴别心源性疾病有帮助，但费用较高，可根据患者具体情况和转诊需求决定。</li>
+                                        <li><strong>肾功能:</strong> 排除肾功能不全，因为肾功能不全可能导致hs-cTnI慢性升高。</li>
+                                        <li><strong>血常规、电解质、血糖等:</strong> 根据具体情况选择，用于排除其他系统性疾病或评估并发症。</li>
+                                    </ul>
+                                    <p class="small-text">**指南依据:** “PE的明确诊断依赖于增强CT检查，而D-二聚体对疑似PE的急性胸痛患者，尤其是临床可能性低到中的患者具有较高的诊断和排除诊断的价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                    <p class="small-text">“AAS的确诊及后续治疗方案的选择依赖于以增强CT为代表的影像学检查结果，但增强CT的应用受到临床可行性、造影剂使用和电离辐射等因素的制约。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                </div>
+                            </div>
+                        </details>
 
-                        <h3>5. 处理决策</h3>
-                        <div class="guide-box">
-                            <p><span class="guide-key">危急重症：</span>立即抢救，并联系上级医院转诊（如急性主动脉夹层、张力性气胸、急性肺栓塞伴休克）。</p>
-                            <p><span class="guide-key">高度怀疑 STEMI：</span>立即启动STEMI处理流程，尽快转诊上级医院行急诊PCI。</p>
-                            <p><span class="guide-key">高度怀疑 NSTEMI：</span>密切监测，给予初步对症支持治疗（如抗血小板、抗凝等，具体用药请遵医嘱），评估风险决定是否转诊行冠脉造影。</p>
-                            <p><span class="guide-key">AMI 可能性小：</span>寻找其他原因并处理（如心绞痛、心肌炎、肺栓塞）。</p>
-                            <p><span class="guide-key">诊断不明确：</span>密切观察，复查hs-cTnI和心电图，必要时会诊。</p>
-                        </div>
+                        <details>
+                            <summary><h3>5. 处理决策</h3></summary>
+                            <div class="details-content">
+                                <div class="guide-box">
+                                    <p>根据综合评估结果，采取相应的处理决策。早期识别高危患者并及时转诊是改善预后的关键。</p>
+                                    <p><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span></p>
+                                    <ul class="guide-steps">
+                                        <li>立即抢救，并联系上级医院转诊。</li>
+                                        <li>例如：急性主动脉夹层、张力性气胸、急性肺栓塞伴休克。</li>
+                                    </ul>
+                                    <p><span class="guide-key">高度怀疑 STEMI:</span></p>
+                                    <ul class="guide-steps">
+                                        <li>立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；给予抗血小板、抗凝等治疗（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li>
+                                    </ul>
+                                    <p><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span></p>
+                                    <ul class="guide-steps">
+                                        <li>密切监测患者病情变化。给予抗血小板、抗凝等治疗（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li>
+                                    </ul>
+                                    <p><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span></p>
+                                    <ul class="guide-steps">
+                                        <li>寻找其他可能的原因，并进行相应处理。例如：心绞痛 (给予对症治疗，具体用药请遵医嘱)，心肌炎 (给予对症治疗，具体用药请遵医嘱)，肺栓塞 (给予对症治疗，具体用药请遵医嘱)。</li>
+                                    </ul>
+                                    <p><span class="guide-key">诊断不明确（高敏肌钙蛋白需进一步观察）:</span></p>
+                                    <ul class="guide-steps">
+                                        <li>密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</li>
+                                    </ul>
+                                    <p class="small-text">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和治疗建议。</p>
+                                    <p class="small-text">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注治疗外，其他急性胸痛患者均需依靠cTn检测结果诊断或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -997,7 +1222,7 @@
             </div>
             <div class="reference-box">
                 <p><strong>1. 工具定位：</strong>本工具是基于国内最新指南共识(如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等)开发的辅助决策工具，<strong>不能替代专业医生的临床判断</strong>。</p>
-                <p><strong>2. 实际诊疗：</strong>实际诊疗需结合患者完整病史、体格检査、其他实验室检査及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
+                <p><strong>2. 实际诊疗</strong>实际诊疗需结合患者完整病史、体格检査、其他实验室检査及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
                 <p><strong>3. 参考值：</strong>hs-cTn 的 99th URL 应以医院自身建立的为准，本工具默认使用<strong>0.060 ng/mL</strong>作为判断依据，您可以在上方*自定义参考区间*。</p>
             </div>
         </div>
@@ -1071,7 +1296,7 @@
         const repeatTimeSelect = document.getElementById('repeatTime');
         const chestPainDurationInput = document.getElementById('chestPainDuration');
         const symptomsRadios = document.querySelectorAll('input[name="symptoms"]');
-        const ecgRadios = document.querySelectorAll('input[name="ecg"]');
+        const ecgRadios = document.querySelectorAll('input[name="ecg"]'); 
         const riskFactorCheckboxes = document.querySelectorAll('.checkbox-row input[type="checkbox"]');
 
         const currentRefIntervalDisplay = document.getElementById('currentRefIntervalDisplay');
@@ -1226,7 +1451,7 @@
                 actions = [
                     '立即启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。',
                     '紧急联系上级医院或胸痛中心，准备转运。',
-                    '转运过程中给予初步对症支持治疗（具体用药请遵医嘱）。', // Modified line
+                    '转运过程中给予初步对症支持治疗（具体用药请遵医嘱）。',
                     '对于STEMI，需在60分钟内启动再灌注治疗（PCI或溶栓）。'
                 ];
                 reasons = [
@@ -1298,7 +1523,7 @@
                     urgency = '立即处理';
                     colorClass = 'red-bg';
                     actions = [
-                        '立即启动初步对症支持治疗（如抗血小板、抗凝等，具体用药请遵医嘱）。', // Modified line
+                        '立即启动初步对症支持治疗（如抗血小板、抗凝等，具体用药请遵医嘱）。',
                         '密切监测患者生命体征和心电图。',
                         '评估患者风险，紧急联系上级医院心内科，准备转诊行冠脉造影。'
                     ];
