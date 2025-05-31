@@ -93,13 +93,14 @@
         :root {
             /* 颜色变量 */
             --primary-blue: #1a73e8;
-            --light-blue: #e6f7ff;
+            --light-blue: #e6f7ff; /* Original light blue */
+            --alice-blue: #F0F8FF; /* AliceBlue for opened details */
             --dark-blue: #0056b3;
             --red: #e53935;
             --orange: #ff9800;
             --yellow: #fdd835;
             --green: #43a047;
-            --gray: #f5f5f5; /* Changed from #f5f5f5 to a slightly different light gray if needed for distinction */
+            --gray: #f5f5f5;
             --dark-gray: #333;
             --border: #ddd;
             --white: #ffffff;
@@ -548,7 +549,7 @@
         }
 
         details[open] {
-            background-color: var(--light-blue); /* Entire card turns light blue when open */
+            background-color: var(--alice-blue); /* Changed to AliceBlue */
             border-color: var(--primary-blue);
         }
         
@@ -570,7 +571,7 @@
         }
 
         details[open] summary {
-            background-color: var(--light-blue); /* Summary also turns light blue when parent details is open */
+            background-color: var(--alice-blue); /* Summary also turns AliceBlue when parent details is open */
             border-radius: 12px 12px 0 0; /* Top corners rounded, bottom straight when open */
         }
 
@@ -628,18 +629,12 @@
         }
 
         .details-content {
-            padding: 0 20px 20px; /* Adjusted padding to allow inner-content-box to have its own padding */
+            padding: 15px 20px 20px; /* Restored padding for content */
             border-top: none;
-            background-color: inherit; /* Inherit light blue from details[open] */
+            background-color: inherit; /* Inherit AliceBlue from details[open] */
         }
 
-        /* New inner box for text content */
-        .inner-content-box {
-            background-color: rgba(255, 255, 255, 0.7); /* Slightly lighter translucent white */
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px; /* Some space from the summary */
-        }
+        /* Removed .inner-content-box entirely */
         
         /* Disclaimer Modal Styles */
         .modal-overlay {
@@ -1075,7 +1070,6 @@
                         <details>
                             <summary><h3>1. 参考值理解</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
                                     <p><span class="guide-key">99th URL：</span>诊断心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
                                     <p><span class="guide-key">不同升高分级：</span>
@@ -1086,14 +1080,12 @@
                                             <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
                                         </ul>
                                     </p>
-                                </div>
                             </div>
                         </details>
                         
                         <details>
                             <summary><h3>2. 检测结果意义</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>hs-cTnI阳性不能简单等同于急性心肌梗死（AMI）：</p>
                                     <ul class="guide-steps">
                                         <li>可能是急性心肌梗死（AMI）</li>
@@ -1101,14 +1093,12 @@
                                         <li>关键区分点为"急性变化"</li>
                                     </ul>
                                     <p><span class="guide-key">动态监测原则：</span>建议0h、1h、2h/3h检测，观察变化趋势。</p>
-                                </div>
                             </div>
                         </details>
                         
                         <details>
                             <summary><h3>3. 基层医院处理要点</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <ul class="guide-steps">
                                         <li><strong>关键检查：</strong>心电图 + hs-cTnI是最低要求。</li>
                                         <li><strong>典型胸痛+ST抬高：</strong>立即启动STEMI流程。</li>
@@ -1116,7 +1106,6 @@
                                         <li><strong>hs-cTnI轻度升高+心电图正常：</strong>寻找其他原因。</li>
                                         <li><strong>不确定情况：</strong>动态监测或转诊。</li>
                                     </ul>
-                                </div>
                             </div>
                         </details>
                     </div>
@@ -1130,7 +1119,6 @@
                         <details>
                             <summary><h3>1. 初始评估 (5-10 分钟内)</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>快速、准确的初始评估是后续诊疗的关键。此阶段应在5-10分钟内完成，重点在于识别危急重症并获取关键病史和检查信息。</p>
                                     <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
                                     <ul class="guide-steps">
@@ -1170,14 +1158,12 @@
                                     <p><span class="guide-key">初步风险评估：</span>根据病史、心电图、体格检查结果，初步判断患者发生ACS和其他严重疾病的可能性。</p>
                                     <p class="small-text">**指南依据:** “所有急诊接诊的急性非创伤性胸痛患者，均应进行病史采集、体格检查及心电图（electrocardiogram, ECG）检查（首次医疗接触10 min内，18导联）。综合临床信息后，高效且有针对性地使用生物标志物检测，有助于及时作出正确的诊断和治疗决策。” — 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》</p>
                                     <p class="small-text">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
-                                </div>
                             </div>
                         </details>
 
                         <details>
                             <summary><h3>2. hs-cTnI 结果解读</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>正确解读hs-cTnI结果对于诊断至关重要。请结合患者临床情况和动态变化进行综合判断。</p>
                                     <p><span class="guide-key">参考范围：</span></p>
                                     <ul class="guide-steps">
@@ -1198,14 +1184,12 @@
                                     </ul>
                                     <p class="small-text">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV≤10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
                                     <p class="small-text">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（≥20%）为急性心肌损伤；如持续升高，且幅度变化<20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                                </div>
                             </div>
                         </details>
 
                         <details>
                             <summary><h3>3. 动态监测</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>动态监测hs-cTnI的变化趋势对于鉴别诊断AMI具有重要价值。建议遵循推荐的复查时间和次数，并结合变化值进行判断。</p>
                                     <p><span class="guide-key">复查时间：</span>建议在以下时间点进行动态监测：</p>
                                     <ul class="guide-steps">
@@ -1224,7 +1208,7 @@
                                             <ul class="guide-steps">
                                                 <li>任何一次 hs-cTnI ≥ 10 倍 99th URL</li>
                                                 <li>或 1 小时 Δ值 ≥ 0.050 ng/mL，或相对变化 ≥ 20%</li>
-                                                <li>或 2 小时 Δ值 ≥ 0.010 ng/mL，或相对变化 ≥ 30%</li>
+                                                <li>或 2 小时 Δ值 ≥ 0.010 ng/mL，或或相对变化 ≥ 30%</li>
                                                 <li>或 3 小时 Δ值 ≥ 0.015 ng/mL，或相对变化 ≥ 50%</li>
                                             </ul>
                                         </li>
@@ -1233,14 +1217,12 @@
                                     </ul>
                                     <p class="small-text">**指南依据:** “hs-cTn的最大应用价值一是通过极低值（通常采用LoD或LoQ）安全排除NSTEMI，二是通过高的基线值或单位时间变化值快速诊断NSTEMI。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                                     <p class="small-text">“0~1h快速CDP主要有两个理论基础：第一，hs-cTn的测定值是一个连续变量，hs-cTn值的升高直接反映了心肌梗死概率的增大；第二，hs-cTn早期的改变量可以作为3h至6h改变量的替代，并额外提供独立于0h测定值的诊断和预后价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                                </div>
                             </div>
                         </details>
 
                         <details>
                             <summary><h3>4. 其他检查建议</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>除了hs-cTnI和心电图，其他辅助检查对于全面评估病情、排除其他疾病也十分重要。在基层医院，请根据医保限制和患者意愿，优先考虑必要的检查。</p>
                                     <p><span class="guide-key">必备检查：</span></p>
                                     <ul class="guide-steps">
@@ -1256,14 +1238,12 @@
                                     </ul>
                                     <p class="small-text">**指南依据:** “PE的明确诊断依赖于增强CT检查，而D-二聚体对疑似PE的急性胸痛患者，尤其是临床可能性低到中的患者具有较高的诊断和排除诊断的价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                                     <p class="small-text">“AAS的确诊及后续治疗方案的选择依赖于以增强CT为代表的影像学检查结果，但增强CT的应用受到临床可行性、造影剂使用和电离辐射等因素的制约。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                                </div>
                             </div>
                         </details>
 
                         <details>
                             <summary><h3>5. 处理决策</h3></summary>
                             <div class="details-content">
-                                <div class="inner-content-box">
                                     <p>根据综合评估结果，采取相应的处理决策。早期识别高危患者并及时转诊是改善预后的关键。</p>
                                     <ul class="guide-steps">
                                         <li><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span> 立即抢救，并联系上级医院转诊。</li>
@@ -1274,7 +1254,6 @@
                                     </ul>
                                     <p class="small-text">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和治疗建议。</p>
                                     <p class="small-text">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注治疗外，其他急性胸痛患者均需依靠cTn检测结果诊断或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                                </div>
                             </div>
                         </details>
                     </div>
