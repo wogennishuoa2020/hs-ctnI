@@ -55,12 +55,20 @@
         
         /* 4. 卡片增加内边距和圆角提供空间感 */
         .analysis-section,
-        .result-section,
-        .guide-section {
+        .result-section { /* Removed .guide-section from here */
             background: white; /* Retain white background for these sections */
             border-radius: 16px;
             box-shadow: var(--shadow);
             padding: 30px;
+        }
+
+        /* Adjust guide-section to remove its own background/shadow/padding */
+        .guide-section {
+            background: none; /* No background */
+            border-radius: 0; /* No border-radius */
+            box-shadow: none; /* No shadow */
+            padding: 0; /* No padding */
+            margin-top: 25px; /* Keep margin-top for spacing from previous section */
         }
         
         /* 5. 输入/输出元素增加呼吸空间 */
@@ -91,7 +99,7 @@
             --orange: #ff9800;
             --yellow: #fdd835;
             --green: #43a047;
-            --gray: #f5f5f5;
+            --gray: #f5f5f5; /* Changed from #f5f5f5 to a slightly different light gray if needed for distinction */
             --dark-gray: #333;
             --border: #ddd;
             --white: #ffffff;
@@ -436,12 +444,13 @@
             color: #777;
         }
         
+        /* The main guide-section should not have its own background/shadow/padding */
         .guide-section {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-            margin-top: 25px;
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0;
+            margin-top: 25px; /* Keep margin-top for spacing from previous section */
         }
         
         .guide-title {
@@ -460,19 +469,29 @@
             margin-bottom: 25px;
         }
         
+        /* Removed background, border, and shadow for guide-box */
         .guide-box {
-            background: #f0f8ff;
-            border-radius: 12px;
-            padding: 15px; /* Reduced padding */
+            background: none; /* No background */
+            border: none; /* No border */
+            border-radius: 0; /* No border-radius */
+            box-shadow: none; /* No shadow */
+            padding: 0; /* Removed padding, content will use details-content padding */
             margin-bottom: 20px;
         }
         
         .guide-steps {
-            margin: 10px 0 10px 15px; /* Reduced margin-left */
+            margin: 5px 0 5px 5px; /* Significantly reduced margin-left */
+            padding: 0; /* Ensure no extra padding */
+            list-style-position: inside; /* Keep bullet points inside for tighter layout */
         }
         
         .guide-steps li {
-            margin-bottom: 10px; /* Slightly reduced margin-bottom for list items */
+            margin-bottom: 8px; /* Slightly reduced margin-bottom for list items */
+            padding-left: 0; /* Ensure no extra padding */
+        }
+
+        .guide-steps p {
+            margin-bottom: 8px; /* Adjust paragraph margin within guide-steps */
         }
         
         .guide-key {
@@ -523,12 +542,13 @@
             margin-bottom: 15px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background-color: #f9f9f9;
+            background-color: var(--gray); /* Default gray background for the entire card */
+            box-shadow: none; /* No shadow for details element */
             transition: all 0.3s ease;
         }
 
         details[open] {
-            background-color: #e6f7ff; /* Light blue when open */
+            background-color: var(--light-blue); /* Entire card turns light blue when open */
             border-color: var(--primary-blue);
         }
         
@@ -538,18 +558,59 @@
             padding: 15px 20px;
             font-weight: 600;
             font-size: 18px;
-            color: var(--dark-gray);
+            color: var(--dark-gray); /* Text color for summary */
             cursor: pointer;
             outline: none;
             position: relative;
             list-style: none; /* Hide default marker */
+            background-color: var(--gray); /* Default gray background for summary */
+            border-radius: 12px; /* Fully rounded when closed */
+            margin-bottom: 0;
+            border-bottom: none; /* No border here */
+        }
+
+        details[open] summary {
+            background-color: var(--light-blue); /* Summary also turns light blue when parent details is open */
+            border-radius: 12px 12px 0 0; /* Top corners rounded, bottom straight when open */
+        }
+
+        /* Specific style for main guide titles ("核心解读原则" and "详细流程") */
+        /* These are NOT part of the details/summary structure, but separate divs */
+        .guide-title {
+            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .guide-title i {
+            color: white; /* Ensure icon is white for blue guide titles */
+        }
+
+
+        summary i { /* Icon directly inside summary */
+            font-size: 20px;
+            margin-right: 12px;
+            color: var(--primary-blue); /* Icon color for gray/light-blue summaries */
+        }
+
+        summary h3 { /* h3 directly inside summary */
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-gray); /* Text color for gray/light-blue summaries */
+            flex-grow: 1;
         }
 
         summary::-webkit-details-marker {
-            display: none; /* Hide default marker for webkit browsers */
+            display: none;
         }
         summary::marker {
-            display: none; /* Hide default marker for other browsers */
+            display: none;
         }
 
         summary::after {
@@ -559,7 +620,7 @@
             position: absolute;
             right: 20px;
             transition: transform 0.3s ease;
-            color: var(--primary-blue);
+            color: var(--primary-blue); /* Chevron color for gray/light-blue summaries */
         }
 
         details[open] summary::after {
@@ -567,8 +628,17 @@
         }
 
         .details-content {
-            padding: 10px 20px 20px;
-            border-top: 1px solid var(--border);
+            padding: 0 20px 20px; /* Adjusted padding to allow inner-content-box to have its own padding */
+            border-top: none;
+            background-color: inherit; /* Inherit light blue from details[open] */
+        }
+
+        /* New inner box for text content */
+        .inner-content-box {
+            background-color: rgba(255, 255, 255, 0.7); /* Slightly lighter translucent white */
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px; /* Some space from the summary */
         }
         
         /* Disclaimer Modal Styles */
@@ -743,6 +813,16 @@
             .chart-line {
                 font-size: 10px;
                 padding: 0 5px;
+            }
+            /* Mobile specific adjustments for summary and details-content */
+            summary {
+                padding: 12px 15px; /* Adjusted padding for mobile summary */
+            }
+            summary::after {
+                right: 15px; /* Adjusted chevron position for mobile */
+            }
+            .details-content {
+                padding: 10px 15px 15px; /* Adjusted padding for mobile content */
             }
         }
         /* Further adjustments for very small screens as per DeepSeek's suggestion */
@@ -995,7 +1075,7 @@
                         <details>
                             <summary><h3>1. 参考值理解</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
                                     <p><span class="guide-key">99th URL：</span>诊断心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
                                     <p><span class="guide-key">不同升高分级：</span>
@@ -1013,7 +1093,7 @@
                         <details>
                             <summary><h3>2. 检测结果意义</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>hs-cTnI阳性不能简单等同于急性心肌梗死（AMI）：</p>
                                     <ul class="guide-steps">
                                         <li>可能是急性心肌梗死（AMI）</li>
@@ -1028,7 +1108,7 @@
                         <details>
                             <summary><h3>3. 基层医院处理要点</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <ul class="guide-steps">
                                         <li><strong>关键检查：</strong>心电图 + hs-cTnI是最低要求。</li>
                                         <li><strong>典型胸痛+ST抬高：</strong>立即启动STEMI流程。</li>
@@ -1050,7 +1130,7 @@
                         <details>
                             <summary><h3>1. 初始评估 (5-10 分钟内)</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>快速、准确的初始评估是后续诊疗的关键。此阶段应在5-10分钟内完成，重点在于识别危急重症并获取关键病史和检查信息。</p>
                                     <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
                                     <ul class="guide-steps">
@@ -1097,7 +1177,7 @@
                         <details>
                             <summary><h3>2. hs-cTnI 结果解读</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>正确解读hs-cTnI结果对于诊断至关重要。请结合患者临床情况和动态变化进行综合判断。</p>
                                     <p><span class="guide-key">参考范围：</span></p>
                                     <ul class="guide-steps">
@@ -1125,7 +1205,7 @@
                         <details>
                             <summary><h3>3. 动态监测</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>动态监测hs-cTnI的变化趋势对于鉴别诊断AMI具有重要价值。建议遵循推荐的复查时间和次数，并结合变化值进行判断。</p>
                                     <p><span class="guide-key">复查时间：</span>建议在以下时间点进行动态监测：</p>
                                     <ul class="guide-steps">
@@ -1160,7 +1240,7 @@
                         <details>
                             <summary><h3>4. 其他检查建议</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>除了hs-cTnI和心电图，其他辅助检查对于全面评估病情、排除其他疾病也十分重要。在基层医院，请根据医保限制和患者意愿，优先考虑必要的检查。</p>
                                     <p><span class="guide-key">必备检查：</span></p>
                                     <ul class="guide-steps">
@@ -1183,28 +1263,14 @@
                         <details>
                             <summary><h3>5. 处理决策</h3></summary>
                             <div class="details-content">
-                                <div class="guide-box">
+                                <div class="inner-content-box">
                                     <p>根据综合评估结果，采取相应的处理决策。早期识别高危患者并及时转诊是改善预后的关键。</p>
-                                    <p><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span></p>
                                     <ul class="guide-steps">
-                                        <li>立即抢救，并联系上级医院转诊。</li>
-                                        <li>例如：急性主动脉夹层、张力性气胸、急性肺栓塞伴休克。</li>
-                                    </ul>
-                                    <p><span class="guide-key">高度怀疑 STEMI:</span></p>
-                                    <ul class="guide-steps">
-                                        <li>立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；给予抗血小板、抗凝等治疗（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li>
-                                    </ul>
-                                    <p><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span></p>
-                                    <ul class="guide-steps">
-                                        <li>密切监测患者病情变化。给予抗血小板、抗凝等治疗（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li>
-                                    </ul>
-                                    <p><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span></p>
-                                    <ul class="guide-steps">
-                                        <li>寻找其他可能的原因，并进行相应处理。例如：心绞痛 (给予对症治疗，具体用药请遵医嘱)，心肌炎 (给予对症治疗，具体用药请遵医嘱)，肺栓塞 (给予对症治疗，具体用药请遵医嘱)。</li>
-                                    </ul>
-                                    <p><span class="guide-key">诊断不明确（高敏肌钙蛋白需进一步观察）:</span></p>
-                                    <ul class="guide-steps">
-                                        <li>密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</li>
+                                        <li><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span> 立即抢救，并联系上级医院转诊。</li>
+                                        <li><span class="guide-key">高度怀疑 STEMI:</span> 立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；给予抗血小板、抗凝等治疗（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li>
+                                        <li><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span> 密切监测患者病情变化。给予抗血小板、抗凝等治疗（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li>
+                                        <li><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span> 寻找其他可能的原因，并进行相应处理。例如：心绞痛 (给予对症治疗，具体用药请遵医嘱)，心肌炎 (给予对症治疗，具体用药请遵医嘱)，肺栓塞 (给予对症治疗，具体用药请遵医嘱)。</li>
+                                        <li><span class="guide-key">诊断不明确（高敏肌钙蛋白需进一步观察）:</span> 密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</li>
                                     </ul>
                                     <p class="small-text">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和治疗建议。</p>
                                     <p class="small-text">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注治疗外，其他急性胸痛患者均需依靠cTn检测结果诊断或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
@@ -1457,7 +1523,7 @@
                 reasons = [
                     `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
                     `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
-                    `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》，需快速鉴别并及时转诊。`
+                    `依据《急性非创伤性胸痛生物标志物联合检测专家专家共识（2024版）》，需快速鉴别并及时转诊。`
                 ];
             } 
             // Priority 2: Initial TnI normal or very low, and low clinical suspicion
