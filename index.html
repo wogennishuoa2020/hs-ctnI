@@ -997,12 +997,12 @@
                 
                 <div id="step2" class="tab-content">
                     <div class="result-card" id="result-card">
-                        <p class="text-left text-orange-600 font-bold mb-2">⚠️ 学习提醒：本结果仅为技术参考要点，实际诊疗请遵循临床医生专业判断</p>
+                        <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p> <!-- 修改: 提醒文本 -->
                         <div class="card-icon" id="result-icon-bg">
                             <i id="result-icon" class="fas fa-check"></i>
                         </div>
-                        <h3 class="result-title" id="result-title">初步评估：等待技术分析</h3> <!-- 修改: 等待技术分析 -> 初步评估：等待技术分析 -->
-                        <div class="risk-level" id="risk-level">风险等级：- (供参考)</div> <!-- 修改: 供参考 -->
+                        <h3 class="result-title" id="result-title">初步评估：等待技术分析</h3>
+                        <div class="risk-level" id="risk-level">风险等级: -</div>
                         
                         <div class="value-highlight" id="tni-value">
                             肌钙蛋白值：
@@ -1028,7 +1028,7 @@
                 </div>
                 
                 <div id="step3" class="tab-content">
-                    <p class="text-left text-orange-600 font-bold mb-2">⚠️ 学习提醒：本结果仅为技术参考要点，实际诊疗请遵循临床医生专业判断</p>
+                    <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p> <!-- 修改: 提醒文本 -->
                     <div class="rec-title">
                         <i class="fas fa-stethoscope"></i> 参考意见
                     </div>
@@ -1068,10 +1068,10 @@
                                     <p><span class="guide-key">99th URL：</span>用于技术理解心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
                                     <p><span class="guide-key">不同升高分级：</span>
                                         <ul class="guide-steps">
-                                            <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL (参考范围)</li> <!-- 修改: 正常范围 -->
-                                            <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL，可能提示心肌损伤</li> <!-- 修改: 可能提示心肌损伤 -->
-                                            <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL，可能提示心肌损伤</li> <!-- 修改: 可能提示心肌损伤 -->
-                                            <li><strong>显著升高:</strong> ≥ 10 倍 99th URL，高度提示心肌损伤</li> <!-- 修改: 高度提示心肌损伤 -->
+                                            <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL (参考范围)</li>
+                                            <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL，可能提示心肌损伤</li>
+                                            <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL，可能提示心肌损伤</li>
+                                            <li><strong>显著升高:</strong> ≥ 10 倍 99th URL，高度提示心肌损伤</li>
                                         </ul>
                             </div>
                         </details>
@@ -1240,9 +1240,9 @@
                                     <p>根据综合评估结果，采取相应的参考意见。早期识别高危患者并及时转诊是改善预后的关键。</p>
                                     <ul class="guide-steps">
                                         <li><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span> 立即抢救，并联系上级医院转诊。</li>
-                                        <li><span class="guide-key">高度怀疑 STEMI:</span> 立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li> <!-- 修改: 给予 -> 建议给予 -->
-                                        <li><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span> 密切监测患者病情变化。建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li> <!-- 修改: 给予 -> 建议给予 -->
-                                        <li><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span> 寻找其他可能的原因，并提供相应参考意见。例如：心绞痛 (可给予对症处置，具体用药请遵医嘱)，心肌炎 (可给予对症处置，具体用药请遵医嘱)，肺栓塞 (可给予对症处置，具体用药请遵医嘱)。</li> <!-- 修改: 进行相应处置 -> 提供相应参考意见; 给予 -> 可给予 -->
+                                        <li><span class="guide-key">高度怀疑 STEMI:</span> 立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li>
+                                        <li><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span> 密切监测患者病情变化。建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li>
+                                        <li><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span> 寻找其他可能的原因，并提供相应参考意见。例如：心绞痛 (可给予对症处置，具体用药请遵医嘱)，心肌炎 (可给予对症处置，具体用药请遵医嘱)，肺栓塞 (可给予对症处置，具体用药请遵医嘱)。</li>
                                         <li><span class="guide-key">技术理解不明确（高敏肌钙蛋白需进一步观察）:</span> 密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</li>
                                     </ul>
                                     <p class="small-text">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和参考意见。</p>
@@ -1263,8 +1263,8 @@
         </div>
         
         <footer>
-            <p>高敏肌钙蛋白I判读辅助手册 v1.3 &copy; <span id="currentYear"></span> | 基于中国最新临床指南共识开发的医学参考工具</p> <!-- 修改: 教育 -> 参考 -->
-            <p>仅供医学参考和学术交流使用，不替代临床专业判断</p> <!-- 修改: 教育 -> 参考 -->
+            <p>高敏肌钙蛋白I判读辅助手册 v1.3 &copy; <span id="currentYear"></span> | 基于中国最新指南共识开发的医学参考工具</p>
+            <p>仅供医学参考和学术交流使用，不替代临床专业判断</p>
         </footer>
     </div>
 
@@ -1378,10 +1378,10 @@
         // Function to get descriptive text for elevation level
         function getElevationText(level, value, ULN) {
             switch(level) {
-                case 'normal': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (参考范围)`; // 修改: 正常范围 -> 参考范围
-                case 'mild': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平轻度升高，约1-3倍ULN，可能提示心肌损伤)`; // 修改
-                case 'moderate': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平中度升高，约3-10倍ULN，可能提示心肌损伤)`; // 修改
-                case 'significant': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平显著升高，>10倍ULN，高度提示心肌损伤)`; // 修改
+                case 'normal': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (参考范围)`;
+                case 'mild': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平轻度升高，约1-3倍ULN，可能提示心肌损伤)`;
+                case 'moderate': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平中度升高，约3-10倍ULN，可能提示心肌损伤)`;
+                case 'significant': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平显著升高，>10倍ULN，高度提示心肌损伤)`;
                 default: return '';
             }
         }
@@ -1514,18 +1514,18 @@
             // Priority 1: Immediate life-threatening conditions (STEMI or severe symptoms)
             if (selectedEcg === 'st_elevation' || selectedSymptoms === 'other') {
                 diagnosis = '高度关注危急重症';
-                urgency = '立即参考处置';
+                urgency = '立即评估与应对';
                 colorClass = 'red-bg';
                 actions = [
-                    '根据初步评估，建议考虑启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。', // 修改
-                    '建议紧急联系上级医院或胸痛中心，评估转运需求。', // 修改
-                    '转运过程中可考虑给予初步对症支持处置（具体用药请遵医嘱）。', // 修改
-                    '对于STEMI，建议在60分钟内启动再灌注处置（PCI或溶栓）。' // 修改
+                    '根据初步评估，建议考虑启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。',
+                    '建议紧急联系上级医院或胸痛中心，评估转运需求。',
+                    '转运过程中可考虑给予初步对症支持处置（具体用药请遵医嘱）。',
+                    '对于STEMI，建议在60分钟内启动再灌注处置（PCI或溶栓）。'
                 ];
                 reasons = [
                     `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
                     `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
-                    `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。` // 修改
+                    `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。`
                 ];
             } 
             // Priority 2: Initial TnI normal or very low, and low clinical suspicion
@@ -1535,14 +1535,14 @@
                     urgency = '观察随访';
                     colorClass = 'green-bg';
                     actions = [
-                        '可观察患者，并考虑寻找其他可能原因（如肌肉骨骼痛、消化道疾病等）。', // 修改
+                        '可观察患者，并考虑寻找其他可能原因（如肌肉骨骼痛、消化道疾病等）。',
                         '若症状持续或加重，可考虑复查 hs-cTnI。',
                         '无需立即进行高费用检查。'
                     ];
                     reasons = [
                         `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 小于99th URL阈值)。`,
                         `且胸痛持续时间较长（>3小时）、无高危因素、心电图正常、胸痛不典型。`,
-                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，在无心脏症状患者中，此值可作为排除急性心肌梗死的参考依据。` // 修改
+                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，在无心脏症状患者中，此值可作为排除急性心肌梗死的参考依据。`
                     ];
                 } else {
                     diagnosis = '肌钙蛋白正常，需结合临床评估';
@@ -1550,11 +1550,11 @@
                     colorClass = 'green-bg';
                     actions = [
                         '建议观察患者，若症状持续或加重，或临床高度怀疑 ACS，可考虑复查 hs-cTnI。',
-                        '建议结合病史、心电图等进行综合参考。' // 修改
+                        '建议结合病史、心电图等进行综合参考。'
                     ];
                     reasons = [
                         `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 正常范围)。`,
-                        `但仍需结合临床情况。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，肌钙蛋白正常不完全排除ACS，尤其在症状发作早期，可能尚未达到升高水平，建议结合临床综合参考。` // 修改
+                        `但仍需结合临床情况。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，肌钙蛋白正常不完全排除ACS，尤其在症状发作早期，可能尚未达到升高水平，建议结合临床综合参考。`
                     ];
                 }
             } 
@@ -1588,50 +1588,50 @@
                 // Combine with symptoms and ECG for NSTEMI suspicion
                 if (isAMIHighPossibility || (selectedSymptoms === 'typical' && selectedEcg === 'ischemic_changes')) {
                     diagnosis = '高度关注急性心肌梗死（AMI）';
-                    urgency = '立即参考处置';
+                    urgency = '立即评估与应对';
                     colorClass = 'red-bg';
                     actions = [
-                        '根据评估，可考虑立即启动初步对症支持处置（如抗血小板、抗凝等，具体用药请遵医嘱）。', // 修改
+                        '根据评估，可考虑立即启动初步对症支持处置（如抗血小板、抗凝等，具体用药请遵医嘱）。',
                         '密切监测患者生命体征和心电图。',
                         '评估患者风险，紧急联系上级医院心内科，准备转诊行冠脉造影。'
                     ];
                     reasons = [
                         `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
                         `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
-                        `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。` // 修改
+                        `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。`
                     ];
                 } else if (isNonAcuteInjury) {
                     diagnosis = '肌钙蛋白升高，非急性心肌损伤';
                     urgency = '观察随访';
                     colorClass = 'green-bg';
                     actions = [
-                        '可寻找其他可能原因（如肾功能不全、心肌炎、心力衰竭、肺栓塞等），并针对病因提供相应参考意见。', // 修改
+                        '可寻找其他可能原因（如肾功能不全、心肌炎、心力衰竭、肺栓塞等），并针对病因提供相应参考意见。',
                         '若临床高度怀疑 ACS，仍需密切观察或请上级医院会诊。'
                     ];
                     reasons = [
                         `hs-cTnI 升高但动态变化不显著。`,
-                        `依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白升高可能由非ACS原因引起，如慢性肾病、心力衰竭、心肌炎等。依据相关指南，此时肌钙蛋白水平通常稳定或动态变化不明显。` // 修改
+                        `依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白升高可能由非ACS原因引起，如慢性肾病、心力衰竭、心肌炎等。依据相关指南，此时肌钙蛋白水平通常稳定或动态变化不明显。`
                     ];
                 } else {
                     diagnosis = '肌钙蛋白升高，待定评估';
                     urgency = '进一步评估';
                     colorClass = 'orange-bg';
                     actions = [
-                        '建议密切观察患者病情变化，并根据临床需要再次复查 hs-cTnI。', // 修改
-                        '建议结合其他检查（如心脏超声、肾功能、D-二聚体等）进行综合参考。', // 修改
+                        '建议密切观察患者病情变化，并根据临床需要再次复查 hs-cTnI。',
+                        '建议结合其他检查（如心脏超声、肾功能、D-二聚体等）进行综合参考。',
                         '若症状加重，立即转诊。'
                     ];
                     reasons = [
-                        `hs-cTnI 升高，但动态变化处于观察区间，或临床表现不典型，建议进一步评估以明确情况。`, // 修改
-                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，对于肌钙蛋白动态变化不明确的患者，建议结合更长时间的观察、重复检测以及其他临床证据进行综合参考评估。` // 修改
+                        `hs-cTnI 升高，但动态变化处于观察区间，或临床表现不典型，建议进一步评估以明确情况。`,
+                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，对于肌钙蛋白动态变化不明确的患者，建议结合更长时间的观察、重复检测以及其他临床证据进行综合参考评估。`
                     ];
                 }
             }
 
             // Update Result Interpretation Display
             resultCard.className = `result-card show ${colorClass}`;
-            resultTitle.textContent = `初步评估：${diagnosis}`; // 修改
-            riskLevel.textContent = `风险等级: ${urgency} (供参考)`; // 修改
+            resultTitle.textContent = `初步评估：${diagnosis}`;
+            riskLevel.textContent = `风险等级: ${urgency}`;
             resultIconBg.className = `card-icon ${colorClass}`; // Update icon background color
             resultIcon.className = `fas ${
                 colorClass === 'red-bg' ? 'fa-bolt' :
