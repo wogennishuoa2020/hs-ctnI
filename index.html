@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高敏肌钙蛋白I判读辅助手册</title> <!-- 修改: 标题 -->
+    <title>高敏肌钙蛋白I判读辅助手册</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -346,10 +346,10 @@
             color: white;
         }
         
+        /* Updated color classes */
         .red-bg { background-color: var(--red); }
-        .orange-bg { background-color: var(--orange); }
-        .yellow-bg { background-color: var(--yellow); }
-        .green-bg { background-color: var(--green); }
+        .orange-bg { background-color: var(--orange); } /* Light/Moderate elevation */
+        .green-bg { background-color: var(--green); } /* Normal */
         
         .result-title {
             font-size: 22px; /* Reduced font size */
@@ -824,7 +824,7 @@
             <p class="text-center text-red-600 font-bold mb-4">重要提示：请在使用本工具前仔细阅读以下条款。使用本工具即表示您已阅读、理解并同意以下内容。</p>
 
             <h3>1. 工具定位：</h3>
-            <p>《高敏肌钙蛋白I判读辅助手册》（以下简称“本工具”）仅为医学教育参考工具，旨在为医护人员提供基于国内指南的技术学习资料。本工具不是医疗器械软件，不构成医疗诊断、治疗建议或医疗服务，不能替代专业医生的临床判断。</p>
+            <p>《高敏肌钙蛋白I判读辅助手册》（以下简称“本工具”）仅为医学教育参考工具，旨在为医护人员提供基于国内外指南的技术学习资料。本工具不是医疗器械软件，不构成医疗诊断、治疗建议或医疗服务，不能替代专业医生的临床判断。</p>
 
             <h3>2. 使用限制：</h3>
             <p>本工具仅供医疗机构检验科及相关专业人员学习交流使用，不得用于临床诊断决策或患者直接操作。用户应结合患者具体病情、完整病史、体格检查及其他检查结果进行综合判断。</p>
@@ -833,13 +833,13 @@
             <p>hs-cTnI异常可能提示急性心肌梗死等危重疾病，任何异常结果都应立即启动相应医疗流程，不可依赖本工具延误救治。本工具仅为技术学习参考，不能用于紧急医疗决策。</p>
 
             <h3>4. 责任免除：</h3>
-            <p>本工具提供的所有信息均基于公开的国内指南（如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》），但不保证其准确性、完整性或适用性。使用本工具所导致的任何后果（包括但不限于误诊、延误治疗、医疗事故），本工具开发者及提供者不承担任何法律责任。</p>
+            <p>本工具提供的所有信息均基于公开的国内外指南（如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》），但不保证其准确性、完整性或适用性。使用本工具所导致的任何后果（包括但不限于误诊、延误治疗、医疗事故），本工具开发者及提供者不承担任何法律责任。</p>
 
             <h3>5. 数据隐私：</h3>
             <p>本工具可能存储用户输入的数据（存储于本地设备）。请勿输入患者真实姓名、身份证号等敏感信息。本工具开发者不对数据泄露或不当使用承担责任。建议定期清除浏览器缓存以保护隐私。</p>
 
             <h3>6. 知识产权声明：</h3>
-            <p>本工具引用了国内相关指南内容，仅用于学术参考，未经商业用途。如有版权争议，请联系我们处理。</p>
+            <p>本工具引用了国内外相关指南内容，仅用于学术参考，未经商业用途。如有版权争议，请联系我们处理。</p>
 
             <h3>7. 适用法律：</h3>
             <p>本声明受中华人民共和国法律管辖。如发生争议，双方应协商解决；协商不成的，提交开发者所在地有管辖权的人民法院处理。</p>
@@ -860,9 +860,9 @@
                     <i class="fas fa-heartbeat"></i>
                 </div>
                 <div class="header-text">
-                    <h1>高敏肌钙蛋白I判读辅助手册</h1> <!-- 修改: 标题 -->
+                    <h1>高敏肌钙蛋白I判读辅助手册</h1>
                     <div class="subtitle">交互式电子学习工具</div>
-                    <p class="header-description">本工具基于中国最新指南共识，为检测阳性结果提供辅助参考</p> <!-- 修改: header description -->
+                    <p class="header-description">本工具基于国内外最新指南共识，为检测阳性结果提供辅助参考</p>
                 </div>
             </div>
         </header>
@@ -896,7 +896,7 @@
                             <input type="number" id="initialTnI" step="0.001" placeholder="输入首次hs-cTnI检测结果">
                             <div class="unit">ng/mL</div>
                         </div>
-                        <div class="small-text">当前参考区间上限: ≤<span id="currentRefIntervalDisplay">0.060</span> ng/mL</div>
+                        <div class="small-text">当前参考区间上限: &le;<span id="currentRefIntervalDisplay">0.060</span> ng/mL</div>
                     </div>
 
                     <div class="form-group">
@@ -932,7 +932,7 @@
                         <div class="radio-group">
                             <div class="radio-item">
                                 <input type="radio" name="symptoms" id="symp-typical" value="typical">
-                                <label class="radio-label" for="symp-typical">典型心绞痛<br><small>（压迫感，持续>20min）</small></label>
+                                <label class="radio-label" for="symp-typical">典型心绞痛<br><small>（压迫感，持续&gt;20min）</small></label>
                             </div>
                             <div class="radio-item">
                                 <input type="radio" name="symptoms" id="symp-atypical" value="atypical">
@@ -982,7 +982,7 @@
                             </div>
                              <div class="checkbox-item">
                                 <input type="checkbox" id="risk-age" value="age">
-                                <label class="checkbox-label" for="risk-age">年龄>65岁</label>
+                                <label class="checkbox-label" for="risk-age">年龄&gt;65岁</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="risk-multiple" value="multiple_risk">
@@ -997,7 +997,7 @@
                 
                 <div id="step2" class="tab-content">
                     <div class="result-card" id="result-card">
-                        <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p> <!-- 修改: 提醒文本 -->
+                        <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p>
                         <div class="card-icon" id="result-icon-bg">
                             <i id="result-icon" class="fas fa-check"></i>
                         </div>
@@ -1011,16 +1011,16 @@
                         <div class="graph-container">
                             <div class="chart-lines">
                                 <div class="chart-line">
-                                    <span>高值</span><span>>10倍ULN</span>
+                                    <span>显著升高</span><span>&ge;5倍ULN</span>
                                 </div>
-                                <div class="chart-line">
-                                    <span>中值</span><span>3-10倍ULN</span>
+                                <div class="chart-line" style="border-color: var(--orange);">
+                                    <span>中度升高</span><span>2-5倍ULN</span>
                                 </div>
-                                <div class="chart-line">
-                                    <span>低值</span><span>1-3倍ULN</span>
+                                <div class="chart-line" style="border-color: var(--orange);">
+                                    <span>轻度升高</span><span>&lt;2倍ULN</span>
                                 </div>
                                 <div class="chart-line" style="border-color: var(--green);">
-                                    <span>正常</span><span>≤ULN</span>
+                                    <span>正常</span><span>&le;ULN</span>
                                 </div>
                             </div>
                         </div>
@@ -1028,7 +1028,7 @@
                 </div>
                 
                 <div id="step3" class="tab-content">
-                    <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p> <!-- 修改: 提醒文本 -->
+                    <p class="text-left text-orange-600 font-bold mb-2">⚠️ 重要提示：此结果仅供医学参考，不替代临床诊断与决策。</p>
                     <div class="rec-title">
                         <i class="fas fa-stethoscope"></i> 参考意见
                     </div>
@@ -1039,10 +1039,10 @@
                     </div>
                     
                     <div class="rec-title">
-                        <i class="fas fa-book"></i> 指南依据
+                        <i class="fas fa-book"></i> 逻辑解释
                     </div>
                     <div class="reference-box">
-                        <ul id="diagnosis-reasoning">
+                        <ul id="logic-explanation">
                             <li>等待技术分析...</li>
                         </ul>
                     </div>
@@ -1065,14 +1065,27 @@
                             <summary><h3>1. 参考值理解</h3></summary>
                             <div class="details-content">
                                     <p><span class="guide-key">单位说明：</span>本系统使用 ng/mL 作为肌钙蛋白单位（1 ng/mL = 1000 ng/L）</p>
-                                    <p><span class="guide-key">99th URL：</span>用于技术理解心肌损伤的阈值（可自定义）。超过此值为"阳性"。</p>
+                                    <p><span class="guide-key">99th URL：</span>用于技术理解心肌损伤的阈值（可自定义）。任何高于此值的hs-cTnI结果均定义为存在心肌损伤。（源自《心肌肌钙蛋白实验室检测与临床应用中国专家共识》）。</p>
                                     <p><span class="guide-key">不同升高分级：</span>
                                         <ul class="guide-steps">
-                                            <li><strong>正常:</strong> ≤ <span id="detailedRefIntervalDisplay">0.060</span> ng/mL (参考范围)</li>
-                                            <li><strong>轻度升高:</strong> > <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL，但 < 2-3 倍 99th URL，可能提示心肌损伤</li>
-                                            <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL，可能提示心肌损伤</li>
-                                            <li><strong>显著升高:</strong> ≥ 10 倍 99th URL，高度提示心肌损伤</li>
+                                            <li><strong>正常:</strong> &le; 99th URL</li>
+                                            <li><strong>轻度升高:</strong> &gt; 99th URL 且 &lt; 2 倍 99th URL</li>
+                                            <li><strong>中度升高:</strong> &ge; 2 倍 99th URL 且 &lt; 5 倍 99th URL</li>
+                                            <li><strong>显著升高:</strong> &ge; 5 倍 99th URL</li>
                                         </ul>
+                                    <p class="small-text">**以 99th URL &le; 0.060 ng/mL 为例：**</p>
+                                    <ul class="guide-steps">
+                                        <li>**轻度升高:** &gt; 0.060 ng/mL 且 &lt; 0.120 ng/mL</li>
+                                        <li>**中度升高:** &ge; 0.120 ng/mL 且 &lt; 0.300 ng/mL</li>
+                                        <li>**显著升高:** &ge; 0.300 ng/mL</li>
+                                    </ul>
+                                    <p class="small-text">**关于“轻/中度升高”分级的逻辑解释：**</p>
+                                    <p class="small-text">性质说明: “轻度升高”和“中度升高”是为方便临床沟通和风险分层而采用的实用性描述，并非国际指南的标准化术语。</p>
+                                    <p class="small-text">逻辑解释: 此分层基于“浓度依赖的风险梯度”原则。即hs-cTnI的浓度越高，AMI的可能性及不良心血管事件的风险也越高。轻度升高（&lt;2倍） 范围常见于慢性肾病、稳定型心衰等非ACS情况，或极早期/极小面积的AMI，风险相对较低。中度升高（2-5倍） 则处于一个“灰色地带”，AMI的可能性显著增加，需高度警惕并依赖动态监测进行鉴别。</p>
+                                    <p class="small-text">文献支持: 多项研究证实了hs-cTn浓度与预后风险之间的连续量效关系，该分层方法是对这一连续风险的简化和临床应用。</p>
+                                    <p class="small-text">**注解2.3：“5倍”阈值的临床意义：** 将“显著升高”的阈值设定为5倍，是基于当前的研究证据。当hs-cTnI基线值超过99th URL的5倍时，其诊断AMI的阳性预测值（PPV）已超过90%，是高度提示AMI的强力指标。（源自欧洲心脏病学会（ESC）0/1h算法及相关研究验证）。</p>
+                                    <p class="small-text">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV&le;10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
+                                    <p class="small-text">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（&ge;20%）为急性心肌损伤；如持续升高，且幅度变化&lt;20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                             </div>
                         </details>
                         
@@ -1115,39 +1128,17 @@
                                     <p>快速、准确的初始评估是后续诊疗的关键。此阶段应在5-10分钟内完成，重点在于识别危急重症并获取关键病史和检查信息。</p>
                                     <p><span class="guide-key">快速分诊：</span>识别危急重症患者，优先处理。</p>
                                     <ul class="guide-steps">
-                                        <li><strong>重点关注：</strong></li>
-                                        <li>持续性剧烈胸痛，伴大汗、恶心、呕吐等</li>
-                                        <li>呼吸困难、晕厥、休克</li>
-                                        <li>心电图 ST 段抬高</li>
+                                        <li><strong>重点关注：</strong>持续性剧烈胸痛（&gt;20分钟未缓解），伴大汗、恶心、呕吐；呼吸困难、晕厥、休克。</li>
                                     </ul>
-                                    <p><span class="guide-key">详细病史：</span></p>
-                                    <ul class="guide-steps">
-                                        <li><strong>胸痛特点：</strong></li>
-                                        <li>部位、性质、放射部位</li>
-                                        <li>发作时间、持续时间</li>
-                                        <li>诱发因素、缓解因素</li>
-                                        <li><strong>危险因素：</strong></li>
-                                        <li>年龄、性别、高血压、糖尿病、吸烟、高血脂、冠心病史等</li>
-                                        <li><strong>伴随症状：</strong></li>
-                                        <li>呼吸困难、心悸、恶心、呕吐、出汗、晕厥等</li>
-                                        <li><strong>既往史：</strong></li>
-                                        <li>有无其他心血管疾病、肾脏疾病等</li>
-                                    </ul>
-                                    <p><span class="guide-key">12 导联心电图：</span>10 分钟内完成，重点观察：</p>
-                                    <ul class="guide-steps">
-                                        <li>ST 段抬高或压低</li>
-                                        <li>T 波改变</li>
-                                        <li>Q 波</li>
-                                        <li>新的左束支传导阻滞</li>
-                                    </ul>
+                                    <p><span class="guide-key">详细病史采集：</span>胸痛特点、危险因素、伴随症状及既往史。</p>
+                                    <p><span class="guide-key">12 导联心电图：</span>10 分钟内完成，重点观察ST段、T波、Q波及束支传导的动态变化。</p>
+                                    <p class="small-text">**注解1.1：ST段抬高的处置优先级**</p>
+                                    <p class="small-text">决策依据: 当心电图符合ST段抬高型心肌梗死（STEMI）标准时，应立即启动STEMI救治流程。</p>
+                                    <p class="small-text">逻辑解释: ST段抬高提示冠状动脉急性、完全闭塞，心肌正面临大面积坏死，其出现时间早于心肌坏死标志物（如肌钙蛋白）的释放。为挽救心肌，必须在黄金时间内进行再灌注治疗。</p>
+                                    <p class="small-text">指南依据: 结合《急性ST段抬高型心肌梗死诊断和治疗指南(2019)》多处强调可以得出：“STEMI的诊断主要依据典型的缺血性胸痛症状和心电图上特征性的ST段抬高。对于典型心电图表现的患者，应立即启动再灌注治疗，不必等待心肌损伤标志物结果。”</p>
                                     <p class="small-text">**注：** 18导联心电图是在标准12导联基础上增加右胸导联（V3R、V4R）和后壁导联（V7、V8、V9），有助于更全面评估右心室或心肌后壁梗死等情况。</p>
-                                    <p><span class="guide-key">初步体格检查：</span></p>
-                                    <ul class="guide-steps">
-                                        <li>生命体征：血压、心率、呼吸、体温、氧饱和度</li>
-                                        <li>心脏听诊：有无杂音、奔马律等</li>
-                                        <li>肺部听诊：有无啰音等</li>
-                                    </ul>
-                                    <p><span class="guide-key">hs-cTnI 检测：</span>立即检测，并记录检测时间。</p>
+                                    <p><span class="guide-key">初步体格检查：</span>评估生命体征、心脏及肺部听诊。</p>
+                                    <p><span class="guide-key">hs-cTnI 检测：</span>立即采血检测并精确记录抽血时间（定义为“0小时”）。</p>
                                     <p><span class="guide-key">初步风险评估：</span>根据病史、心电图、体格检查结果，初步判断患者发生ACS和其他严重疾病的可能性。</p>
                                     <p class="small-text">**指南依据:** “所有急诊接诊的急性非创伤性胸痛患者，均应进行病史采集、体格检查及心电图（electrocardiogram, ECG）检查（首次医疗接触10 min内，18导联）。综合临床信息后，高效且有针对性地使用生物标志物检测，有助于及时作出正确的诊断和治疗参考。” — 《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》</p>
                                     <p class="small-text">**首次医疗接触定义：** 指患者因当前症状（如胸痛）首次获得医疗专业人员（如急救人员、医生、护士）评估或干预的时间点，不限于首次就诊医院。</p>
@@ -1160,23 +1151,30 @@
                                     <p>正确技术理解hs-cTnI结果对于技术理解至关重要。请结合患者临床情况和动态变化进行综合判断。</p>
                                     <p><span class="guide-key">参考范围：</span></p>
                                     <ul class="guide-steps">
-                                        <li>以医院建立的 <strong>99th URL</strong> 为准，同时参考试剂盒说明书。</li>
-                                        <li><span class="small-text">**注解：** `99th URL` 指的是“第99百分位上参考限值”（99th percentile Upper Reference Limit），是健康人群中该指标的正常上限，超过此值可能提示心肌损伤。</span></li>
-                                        <li><span class="small-text">例如：本工具默认参考区间为 ≤ 0.060 ng/mL</span></li>
+                                        <li>以本院建立的 <strong>99th URL</strong>（第99百分位上参考限值）为准。</li>
                                     </ul>
-                                    <p><span class="guide-key">结果分级：</span></p>
+                                    <p class="small-text">**注解2.1：99th URL的定义**</p>
+                                    <p class="small-text">指在参照的健康人群中，检测指标分布在第99个百分位点的数值。任何高于此值的hs-cTnI结果均定义为存在心肌损伤。（源自《心肌肌钙蛋白实验室检测与临床应用中国专家共识》）。</p>
+                                    <p><span class="guide-key">结果分级：</span>
+                                        <ul class="guide-steps">
+                                            <li><strong>正常:</strong> &le; 99th URL</li>
+                                            <li><strong>轻度升高:</strong> &gt; 99th URL 且 &lt; 2 倍 99th URL</li>
+                                            <li><strong>中度升高:</strong> &ge; 2 倍 99th URL 且 &lt; 5 倍 99th URL</li>
+                                            <li><strong>显著升高:</strong> &ge; 5 倍 99th URL</li>
+                                        </ul>
+                                    <p class="small-text">**以 99th URL &le; <span id="detailedRefIntervalDisplay">0.060</span> ng/mL 为例：**</p>
                                     <ul class="guide-steps">
-                                        <li><strong>正常:</strong> ≤ 99th URL</li>
-                                        <li><strong>升高:</strong> > 99th URL
-                                            <ul class="guide-steps">
-                                                <li><strong>轻度升高:</strong> > 99th URL，但 < 2-3 倍 99th URL</li>
-                                                <li><strong>中度升高:</strong> 2-3 倍 99th URL，但 < 10 倍 99th URL</li>
-                                                <li><strong>显著升高:</strong> ≥ 10 倍 99th URL</li>
-                                            </ul>
-                                        </li>
+                                        <li>**轻度升高:** &gt; <span id="detailedRefIntervalDisplay2">0.060</span> ng/mL 且 &lt; 0.120 ng/mL</li>
+                                        <li>**中度升高:** &ge; 0.120 ng/mL 且 &lt; 0.300 ng/mL</li>
+                                        <li>**显著升高:** &ge; 0.300 ng/mL</li>
                                     </ul>
-                                    <p class="small-text">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV≤10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
-                                    <p class="small-text">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（≥20%）为急性心肌损伤；如持续升高，且幅度变化<20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                    <p class="small-text">**注解2.2：关于“轻/中度升高”分级的逻辑解释**</p>
+                                    <p class="small-text">性质说明: “轻度升高”和“中度升高”是为方便临床沟通和风险分层而采用的实用性描述，并非国际指南的标准化术语。</p>
+                                    <p class="small-text">逻辑解释: 此分层基于“浓度依赖的风险梯度”原则。即hs-cTnI的浓度越高，AMI的可能性及不良心血管事件的风险也越高。轻度升高（&lt;2倍） 范围常见于慢性肾病、稳定型心衰等非ACS情况，或极早期/极小面积的AMI，风险相对较低。中度升高（2-5倍） 则处于一个“灰色地带”，AMI的可能性显著增加，需高度警惕并依赖动态监测进行鉴别。</p>
+                                    <p class="small-text">文献支持: 多项研究证实了hs-cTn浓度与预后风险之间的连续量效关系，该分层方法是对这一连续风险的简化和临床应用。</p>
+                                    <p class="small-text">**注解2.3：“5倍”阈值的临床意义：** 将“显著升高”的阈值设定为5倍，是基于当前的研究证据。当hs-cTnI基线值超过99th URL的5倍时，其诊断AMI的阳性预测值（PPV）已超过90%，是高度提示AMI的强力指标。（源自欧洲心脏病学会（ESC）0/1h算法及相关研究验证）。</p>
+                                    <p class="small-text">**指南依据:** “hs-cTn检测方法应当满足在超过50%健康男性和女性人群外周血中均能够稳定地检测到cTn，且检测的结果等于或高于检出限，同时第99百分位浓度下CV&le;10%，否则为con-cTn检测方法。” — 《心肌肌钙蛋白实验室检测与临床应用中国专家共识》</p>
+                                    <p class="small-text">“cTn水平高于99th URL是心肌损伤的诊断标准，如伴随着上升或下降（&ge;20%）为急性心肌损伤；如持续升高，且幅度变化&lt;20%则为慢性心肌损伤。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                             </div>
                         </details>
 
@@ -1186,30 +1184,46 @@
                                     <p>动态监测hs-cTnI的变化趋势对于鉴别技术理解AMI具有重要价值。建议遵循推荐的复查时间和次数，并结合变化值进行判断。</p>
                                     <p><span class="guide-key">复查时间：</span>建议在以下时间点进行动态监测：</p>
                                     <ul class="guide-steps">
-                                        <li><strong>首选方案:</strong> 0 小时（首次检测）、1 小时、2 小时</li>
-                                        <li><strong>备选方案:</strong> 0 小时（首次检测）、2 小时、3 小时 (尤其适用于基层医院)</li>
+                                        <li><strong>首选方案:</strong> 0 小时（首次检测）、1 小时、2 小时。</li>
+                                        <li><strong>基层备选方案:</strong> 0 小时（首次检测）、2 小时、3 小时。</li>
                                     </ul>
-                                    <p><span class="guide-key">复查次数：</span>至少复查 1-2 次，必要时可多次复查。</p>
-                                    <p><span class="guide-key">结果技术理解：</span></p>
+                                    <p><span class="guide-key">结果解读：</span></p>
                                     <ul class="guide-steps">
-                                        <li><strong>绝对变化 (Δ值):</strong> 复查值 - 首次值</li>
-                                        <li><strong>相对变化 (%):</strong> ((复查值 - 首次值) / 首次值) × 100%</li>
+                                        <li><strong>相对变化 (%):</strong> ((复查值 - 首次值) / 首次值) &times; 100%</li>
                                     </ul>
                                     <p><span class="guide-key">判断标准：</span></p>
                                     <ul class="guide-steps">
-                                        <li><strong>AMI 高可能性:</strong>
+                                        <li><strong>AMI 高可能性：</strong>
                                             <ul class="guide-steps">
-                                                <li>任何一次 hs-cTnI ≥ 10 倍 99th URL</li>
-                                                <li>或 1 小时 Δ值 ≥ 0.050 ng/mL，或相对变化 ≥ 20%</li>
-                                                <li>或 2 小时 Δ值 ≥ 0.010 ng/mL，或或相对变化 ≥ 30%</li>
-                                                <li>或 3 小时 Δ值 ≥ 0.015 ng/mL，或相对变化 ≥ 50%</li>
+                                                <li>首次检测值即为**“显著升高”**（&ge; 5 倍 99th URL）。</li>
+                                                <li>或 动态监测出现以下任一变化：</li>
+                                                <li>在1小时复查点，相对变化(%) &ge; 20%。</li>
+                                                <li>在2小时复查点，相对变化(%) &ge; 30%。</li>
+                                                <li>在3小时复查点，相对变化(%) &ge; 50%。</li>
                                             </ul>
                                         </li>
-                                        <li><strong>AMI 可能性小:</strong> 所有 hs-cTnI ≤ 2-3 倍 99th URL，且动态变化不明显</li>
-                                        <li><strong>需要进一步观察:</strong> 介于上述两者之间的情况</li>
+                                        <li><strong>AMI 可能性小：</strong>
+                                            <ul class="guide-steps">
+                                                <li>所有hs-cTnI检测值均在**“轻度升高”**范围内（&lt; 2 倍 99th URL）。</li>
+                                                <li>且 动态变化不满足上述“AMI高可能性”的任何一条标准。</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>需要进一步观察：</strong>
+                                            <ul class="guide-steps">
+                                                <li>介于上述两者之间的情况（例如：首次值为“中度升高”，但动态变化不显著）。</li>
+                                            </ul>
+                                        </li>
                                     </ul>
-                                    <p class="small-text">**指南依据:** “hs-cTn的最大应用价值一是通过极低值（通常采用LoD或LoQ）安全排除NSTEMI，二是通过高的基线值或单位时间变化值快速技术理解NSTEMI。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
-                                    <p class="small-text">“0~1h快速CDP主要有两个理论基础：第一，hs-cTn的测定值是一个连续变量，hs-cTn值的升高直接反映了心肌梗死概率的增大；第二，hs-cTn早期的改变量可以作为3h至6h改变量的替代，并额外提供独立于0h测定值的技术理解和预后价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
+                                    <p class="small-text">**注解3.1：动态变化阈值的逻辑解释与应用**</p>
+                                    <p class="small-text">“X小时”的定义: 指在0小时检测后，于第X小时这个时间点进行复查所观察到的变化。</p>
+                                    <p class="small-text">相对变化(%)递进式阈值的逻辑: 提供了不受具体数值影响的通用判断原则。不同百分比的设定逻辑如下：</p>
+                                    <p class="small-text">上述区分1、2、3小时的不同百分比阈值，是一个基于心肌坏死标志物释放动力学原理的推测的简化模型。</p>
+                                    <ul class="guide-steps">
+                                        <li>早期（1小时&ge;20%）: 在损伤发生的极早期，即使是20%的相对增长也意义重大，它捕捉到了一个快速的“上升势头”，是急性事件的强烈信号。</li>
+                                        <li>中期（2小时&ge;30%）: 随着时间推移，一个中等程度的增长（30%）被认为是确认持续损伤的合理阈值。</li>
+                                        <li>后期（3小时&ge;50%）: 在更长的时间窗口内，需要一个更显著的累积增幅（50%）来明确定义一次完整的急性释放过程，并与慢性、平稳的损伤状态相区别。</li>
+                                    </ul>
+                                    <p class="small-text">**指南依据:** 相对变化20%和50%的原则在《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》等国内共识中有提及。相对变化&ge;30%的阈值并非国际指南的统一标准，但作为​​次选或补充标准，优先推荐​​仍以ESC指南的绝对变化值（如&ge;5 ng/L）或相对变化&ge;20%为核心依据。此处的细化是为了给临床提供更清晰、更具操作性的分步指引，仅供参考。</p>
                             </div>
                         </details>
 
@@ -1217,18 +1231,8 @@
                             <summary><h3>4. 其他检查参考</h3></summary>
                             <div class="details-content">
                                     <p>除了hs-cTnI和心电图，其他辅助检查对于全面评估病情、排除其他疾病也十分重要。在基层医院，请根据医保限制和患者意愿，优先考虑必要的检查。</p>
-                                    <p><span class="guide-key">必备检查：</span></p>
-                                    <ul class="guide-steps">
-                                        <li>12 导联心电图（用于初步评估和排除STEMI）</li>
-                                    </ul>
-                                    <p><span class="guide-key">选择性检查（根据临床指征和基层条件选择）：</span></p>
-                                    <ul class="guide-steps">
-                                        <li><strong>胸片:</strong> 排除气胸、肺部感染等非心源性胸痛原因，费用较低，易于基层开展。</li>
-                                        <li><strong>D-二聚体:</strong> 怀疑肺栓塞（PE）时，D-二聚体阴性可有效排除PE，避免不必要的CT检查。</li>
-                                        <li><strong>心脏超声:</strong> 评估心功能、室壁运动等，对鉴别心源性疾病有帮助，但费用较高，可根据患者具体情况和转诊需求决定。</li>
-                                        <li><strong>肾功能:</strong> 排除肾功能不全，因为肾功能不全可能导致hs-cTnI慢性升高。</li>
-                                        <li><strong>血常规、电解质、血糖等:</strong> 根据具体情况选择，用于排除其他系统性疾病或评估并发症。</li>
-                                    </ul>
+                                    <p><span class="guide-key">必备检查：</span>12导联心电图（应根据病情变化动态复查）。</p>
+                                    <p><span class="guide-key">选择性检查（根据临床指征和基层条件选择）：</span>胸片、D-二聚体（怀疑肺栓塞时）、心脏超声、肾功能、血常规、电解质等。</p>
                                     <p class="small-text">**指南依据:** “PE的明确技术理解依赖于增强CT检查，而D-二聚体对疑似PE的急性胸痛患者，尤其是临床可能性低到中的患者具有较高的技术理解和排除技术理解的价值。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                                     <p class="small-text">“AAS的技术理解及后续治疗方案的选择依赖于以增强CT为代表的影像学检查结果，但增强CT的应用受到临床可行性、造影剂使用和电离辐射等因素的制约。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
                             </div>
@@ -1239,11 +1243,39 @@
                             <div class="details-content">
                                     <p>根据综合评估结果，采取相应的参考意见。早期识别高危患者并及时转诊是改善预后的关键。</p>
                                     <ul class="guide-steps">
-                                        <li><span class="guide-key">危急重症（已在“快速筛查”中处理）:</span> 立即抢救，并联系上级医院转诊。</li>
-                                        <li><span class="guide-key">高度怀疑 STEMI:</span> 立即启动 STEMI 处理流程：吸氧、建立静脉通路、监测心电；建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）；尽快转诊上级医院行急诊 PCI。</li>
-                                        <li><span class="guide-key">高度怀疑 NSTEMI（高敏肌钙蛋白高可能性）:</span> 密切监测患者病情变化。建议给予抗血小板、抗凝等处置（具体用药请遵医嘱）。评估患者风险，决定是否需要转诊上级医院行冠脉造影。</li>
-                                        <li><span class="guide-key">AMI 可能性小（高敏肌钙蛋白低可能性）:</span> 寻找其他可能的原因，并提供相应参考意见。例如：心绞痛 (可给予对症处置，具体用药请遵医嘱)，心肌炎 (可给予对症处置，具体用药请遵医嘱)，肺栓塞 (可给予对症处置，具体用药请遵医嘱)。</li>
-                                        <li><span class="guide-key">技术理解不明确（高敏肌钙蛋白需进一步观察）:</span> 密切观察患者病情变化。复查 hs-cTnI 和心电图。必要时请上级医院会诊。</li>
+                                        <li><span class="guide-key">危急重症（如主动脉夹层、张力性气胸等）：</span>立即抢救，并联系上级医院转诊。</li>
+                                        <li><span class="guide-key">高度怀疑 STEMI：</span>
+                                            <ul class="guide-steps">
+                                                <li>触发条件：心电图符合ST段抬高标准。</li>
+                                                <li>操作：立即启动STEMI处理流程，并尽快转诊至具备急诊PCI能力的医院。</li>
+                                            </ul>
+                                        </li>
+                                        <li><span class="guide-key">高度怀疑 NSTEMI：</span>
+                                            <ul class="guide-steps">
+                                                <li>触发条件：hs-cTnI结果符合“AMI 高可能性”的标准。</li>
+                                                <li>操作：密切监测病情变化，评估风险，强烈建议联系上级医院准备转诊。</li>
+                                            </ul>
+                                        </li>
+                                        <li><span class="guide-key">AMI 可能性小：</span>
+                                            <ul class="guide-steps">
+                                                <li>触发条件：hs-cTnI结果符合“AMI 可能性小”的标准。</li>
+                                                <li>操作：重点寻找其他可能导致心肌损伤的原因（如慢性肾病、心力衰竭等），并进行相应处理。</li>
+                                            </ul>
+                                        </li>
+                                        <li><span class="guide-key">诊断不明确：</span>
+                                            <ul class="guide-steps">
+                                                <li>触发条件：hs-cTnI结果符合“需要进一步观察”的标准。</li>
+                                                <li>操作：密切观察病情，可延长监测时间，复查hs-cTnI和心电图，并考虑增加心脏超声等检查。必要时请上级医院会诊或转诊。</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <p><span class="guide-key">参考文献</span></p>
+                                    <ul class="guide-steps">
+                                        <li>中华医学会心血管病学分会, 中华医学会急诊医学分会. 急性ST段抬高型心肌梗死诊断和治疗指南(2019)[J]. 中华心血管病杂志, 2020, 48(2): 102-137.</li>
+                                        <li>中华医学会检验医学分会. 心肌肌钙蛋白实验室检测与临床应用中国专家共识[J]. 中华检验医学杂志, 2021, 44(8): 683-696.</li>
+                                        <li>中国医疗保健国际交流促进会胸痛分会. 胸痛中心规范化应用主要心血管生物标志物专家共识（2024）[J]. 中国循环杂志, 2024, 39(2): 113-125.</li>
+                                        <li>Collet JP, Thiele H, Barbato E, et al. 2020 ESC Guidelines for the management of acute coronary syndromes in patients presenting without persistent ST-segment elevation[J]. European Heart Journal, 2021, 42(14): 1289-1367.</li>
+                                        <li>Chapman AR, Lee KK, McAllister DA, et al. Association of High-Sensitivity Cardiac Troponin I Concentration With Cardiac Outcomes in Patients With Suspected Acute Coronary Syndrome[J]. JAMA, 2017, 318(19): 1913-1924.</li>
                                     </ul>
                                     <p class="small-text">**指南依据:** 本手册目标在于提供分层处理策略，强调对危急重症的早期识别和及时转诊，并对病情较轻的患者提供基层观察和参考意见。</p>
                                     <p class="small-text">“除STEMI和极高危NSTE-ACS患者需尽快实施再灌注处置外，其他急性胸痛患者均需依靠cTn检测结果技术理解或者排除心肌损伤与ACS。” — 《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》</p>
@@ -1256,14 +1288,14 @@
                 <i class="fas fa-exclamation-triangle"></i> 重要提示
             </div>
             <div class="reference-box">
-                <p><strong>1. 工具定位：</strong>本工具是基于国内最新指南共识(如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等)开发的医学教育参考工具，<strong>不是医疗器械软件，不能替代专业医生的临床判断</strong>。</p>
+                <p><strong>1. 工具定位：</strong>本工具是基于国内外最新指南共识(如《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《急性非创伤性胸痛生物标志物联合检测专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识》等)开发的医学教育参考工具，<strong>不是医疗器械软件，不能替代专业医生的临床判断</strong>。</p>
                 <p><strong>2. 实际应用：</strong>本工具仅供医疗机构检验科及相关专业人员学习交流使用，不得用于临床诊断决策。实际诊疗需结合患者完整病史、体格检查、其他实验室检查及影像学结果。基层医院条件有限时，应优先保证患者安全，及时转诊。</p>
                 <p><strong>3. 参考值：</strong>hs-cTn 的 99th URL 应以医院自身建立的为准，本工具默认使用<strong>0.060 ng/mL</strong>作为判断依据，您可以在上方*自定义参考区间*。</p>
             </div>
         </div>
         
         <footer>
-            <p>高敏肌钙蛋白I判读辅助手册 v1.3 &copy; <span id="currentYear"></span> | 基于中国最新指南共识开发的医学参考工具</p>
+            <p>高敏肌钙蛋白I判读辅助手册 v1.3 &copy; <span id="currentYear"></span> | 基于国内外最新指南共识开发的医学参考工具</p>
             <p>仅供医学参考和学术交流使用，不替代临床专业判断</p>
         </footer>
     </div>
@@ -1322,7 +1354,7 @@
         const resultIconBg = document.getElementById('result-icon-bg'); // For background color
         const tniValueDisplay = document.getElementById('tni-value');
         const recRecommendations = document.getElementById('rec-recommendations');
-        const diagnosisReasoning = document.getElementById('diagnosis-reasoning'); 
+        const logicExplanation = document.getElementById('logic-explanation'); // Changed ID here
 
         // Input elements
         const customReferenceIntervalInput = document.getElementById('customReferenceInterval');
@@ -1362,26 +1394,30 @@
         document.addEventListener('DOMContentLoaded', () => {
             const initialURL = get99thPercentileURL();
             currentRefIntervalDisplay.textContent = initialURL.toFixed(3);
-            detailedRefIntervalDisplay.textContent = initialURL.toFixed(3);
-            detailedRefIntervalDisplay2.textContent = initialURL.toFixed(3);
+            if (detailedRefIntervalDisplay) { 
+                detailedRefIntervalDisplay.textContent = initialURL.toFixed(3);
+            }
+            if (detailedRefIntervalDisplay2) { 
+                detailedRefIntervalDisplay2.textContent = initialURL.toFixed(3);
+            }
         });
 
 
         // Function to calculate elevation level based on 99th URL (ULN)
         function calculateElevationLevel(value, ULN) {
             if (value <= ULN) return 'normal';
-            if (value <= ULN * 3) return 'mild'; // 1-3 times ULN
-            if (value <= ULN * 10) return 'moderate'; // 3-10 times ULN
-            return 'significant'; // >10 times ULN
+            if (value < ULN * 2) return 'mild'; // New: < 2 times ULN
+            if (value >= ULN * 2 && value < ULN * 5) return 'moderate'; // New: >= 2 times ULN and < 5 times ULN
+            return 'significant'; // New: >= 5 times ULN
         }
 
         // Function to get descriptive text for elevation level
         function getElevationText(level, value, ULN) {
             switch(level) {
                 case 'normal': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (参考范围)`;
-                case 'mild': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平轻度升高，约1-3倍ULN，可能提示心肌损伤)`;
-                case 'moderate': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平中度升高，约3-10倍ULN，可能提示心肌损伤)`;
-                case 'significant': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平显著升高，>10倍ULN，高度提示心肌损伤)`;
+                case 'mild': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平轻度升高，可能提示心肌损伤，需关注)`; // Updated text
+                case 'moderate': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平中度升高，AMI可能性增加，需高度警惕)`; // Updated text
+                case 'significant': return `hs-cTnI: <strong>${value.toFixed(3)} ng/mL</strong> (水平显著升高，&ge;5倍ULN，高度提示心肌损伤)`; // New text
                 default: return '';
             }
         }
@@ -1510,122 +1546,94 @@
             
             const elevationLevel = calculateElevationLevel(initialTnI, ULN);
 
-            // Decision Logic
-            // Priority 1: Immediate life-threatening conditions (STEMI or severe symptoms)
-            if (selectedEcg === 'st_elevation' || selectedSymptoms === 'other') {
+            // Decision Logic based on new "hs-cTnI 阳性结果处理方案" document
+            let isAMIHighPossibility = false;
+            let meetsDynamicHighPossibility = false;
+
+            // Check for immediate "显著升高" (>= 5x ULN) as a primary trigger for high possibility
+            if (initialTnI >= (5 * ULN)) {
+                isAMIHighPossibility = true;
+            }
+
+            // Check for dynamic changes if repeatTnI is available
+            if (!isNaN(repeatTnI)) {
+                // Remove deltaValue calculation and usage
+                const relativeChange = initialTnI !== 0 ? ((repeatTnI - initialTnI) / initialTnI) * 100 : 0;
+
+                if (repeatTime === 1 && relativeChange >= 20) { // Only relative change
+                    meetsDynamicHighPossibility = true;
+                } else if (repeatTime === 2 && relativeChange >= 30) { // Only relative change
+                    meetsDynamicHighPossibility = true;
+                } else if (repeatTime === 3 && relativeChange >= 50) { // Only relative change
+                    meetsDynamicHighPossibility = true;
+                }
+            }
+
+            // Main decision tree
+            if (selectedEcg === 'st_elevation') { // Highest priority: STEMI
+                diagnosis = '高度怀疑 STEMI';
+                urgency = '立即评估与应对';
+                colorClass = 'red-bg';
+                actions = [
+                    '触发条件：心电图符合ST段抬高标准。',
+                    '操作：立即启动STEMI处理流程，并尽快转诊至具备急诊PCI能力的医院。'
+                ];
+                reasons = [
+                    '<strong>判读逻辑：</strong>心电图ST段抬高提示冠状动脉急性、完全闭塞，心肌正面临大面积坏死，其出现时间早于心肌坏死标志物（如肌钙蛋白）的释放。为挽救心肌，必须在黄金时间内进行再灌注治疗。',
+                    '<strong>背景与依据：</strong>主要遵循《急性ST段抬高型心肌梗死诊断和治疗指南(2019)》的原则。该指南强调STEMI诊断主要依据典型的缺血性胸痛症状和心电图特征性ST段抬高，对于典型心电图表现的患者，应立即启动再灌注治疗，不必等待心肌损伤标志物结果。'
+                ];
+            } else if (selectedSymptoms === 'other') { // High priority: Severe symptoms (suggesting other critical conditions)
                 diagnosis = '高度关注危急重症';
                 urgency = '立即评估与应对';
                 colorClass = 'red-bg';
                 actions = [
-                    '根据初步评估，建议考虑启动紧急救治流程：吸氧、建立静脉通路、持续心电监护，监测生命体征。',
-                    '建议紧急联系上级医院或胸痛中心，评估转运需求。',
-                    '转运过程中可考虑给予初步对症支持处置（具体用药请遵医嘱）。',
-                    '对于STEMI，建议在60分钟内启动再灌注处置（PCI或溶栓）。'
+                    '立即抢救，并联系上级医院转诊。'
                 ];
                 reasons = [
-                    `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
-                    `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
-                    `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。`
+                    '<strong>判读逻辑：</strong>严重的伴随症状（如呼吸困难、晕厥、大汗、恶心呕吐等）可能提示急性肺栓塞、主动脉夹层等危及生命的非冠脉综合征，需要立即干预。',
+                    '<strong>背景与依据：</strong>《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》强调在初始评估中需快速识别危急重症患者并优先处理。'
                 ];
-            } 
-            // Priority 2: Initial TnI normal or very low, and low clinical suspicion
-            else if (initialTnI <= ULN) { // Initial TnI normal
-                if (chestPainDuration > 3 && selectedRiskFactors.length === 0 && selectedEcg === 'normal' && selectedSymptoms === 'none') {
-                    diagnosis = '急性心肌梗死可能性很小，建议评估';
-                    urgency = '观察随访';
-                    colorClass = 'green-bg';
-                    actions = [
-                        '可观察患者，并考虑寻找其他可能原因（如肌肉骨骼痛、消化道疾病等）。',
-                        '若症状持续或加重，可考虑复查 hs-cTnI。',
-                        '无需立即进行高费用检查。'
-                    ];
-                    reasons = [
-                        `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 小于99th URL阈值)。`,
-                        `且胸痛持续时间较长（>3小时）、无高危因素、心电图正常、胸痛不典型。`,
-                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，在无心脏症状患者中，此值可作为排除急性心肌梗死的参考依据。`
-                    ];
-                } else {
-                    diagnosis = '肌钙蛋白正常，需结合临床评估';
-                    urgency = '观察随访';
-                    colorClass = 'green-bg';
-                    actions = [
-                        '建议观察患者，若症状持续或加重，或临床高度怀疑 ACS，可考虑复查 hs-cTnI。',
-                        '建议结合病史、心电图等进行综合参考。'
-                    ];
-                    reasons = [
-                        `首次 hs-cTnI ${initialTnI.toFixed(3)} ng/mL (≤ ${ULN.toFixed(3)} ng/mL, 正常范围)。`,
-                        `但仍需结合临床情况。依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，肌钙蛋白正常不完全排除ACS，尤其在症状发作早期，可能尚未达到升高水平，建议结合临床综合参考。`
-                    ];
-                }
-            } 
-            // Priority 3: Initial TnI elevated, dynamic changes are key
-            else { // Initial TnI Elevated (> ULN)
-                let isAMIHighPossibility = false;
-                let isNonAcuteInjury = false; // For chronic elevation or non-acute causes
-
-                if (repeatTnI !== null && !isNaN(repeatTnI)) { // Dynamic evaluation available
-                    const deltaValue = repeatTnI - initialTnI;
-                    const relativeChange = initialTnI !== 0 ? (deltaValue / initialTnI) * 100 : 0;
-
-                    // Apply dynamic change criteria from your provided logic
-                    if (repeatTime === 1) {
-                        if (relativeChange >= 20 || deltaValue >= 0.050) isAMIHighPossibility = true;
-                        else if (relativeChange < 20 && deltaValue < 0.050 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
-                    } else if (repeatTime === 2) {
-                        if (relativeChange >= 30 || deltaValue >= 0.010) isAMIHighPossibility = true;
-                        else if (relativeChange < 30 && deltaValue < 0.010 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
-                    } else if (repeatTime === 3) {
-                        if (relativeChange >= 50 || deltaValue >= 0.015) isAMIHighPossibility = true;
-                        else if (relativeChange < 50 && deltaValue < 0.015 && initialTnI <= (3 * ULN) && repeatTnI <= (3 * ULN)) isNonAcuteInjury = true;
-                    }
-                }
-
-                // Also check for absolute high values as a primary high possibility
-                if (initialTnI >= (10 * ULN) || (repeatTnI !== null && !isNaN(repeatTnI) && repeatTnI >= (10 * ULN))) {
-                     isAMIHighPossibility = true; // Overrides dynamic changes if absolute value is very high
-                }
-
-                // Combine with symptoms and ECG for NSTEMI suspicion
-                if (isAMIHighPossibility || (selectedSymptoms === 'typical' && selectedEcg === 'ischemic_changes')) {
-                    diagnosis = '高度关注急性心肌梗死（AMI）';
-                    urgency = '立即评估与应对';
-                    colorClass = 'red-bg';
-                    actions = [
-                        '根据评估，可考虑立即启动初步对症支持处置（如抗血小板、抗凝等，具体用药请遵医嘱）。',
-                        '密切监测患者生命体征和心电图。',
-                        '评估患者风险，紧急联系上级医院心内科，准备转诊行冠脉造影。'
-                    ];
-                    reasons = [
-                        `心电图提示ST段抬高或新发左/右束支传导阻滞，或患者伴有呼吸困难、晕厥、大汗、恶心呕吐等严重伴随症状。`,
-                        `高度提示危急重症（如STEMI、急性肺栓塞、主动脉夹层等）。`,
-                        `依据《急性非创伤性胸痛生物标志物联合检测专家共识（2024版）》等指南，建议快速鉴别并及时转诊。`
-                    ];
-                } else if (isNonAcuteInjury) {
-                    diagnosis = '肌钙蛋白升高，非急性心肌损伤';
-                    urgency = '观察随访';
-                    colorClass = 'green-bg';
-                    actions = [
-                        '可寻找其他可能原因（如肾功能不全、心肌炎、心力衰竭、肺栓塞等），并针对病因提供相应参考意见。',
-                        '若临床高度怀疑 ACS，仍需密切观察或请上级医院会诊。'
-                    ];
-                    reasons = [
-                        `hs-cTnI 升高但动态变化不显著。`,
-                        `依据《心肌肌钙蛋白实验室检测与临床应用中国专家共识》，高敏肌钙蛋白升高可能由非ACS原因引起，如慢性肾病、心力衰竭、心肌炎等。依据相关指南，此时肌钙蛋白水平通常稳定或动态变化不明显。`
-                    ];
-                } else {
-                    diagnosis = '肌钙蛋白升高，待定评估';
-                    urgency = '进一步评估';
-                    colorClass = 'orange-bg';
-                    actions = [
-                        '建议密切观察患者病情变化，并根据临床需要再次复查 hs-cTnI。',
-                        '建议结合其他检查（如心脏超声、肾功能、D-二聚体等）进行综合参考。',
-                        '若症状加重，立即转诊。'
-                    ];
-                    reasons = [
-                        `hs-cTnI 升高，但动态变化处于观察区间，或临床表现不典型，建议进一步评估以明确情况。`,
-                        `依据《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》，对于肌钙蛋白动态变化不明确的患者，建议结合更长时间的观察、重复检测以及其他临床证据进行综合参考评估。`
-                    ];
-                }
+            } else if (isAMIHighPossibility || meetsDynamicHighPossibility) { // High possibility AMI (based on hs-cTnI criteria)
+                diagnosis = '高度怀疑 NSTEMI';
+                urgency = '立即评估与应对';
+                colorClass = 'red-bg';
+                actions = [
+                    '触发条件：hs-cTnI结果符合“AMI 高可能性”的标准。',
+                    '操作：密切监测病情变化，评估风险，强烈建议联系上级医院准备转诊。'
+                ];
+                reasons = [
+                    `<strong>判读逻辑：</strong> 此判读基于首次检测值已达到<strong>显著升高</strong>（≥5倍ULN）或在动态监测中出现<strong>临床有意义的相对变化</strong>（如1小时≥20%，2小时≥30%，3小时≥50%），高度提示急性心肌梗死。`,
+                    `<strong>背景与依据：</strong> 肌钙蛋白显著升高（≥5倍ULN）是高度提示AMI的强力指标，此阈值主要源自欧洲心脏病学会（ESC）0/1h算法及相关研究验证。动态变化（如≥20%）则能进一步确认急性心肌损伤，此原则在《心肌肌钙蛋白实验室检测与临床应用中国专家共识》、《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》等指南中有所提及。`,
+                    `💡 提示：如需详细了解肌钙蛋白“显著升高”及“动态变化阈值”的原理，请查阅【资料参考】模块。`
+                ];
+            } else if (initialTnI < (2 * ULN) && (isNaN(repeatTnI) || repeatTnI < (2 * ULN)) && !isAMIHighPossibility && !meetsDynamicHighPossibility) {
+                // AMI 可能性小：All values in "轻度升高" range AND no significant dynamic change
+                diagnosis = 'AMI可能性小，建议评估其他原因';
+                urgency = '观察随访';
+                colorClass = 'orange-bg'; 
+                actions = [
+                    '触发条件：hs-cTnI结果符合“AMI 可能性小”的标准。',
+                    '操作：重点寻找其他可能导致心肌损伤的原因（如慢性肾病、心力衰竭等），并进行相应处理。'
+                ];
+                reasons = [
+                    `<strong>判读逻辑：</strong> 此判读基于所有hs-cTnI检测值均在<strong>“轻度升高”</strong>范围内（< 2 倍 99th URL），且动态变化<strong>不满足</strong>AMI高可能性的任何一条标准。这种分级是为临床实践方便而设的<strong>实用性描述</strong>。`,
+                    `<strong>背景与依据：</strong> 轻度升高范围常见于慢性肾病、稳定型心衰等非ACS情况，AMI可能性较小，此原则遵循《心肌肌钙蛋白实验室检测与临床应用中国专家共识》中关于心肌损伤鉴别诊断的指导。`,
+                    `💡 提示：如需详细了解肌钙蛋白“轻度升高”及“动态变化阈值”的原理，请查阅【资料参考】模块。`
+                ];
+            } else {
+                // All other cases fall into "需要进一步观察" (诊断不明确)
+                diagnosis = '肌钙蛋白升高，需进一步观察与评估';
+                urgency = '进一步评估';
+                colorClass = 'orange-bg';
+                actions = [
+                    '触发条件：hs-cTnI结果符合“需要进一步观察”的标准。',
+                    '操作：密切观察病情，可延长监测时间，复查hs-cTnI和心电图，并考虑增加心脏超声等检查。必要时请上级医院会诊或转诊。'
+                ];
+                reasons = [
+                    `<strong>判读逻辑：</strong> 此情况通常发生在hs-cTnI处于<strong>中度升高</strong>（2-5倍ULN），但动态变化不显著，或临床表现不典型，诊断仍不明确。这种分级是为临床实践方便而设的<strong>实用性描述</strong>。`,
+                    `<strong>背景与依据：</strong> 肌钙蛋白中度升高（2-5倍ULN）处于临床“灰色地带”，AMI的可能性显著增加，需高度警惕并依赖动态监测进行鉴别，此原则与《胸痛中心规范化应用主要心血管生物标志物专家共识（2024）》中强调的综合判断精神一致。`,
+                    `💡 提示：如需详细了解肌钙蛋白“中度升高”及“动态变化阈值”的原理，请查阅【资料参考】模块。`
+                ];
             }
 
             // Update Result Interpretation Display
@@ -1636,14 +1644,24 @@
             resultIcon.className = `fas ${
                 colorClass === 'red-bg' ? 'fa-bolt' :
                 colorClass === 'orange-bg' ? 'fa-exclamation-circle' :
-                colorClass === 'yellow-bg' ? 'fa-exclamation-triangle' :
-                'fa-check'
+                'fa-check' // Default for green-bg (normal)
             }`; // Update icon based on color
 
-            tniValueDisplay.innerHTML = getElevationText(elevationLevel, initialTnI, ULN);
+            // Conditional display for tniValueDisplay based on diagnosis
+            let tniDisplayHtml = '';
+            if (diagnosis === '高度怀疑 STEMI') {
+                tniDisplayHtml = `hs-cTnI: <strong>${initialTnI.toFixed(3)} ng/mL</strong><br><span class="text-red-700 text-sm">（ST段抬高是主要判断依据，肌钙蛋白结果不应延误救治）</span>`;
+            } else if (diagnosis === '高度关注危急重症') {
+                tniDisplayHtml = `hs-cTnI: <strong>${initialTnI.toFixed(3)} ng/mL</strong><br><span class="text-red-700 text-sm">（严重临床症状和体征是主要判断依据）</span>`;
+            }
+             else {
+                tniDisplayHtml = getElevationText(elevationLevel, initialTnI, ULN); // Use the detailed elevation text for other cases
+            }
+            tniValueDisplay.innerHTML = tniDisplayHtml;
             
+            // Reassign actions and reasons to be displayed
             recRecommendations.innerHTML = actions.map(rec => `<p>${rec}</p>`).join('');
-            diagnosisReasoning.innerHTML = reasons.map(reason => `<li>${reason}</li>`).join('');
+            logicExplanation.innerHTML = reasons.map(reason => `<li>${reason}</li>`).join(''); // Changed ID here
             
             // Auto switch to result tab
             document.querySelector('[data-tab="step2"]').click();
